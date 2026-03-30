@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advisory and Training: RP Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #18213a;
+  --navy-deep: #101828;
+  --navy-mid:  #1e2d4a;
+  --lime:      #cfe84e;
+  --lime-dim:  #b8d138;
+  --lime-faint: rgba(207,232,78,.06);
+  --lime-rule: rgba(207,232,78,.25);
+  --white:     #ffffff;
+  --off:       #f5f4f0;
+  --warm:      #eceae4;
+  --border:    rgba(24,33,58,.09);
+  --muted:     #797269;
+  --ink:       #18213a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'DM Sans', sans-serif;
+  --max:   1080px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--off); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+body::before { content: ''; position: fixed; inset: 0; z-index: 9998; pointer-events: none; opacity: .4; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E"); }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 640px)  { .wrap { padding: 0 2rem; } }
+@media (min-width: 1024px) { .wrap { padding: 0 3rem; } }
+.eyebrow { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.eyebrow-lime { color: var(--lime-dim); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; font-family: var(--sans); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; padding: .88rem 1.7rem; cursor: pointer; transition: all .2s; border: none; border-radius: 1px; white-space: nowrap; min-height: 48px; }
+.btn-lime { background: var(--lime); color: var(--navy-deep); }
+.btn-lime:hover { background: var(--lime-dim); box-shadow: 0 4px 16px rgba(207,232,78,.22); transform: translateY(-1px); }
+.btn-ghost-lt { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost-lt:hover { color: var(--ink); border-color: var(--navy); }
+.btn-ghost-dk { background: transparent; color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.2); }
+.btn-ghost-dk:hover { color: white; border-color: var(--lime); }
+.btn-full { width: 100%; }
+/* reveal */
+.rv { opacity: 1; transform: none; }
+.js-ready .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.js-ready .rv.in { opacity: 1; transform: none; }
+.js-ready .rv.d1 { transition-delay: .08s; } .js-ready .rv.d2 { transition-delay: .16s; }
+.js-ready .rv.d3 { transition-delay: .24s; } .js-ready .rv.d4 { transition-delay: .32s; }
+/* nav */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; background: rgba(245,244,240,.95); backdrop-filter: blur(18px); border-bottom: 1px solid var(--border); }
+@media (min-width: 640px) { nav { padding: 0 2rem; } }
+@media (min-width: 1024px) { nav { height: 60px; padding: 0 3rem; } }
+.nav-logo { display: flex; align-items: center; gap: .45rem; font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--ink); z-index: 2; }
+.nav-mark { width: 22px; height: 22px; background: var(--navy); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-mark span { font-family: var(--sans); font-size: .48rem; font-weight: 500; color: var(--lime); letter-spacing: .04em; }
+.nav-toggle { display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; cursor: pointer; background: none; border: none; padding: .5rem; z-index: 2; }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--ink); border-radius: 1px; transform-origin: center; transition: transform .3s ease, opacity .3s ease, width .3s ease; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; width: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.nav-drawer { position: fixed; inset: 0; top: 56px; z-index: 250; background: rgba(245,244,240,.98); backdrop-filter: blur(20px); display: flex; flex-direction: column; padding: 2rem 1.25rem 3rem; transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1); overflow-y: auto; }
+.nav-drawer.open { transform: translateX(0); }
+.nav-drawer ul { list-style: none; display: flex; flex-direction: column; gap: 0; flex: 1; }
+.nav-drawer ul li { border-bottom: 1px solid var(--border); }
+.nav-drawer ul a { display: block; padding: 1.1rem 0; font-size: 1.1rem; font-family: var(--serif); font-weight: 400; color: var(--ink); transition: color .2s; }
+.nav-drawer-cta { margin-top: 2rem; }
+.nav-links-desk { display: none; align-items: center; gap: 2rem; list-style: none; }
+@media (min-width: 768px) { .nav-links-desk { display: flex; } .nav-toggle { display: none; } .nav-drawer { display: none !important; } }
+.nav-links-desk a { font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 500; color: var(--muted); transition: color .2s; position: relative; padding-bottom: 2px; }
+.nav-links-desk a::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 1.5px; background: var(--lime); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.nav-links-desk a:hover { color: var(--ink); }
+.nav-links-desk a:hover::after { transform: scaleX(1); }
+.nav-links-desk .active { color: var(--ink); }
+.nav-links-desk .nav-cta { background: var(--navy); color: white; padding: .44rem 1.1rem; border-radius: 1px; font-size: .69rem !important; }
+.nav-links-desk .nav-cta:hover { background: var(--navy-mid); }
+body.nav-open { overflow: hidden; }
+
+/* page hero */
+.page-hero { padding-top: 56px; background: var(--navy-deep); position: relative; overflow: hidden; }
+@media (min-width: 1024px) { .page-hero { padding-top: 60px; } }
+.page-hero-bg { position: absolute; bottom: -3rem; right: -1rem; font-family: var(--serif); font-size: clamp(10rem, 25vw, 26rem); font-weight: 300; font-style: italic; color: rgba(255,255,255,.025); line-height: 1; user-select: none; pointer-events: none; }
+@media (max-width: 480px) { .page-hero-bg { display: none; } }
+.page-hero-inner { padding: 4rem 0 5rem; position: relative; z-index: 2; }
+@media (min-width: 768px) { .page-hero-inner { padding: 5.5rem 0 6rem; } }
+.page-breadcrumb { display: flex; align-items: center; gap: .6rem; font-size: .67rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.25); font-weight: 500; margin-bottom: 2.5rem; }
+.page-breadcrumb a { color: rgba(255,255,255,.25); transition: color .2s; }
+.page-breadcrumb a:hover { color: rgba(255,255,255,.5); }
+.page-breadcrumb-sep { color: rgba(255,255,255,.15); }
+.page-breadcrumb-current { color: var(--lime); opacity: .7; }
+.page-headline { font-family: var(--serif); font-size: clamp(2.6rem, 7vw, 6rem); font-weight: 300; line-height: .97; letter-spacing: -.025em; color: white; margin-bottom: 2rem; }
+.page-headline em { font-style: italic; color: var(--lime); }
+.page-hero-grid { display: flex; flex-direction: column; gap: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,.07); }
+@media (min-width: 768px) { .page-hero-grid { flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 4rem; } }
+.page-hero-desc { font-size: .92rem; color: rgba(255,255,255,.5); line-height: 1.82; font-weight: 300; max-width: 52ch; }
+.page-hero-desc strong { color: rgba(255,255,255,.62); font-weight: 400; }
+.page-hero-note { flex-shrink: 0; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-left: 2px solid rgba(207,232,78,.3); padding: 1.1rem 1.4rem; border-radius: 1px; max-width: 32ch; }
+.page-hero-note p { font-size: .78rem; color: rgba(255,255,255,.48); line-height: 1.72; font-weight: 300; }
+.page-hero-note strong { color: rgba(255,255,255,.6); font-weight: 400; }
+
+/* training */
+.training-sec { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+@media (min-width: 768px) { .training-sec { padding: 7rem 0; } }
+.section-intro { margin-bottom: 3.5rem; display: flex; flex-direction: column; gap: 1rem; }
+@media (min-width: 860px) { .section-intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: end; } }
+.section-headline { font-family: var(--serif); font-size: clamp(1.9rem, 5vw, 3.5rem); font-weight: 300; line-height: 1.08; letter-spacing: -.015em; color: var(--ink); }
+.section-headline em { font-style: italic; }
+.section-aside { font-size: .84rem; color: #5e5750; line-height: 1.8; font-weight: 300; }
+.training-pair { display: flex; flex-direction: column; gap: 1.5rem; }
+@media (min-width: 768px) { .training-pair { flex-direction: row; gap: 2px; } }
+.training-card { flex: 1; background: var(--white); padding: 2.5rem 2rem; border: 1px solid var(--border); position: relative; cursor: default; }
+@media (min-width: 768px) { .training-card:first-child { border-right: none; } }
+.training-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--navy); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+.training-card:hover::before { transform: scaleX(1); }
+.training-card-eyebrow { font-size: .63rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; color: var(--muted); margin-bottom: 1rem; }
+.training-card-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--ink); line-height: 1.2; margin-bottom: .9rem; }
+.training-card-desc { font-size: .83rem; color: #5e5750; line-height: 1.82; font-weight: 300; margin-bottom: 1.6rem; }
+.training-card-items { display: flex; flex-direction: column; gap: .48rem; }
+.training-card-item { font-size: .78rem; color: var(--ink); display: flex; align-items: baseline; gap: .55rem; }
+.training-card-item::before { content: '/'; color: var(--lime-dim); font-size: .75rem; flex-shrink: 0; opacity: .8; }
+
+/* advisory services */
+.advisory-sec { padding: 5rem 0; border-bottom: 1px solid var(--border); }
+@media (min-width: 768px) { .advisory-sec { padding: 7rem 0; } }
+.advisory-list { display: flex; flex-direction: column; margin-top: 3.5rem; }
+.advisory-item { padding: 1.8rem 0; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: .65rem; cursor: default; transition: padding-left .18s; }
+.advisory-item:last-child { border-bottom: 1px solid var(--border); }
+.advisory-item:hover { padding-left: .4rem; border-left: 2px solid var(--lime-rule); margin-left: -.4rem; }
+@media (min-width: 640px) { .advisory-item { display: grid; grid-template-columns: 1.8fr .6fr 1.8fr; gap: 2.5rem; align-items: baseline; } }
+.advisory-item-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; color: var(--ink); line-height: 1.25; }
+.advisory-item-tag { font-size: .63rem; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; color: var(--navy-mid); background: var(--warm); padding: .22rem .6rem; border-radius: 10px; border: 1px solid rgba(24,33,58,.08); width: fit-content; height: fit-content; transition: background .2s, border-color .2s; }
+.advisory-item-desc { font-size: .8rem; color: #5e5750; font-weight: 300; line-height: 1.72; }
+
+/* who */
+.who { padding: 5rem 0; border-bottom: 1px solid var(--border); background: var(--warm); }
+@media (min-width: 768px) { .who { padding: 7rem 0; } }
+.who-inner { display: flex; flex-direction: column; gap: 2.5rem; }
+@media (min-width: 860px) { .who-inner { display: grid; grid-template-columns: 1fr 1.8fr; gap: 6rem; align-items: start; } }
+.who-headline { font-family: var(--serif); font-size: clamp(1.8rem, 4.5vw, 3rem); font-weight: 300; line-height: 1.1; letter-spacing: -.015em; color: var(--ink); }
+.who-headline em { font-style: italic; }
+.who-left p { font-size: .84rem; color: #5e5750; line-height: 1.8; font-weight: 300; margin-top: 1rem; }
+.who-points { display: flex; flex-direction: column; }
+.who-point { padding: 1.4rem 0; border-top: 1px solid var(--border); display: grid; grid-template-columns: 1.5rem 1fr; gap: 1rem; align-items: start; }
+.who-point:last-child { border-bottom: 1px solid var(--border); }
+.who-point-n { font-family: var(--serif); font-style: italic; font-size: .9rem; color: rgba(24,33,58,.2); padding-top: .2rem; }
+.who-point-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--ink); margin-bottom: .35rem; line-height: 1.2; }
+.who-point-body { font-size: .8rem; color: #5e5750; line-height: 1.75; font-weight: 300; }
+
+/* bridge */
+.bridge { padding: 5rem 0; border-bottom: 1px solid var(--border); background: var(--navy); }
+@media (min-width: 768px) { .bridge { padding: 7rem 0; } }
+.bridge-inner { display: flex; flex-direction: column; gap: 2.5rem; }
+@media (min-width: 860px) { .bridge-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; } }
+.bridge-copy h2 { font-family: var(--serif); font-size: clamp(1.9rem, 4.5vw, 3.5rem); font-weight: 300; line-height: 1.1; color: white; margin-bottom: 1.2rem; }
+.bridge-copy h2 em { font-style: italic; color: var(--lime); }
+.bridge-copy p { font-size: .88rem; color: rgba(255,255,255,.5); line-height: 1.82; font-weight: 300; margin-bottom: 1rem; }
+.bridge-copy p strong { color: rgba(255,255,255,.65); font-weight: 400; }
+.bridge-copy .btn { margin-top: .8rem; }
+.bridge-path { display: flex; flex-direction: column; gap: 1px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.07); border-radius: 2px; overflow: hidden; }
+.bridge-step { background: rgba(255,255,255,.02); padding: 1.2rem 1.5rem; display: grid; grid-template-columns: 2rem 1fr auto; gap: .8rem; align-items: center; transition: background .2s; }
+.bridge-step:hover { background: rgba(255,255,255,.06); }
+.bridge-step-n { font-family: var(--serif); font-style: italic; font-size: .9rem; color: var(--lime); opacity: .35; }
+.bridge-step-name { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,.72); }
+.bridge-step-sub { font-size: .73rem; color: rgba(255,255,255,.4); font-weight: 300; margin-top: .15rem; }
+.bridge-step-arrow { color: var(--lime); opacity: .25; font-size: .8rem; }
+
+/* cta */
+.cta { background: var(--navy-deep); padding: 6rem 0 5.5rem; position: relative; overflow: hidden; }
+@media (min-width: 768px) { .cta { padding: 8rem 0 7rem; } }
+.cta-bg { position: absolute; bottom: -3rem; right: -1rem; font-family: var(--serif); font-size: clamp(12rem, 28vw, 26rem); font-weight: 300; font-style: italic; color: rgba(255,255,255,.02); line-height: 1; user-select: none; pointer-events: none; }
+@media (max-width: 480px) { .cta-bg { display: none; } }
+.cta-inner { position: relative; z-index: 2; }
+.cta-eyebrow { margin-bottom: 1.4rem; }
+.cta-headline { font-family: var(--serif); font-size: clamp(2.2rem, 6vw, 5rem); font-weight: 300; line-height: .97; letter-spacing: -.02em; color: white; margin-bottom: 1.4rem; }
+.cta-headline em { font-style: italic; color: var(--lime); }
+.cta-sub { font-size: .88rem; color: rgba(255,255,255,.48); font-weight: 300; max-width: 46ch; line-height: 1.8; margin-bottom: 2rem; }
+.cta-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+/* footer */
+footer { background: var(--navy-deep); border-top: 1px solid rgba(255,255,255,.04); padding: 3.5rem 0 2rem; }
+.footer-in { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+@media (min-width: 640px) { .footer-in { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 900px) { .footer-in { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; } }
+.footer-brand { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: white; margin-bottom: .7rem; display: flex; align-items: center; gap: .45rem; grid-column: 1 / -1; }
+@media (min-width: 900px) { .footer-brand { grid-column: auto; } }
+.footer-mark { width: 21px; height: 21px; background: var(--navy-mid); border-radius: 2px; display: flex; align-items: center; justify-content: center; }
+.footer-mark span { font-family: var(--sans); font-size: .48rem; font-weight: 500; color: var(--lime); }
+.footer-tag { font-size: .74rem; color: rgba(255,255,255,.32); line-height: 1.75; font-weight: 300; }
+.footer-col h4 { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.18); font-weight: 500; margin-bottom: .9rem; }
+.footer-col ul { list-style: none; }
+.footer-col li { font-size: .78rem; color: rgba(255,255,255,.38); margin-bottom: .42rem; font-weight: 300; transition: color .2s; }
+.footer-col li:hover { color: rgba(255,255,255,.7); }
+.footer-col li a { color: inherit; transition: color .2s; }
+.footer-col li a:hover { color: rgba(255,255,255,.65); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,.05); padding-top: 1.8rem; display: flex; flex-direction: column; gap: .35rem; font-size: .67rem; color: rgba(255,255,255,.12); }
+@media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <span class="nav-mark"><span>RP</span></span>
+    RP Collective
+  </a>
+  <ul class="nav-links-desk">
+    <li><a href="index.html#offer">Solutions</a></li>
+    <li><a href="index.html#process">How it works</a></li>
+    <li><a href="#" class="active">Advisory and Training</a></li>
+    <li><a href="index.html#contact" class="nav-cta">Start a conversation</a></li>
+  </ul>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-drawer" aria-hidden="true">
+  <ul>
+    <li><a href="index.html#offer">Solutions</a></li>
+    <li><a href="index.html#workflows">Workflow examples</a></li>
+    <li><a href="index.html#process">How it works</a></li>
+    <li><a href="#">Advisory and Training</a></li>
+  </ul>
+  <div class="nav-drawer-cta">
+    <a href="index.html#contact" class="btn btn-lime btn-full">Start a conversation →</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg">clarity</div>
+  <div class="wrap">
+    <div class="page-hero-inner">
+      <div class="page-breadcrumb rv">
+        <a href="index.html">RP Collective</a>
+        <span class="page-breadcrumb-sep">→</span>
+        <span class="page-breadcrumb-current">Advisory and Training</span>
+      </div>
+      <h1 class="page-headline rv d1">
+        Clarity before<br><em>commitment.</em>
+      </h1>
+      <div class="page-hero-grid rv d2">
+        <p class="page-hero-desc">
+          Some businesses need to understand where AI fits before they build anything. Others need their teams trained before a rollout works. Some need clearer insight into how a workflow or service is actually performing. <strong>These engagements are built for that stage.</strong>
+        </p>
+        <div class="page-hero-note">
+          <p>Advisory and training often leads directly into implementation. It creates the conditions for a workflow launch to succeed rather than struggle.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINING -->
+<section class="training-sec" id="training">
+  <div class="wrap">
+    <div class="section-intro">
+      <h2 class="section-headline rv">AI training that builds<br><em>real capability</em></h2>
+      <p class="section-aside rv d1">Practical sessions built around your context and workflows. Not awareness modules. The goal is capability your teams can use on Monday morning.</p>
+    </div>
+    <div class="training-pair">
+      <div class="training-card rv d1">
+        <div class="training-card-eyebrow">For leadership teams</div>
+        <div class="training-card-title">AI for leaders who need to decide, not just understand.</div>
+        <p class="training-card-desc">For founders, directors, and senior leaders. Covers what AI can and cannot do in practice, how to evaluate workflow opportunities, and how to lead teams through adoption without losing momentum.</p>
+        <div class="training-card-items">
+          <div class="training-card-item">What AI can and cannot do, practically</div>
+          <div class="training-card-item">How to identify and evaluate workflow opportunities</div>
+          <div class="training-card-item">Build vs buy vs partner decisions</div>
+          <div class="training-card-item">Leading teams through adoption</div>
+          <div class="training-card-item">Managing risk and setting realistic expectations</div>
+        </div>
+      </div>
+      <div class="training-card rv d2">
+        <div class="training-card-eyebrow">For functional teams</div>
+        <div class="training-card-title">Practical AI skills for the people doing the work.</div>
+        <p class="training-card-desc">Applied workshops for operations, customer service, finance, and other functional teams. Built around the tools and tasks your team already uses. Consistent, confident usage in practice, not awareness of AI in the abstract.</p>
+        <div class="training-card-items">
+          <div class="training-card-item">Team-specific AI tools and applied workflows</div>
+          <div class="training-card-item">Prompt design and practical skills</div>
+          <div class="training-card-item">Building habits that outlast the session</div>
+          <div class="training-card-item">Identifying further AI opportunities in the team</div>
+          <div class="training-card-item">Measuring and improving usage over time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORY AND RESEARCH -->
+<section class="advisory-sec" id="advisory">
+  <div class="wrap">
+    <div class="section-intro">
+      <h2 class="section-headline rv">Advisory that produces<br><em>clear next steps</em></h2>
+      <p class="section-aside rv d1">Focused engagements with a defined output. Each one produces something the business can act on.</p>
+    </div>
+    <div class="advisory-list">
+
+      <div class="advisory-item rv">
+        <div class="advisory-item-name">AI Opportunity Assessment</div>
+        <div class="advisory-item-tag">Advisory</div>
+        <div class="advisory-item-desc">A diagnostic that gives leadership a clear view of where AI is worth applying, before committing to a build. Output is a prioritised list of workflow opportunities with realistic effort and expected value.</div>
+      </div>
+
+      <div class="advisory-item rv">
+        <div class="advisory-item-name">Operations and Workflow Review</div>
+        <div class="advisory-item-tag">Advisory</div>
+        <div class="advisory-item-desc">A review of how work actually moves through a team or business. Identifies where manual processes, fragmented coordination, or unclear ownership are creating drag. A useful foundation before any AI workflow is designed or built.</div>
+      </div>
+
+      <div class="advisory-item rv">
+        <div class="advisory-item-name">Customer and Workflow Insight</div>
+        <div class="advisory-item-tag">Research</div>
+        <div class="advisory-item-desc">Research into how customers or users interact with a service or workflow in practice. Useful before applying AI to a customer-facing process, redesigning a service, or validating where a workflow is actually failing. Outputs are tied to a specific decision the business needs to make.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO THIS IS FOR -->
+<section class="who">
+  <div class="wrap">
+    <div class="who-inner">
+      <div class="who-left rv">
+        <h2 class="who-headline">Who these<br>engagements<br>are <em>for</em></h2>
+        <p>Businesses at different stages, but with a shared need for clarity before they commit to building.</p>
+      </div>
+      <div class="who-points rv d1">
+        <div class="who-point">
+          <div class="who-point-n">i</div>
+          <div>
+            <div class="who-point-title">You know something is slow but are not sure where AI fits</div>
+            <p class="who-point-body">You have a sense that AI could help with operations, support, or coordination, but you have not identified a clear starting point. An assessment gives you the clarity to make a confident first decision.</p>
+          </div>
+        </div>
+        <div class="who-point">
+          <div class="who-point-n">ii</div>
+          <div>
+            <div class="who-point-title">Your leadership team needs to understand AI before committing to it</div>
+            <p class="who-point-body">Boards and senior teams being asked to approve AI investments or lead AI-adjacent change need a practical view. Not a technology briefing. Training gives them the grounding to lead well and ask the right questions.</p>
+          </div>
+        </div>
+        <div class="who-point">
+          <div class="who-point-n">iii</div>
+          <div>
+            <div class="who-point-title">Your teams are using AI inconsistently or not at all</div>
+            <p class="who-point-body">Tools have been introduced but adoption is uneven. Applied workshops build consistent habits, not by telling people AI is useful, but by showing them where it saves time in their specific role.</p>
+          </div>
+        </div>
+        <div class="who-point">
+          <div class="who-point-n">iv</div>
+          <div>
+            <div class="who-point-title">You need clearer insight before committing to a workflow change</div>
+            <p class="who-point-body">You are planning a change to a product, service, or operational process and need a clearer picture of how it is actually performing before committing resources to redesigning or building on top of it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE TO IMPLEMENTATION -->
+<section class="bridge">
+  <div class="wrap">
+    <div class="bridge-inner">
+      <div class="bridge-copy rv">
+        <h2>Advisory work usually leads directly to <em>implementation.</em></h2>
+        <p>Most businesses that start with an assessment, training, or research engagement have a clear workflow opportunity by the time it concludes. <strong>When there is something worth building, we move directly into it.</strong></p>
+        <p>The advisory work becomes the foundation. It is not a separate phase that sits alongside the build.</p>
+        <a href="index.html#offer" class="btn btn-ghost-dk">See our AI solutions →</a>
+      </div>
+      <div class="bridge-path rv d1">
+        <div class="bridge-step">
+          <div class="bridge-step-n">i</div>
+          <div>
+            <div class="bridge-step-name">Advisory or Training</div>
+            <div class="bridge-step-sub">Understand where AI fits and what is worth building</div>
+          </div>
+          <div class="bridge-step-arrow">↓</div>
+        </div>
+        <div class="bridge-step">
+          <div class="bridge-step-n">ii</div>
+          <div>
+            <div class="bridge-step-name">AI Workflow Launch</div>
+            <div class="bridge-step-sub">Design, build, and deploy into real operations</div>
+          </div>
+          <div class="bridge-step-arrow">↓</div>
+        </div>
+        <div class="bridge-step">
+          <div class="bridge-step-n">iii</div>
+          <div>
+            <div class="bridge-step-name">AI Operations Management</div>
+            <div class="bridge-step-sub">Optimise, improve, and expand from there</div>
+          </div>
+          <div class="bridge-step-arrow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="cta-bg">ready</div>
+  <div class="wrap">
+    <div class="cta-inner rv">
+      <div class="cta-eyebrow"><span class="eyebrow eyebrow-lime">Start here</span></div>
+      <h2 class="cta-headline">Not sure<br>where to <em>begin?</em></h2>
+      <p class="cta-sub">A short conversation to identify whether there is a real operational use case worth pursuing, and what the right first step would be. No pitch. No commitment.</p>
+      <div class="cta-btns">
+        <a href="mailto:hello@rp-collective.com" class="btn btn-lime">Book a discovery call →</a>
+        <a href="index.html" class="btn btn-ghost-dk">View AI solutions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-in">
+      <div class="footer-brand">
+        <span class="footer-mark"><span>RP</span></span>
+        RP Collective
+      </div>
+      <div style="grid-column: 1 / -1; margin-top: -.5rem;">
+        <p class="footer-tag">Practical AI for operational teams. From initial audit to deployment, optimisation, and ongoing support.</p>
+      </div>
+      <div class="footer-col">
+        <h4>AI Solutions</h4>
+        <ul>
+          <li><a href="index.html#offer">AI Opportunity Audit</a></li>
+          <li><a href="index.html#offer">AI Workflow Launch</a></li>
+          <li><a href="index.html#offer">AI Operations Management</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Advisory and Training</h4>
+        <ul>
+          <li><a href="#training">Leadership AI Training</a></li>
+          <li><a href="#training">Team Workshops</a></li>
+          <li><a href="#advisory">AI Assessment</a></li>
+          <li><a href="#advisory">User Research</a></li>
+          <li><a href="#advisory">Customer and Workflow Insight</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Offices</h4>
+        <ul>
+          <li>Nairobi, Kenya</li>
+          <li>London, UK</li>
+          <li>Lille, France</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RP Collective. All rights reserved.</span>
+      <span>Nairobi · London · Lille</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.body.classList.add('js-ready');
+const rvEls = document.querySelectorAll('.rv');
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.07 });
+rvEls.forEach(el => rvObs.observe(el));
+document.querySelectorAll('.page-hero .rv').forEach((el, i) => {
+  setTimeout(() => el.classList.add('in'), 120 + i * 110);
+});
+const toggle = document.querySelector('.nav-toggle');
+const drawer = document.querySelector('.nav-drawer');
+const drawerLinks = drawer.querySelectorAll('a');
+toggle.addEventListener('click', () => {
+  const isOpen = toggle.classList.toggle('open');
+  drawer.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  drawer.setAttribute('aria-hidden', !isOpen);
+  document.body.classList.toggle('nav-open', isOpen);
+});
+drawerLinks.forE

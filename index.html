@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RP Collective: Practical AI for Operational Teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+<style>
+/* ─── TOKENS ─── */
+:root {
+  --navy:      #18213a;
+  --navy-deep: #101828;
+  --navy-mid:  #1e2d4a;
+  --lime:      #cfe84e;
+  --lime-dim:  #b8d138;
+  --lime-pale: rgba(207,232,78,.09);
+  --lime-faint: rgba(207,232,78,.06);
+  --lime-rule: rgba(207,232,78,.25);
+  --white:     #ffffff;
+  --off:       #f5f4f0;
+  --warm:      #eceae4;
+  --border:    rgba(24,33,58,.09);
+  --muted:     #797269;
+  --ink:       #18213a;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans:  'DM Sans', sans-serif;
+  --max:   1080px;
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--off);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+
+/* grain */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998;
+  pointer-events: none; opacity: .4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+}
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 640px)  { .wrap { padding: 0 2rem; } }
+@media (min-width: 1024px) { .wrap { padding: 0 3rem; } }
+
+/* ─── TYPE ─── */
+.eyebrow {
+  font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+  font-weight: 600; color: var(--muted);
+}
+.eyebrow-lime { color: var(--lime-dim); letter-spacing: .22em; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-family: var(--sans); font-size: .72rem;
+  letter-spacing: .1em; text-transform: uppercase; font-weight: 500;
+  padding: .88rem 1.7rem; cursor: pointer; transition: all .2s;
+  border: none; border-radius: 1px; white-space: nowrap;
+  /* minimum touch target */
+  min-height: 48px;
+}
+.btn-lime { background: var(--lime); color: var(--navy-deep); }
+.btn-lime:hover, .btn-lime:active { background: var(--lime-dim); box-shadow: 0 4px 16px rgba(207,232,78,.22); transform: translateY(-1px); }
+.btn-ghost-dk { background: transparent; color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.2); }
+.btn-ghost-dk:hover, .btn-ghost-dk:active { color: white; border-color: var(--lime); }
+.btn-ghost-lt { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost-lt:hover, .btn-ghost-lt:active { color: var(--ink); border-color: var(--navy); }
+.btn-full { width: 100%; }
+
+/* ─── REVEAL ─── */
+/* Visible by default — JS adds .js-ready to body to enable animations */
+.rv { opacity: 1; transform: none; }
+.js-ready .rv { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.js-ready .rv.in { opacity: 1; transform: none; }
+.js-ready .rv.d1 { transition-delay: .08s; } .js-ready .rv.d2 { transition-delay: .16s; }
+.js-ready .rv.d3 { transition-delay: .24s; } .js-ready .rv.d4 { transition-delay: .32s; }
+
+/* ═══════════════════════════════════════
+   NAV — mobile-first with hamburger
+═══════════════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1.25rem;
+  background: rgba(245,244,240,.95); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 640px) { nav { padding: 0 2rem; } }
+@media (min-width: 1024px) { nav { height: 60px; padding: 0 3rem; } }
+
+.nav-logo {
+  display: flex; align-items: center; gap: .45rem;
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 600; color: var(--ink);
+  z-index: 2;
+}
+.nav-mark {
+  width: 22px; height: 22px; background: var(--navy);
+  border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.nav-mark span { font-family: var(--sans); font-size: .48rem; font-weight: 500; color: var(--lime); letter-spacing: .04em; }
+
+/* hamburger button */
+.nav-toggle {
+  display: flex; flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; cursor: pointer;
+  background: none; border: none; padding: .5rem;
+  z-index: 2;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink); border-radius: 1px;
+  transform-origin: center;
+  transition: transform .3s ease, opacity .3s ease, width .3s ease;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; width: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* mobile drawer */
+.nav-drawer {
+  position: fixed; inset: 0; top: 56px; z-index: 250;
+  background: rgba(245,244,240,.98); backdrop-filter: blur(20px);
+  display: flex; flex-direction: column;
+  padding: 2rem 1.25rem 3rem;
+  transform: translateX(100%);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+}
+.nav-drawer.open { transform: translateX(0); }
+
+.nav-drawer ul {
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: 0; flex: 1;
+}
+.nav-drawer ul li {
+  border-bottom: 1px solid var(--border);
+}
+.nav-drawer ul a {
+  display: block; padding: 1.1rem 0;
+  font-size: 1.1rem; font-family: var(--serif); font-weight: 400;
+  color: var(--ink); letter-spacing: .01em;
+  transition: color .2s;
+}
+.nav-drawer ul a:active { color: var(--navy-mid); }
+.nav-drawer-cta {
+  margin-top: 2rem;
+}
+
+/* desktop nav links — hidden on mobile */
+.nav-links-desk {
+  display: none; align-items: center; gap: 2rem; list-style: none;
+}
+@media (min-width: 768px) {
+  .nav-links-desk { display: flex; }
+  .nav-toggle { display: none; }
+  .nav-drawer { display: none !important; }
+}
+.nav-links-desk a {
+  font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+  font-weight: 500; color: var(--muted); transition: color .2s;
+  position: relative; padding-bottom: 2px;
+}
+.nav-links-desk a::after {
+  content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+  height: 1.5px; background: var(--lime); transform: scaleX(0);
+  transform-origin: left; transition: transform .25s ease;
+}
+.nav-links-desk a:hover { color: var(--ink); }
+.nav-links-desk a:hover::after { transform: scaleX(1); }
+.nav-links-desk .nav-cta {
+  background: var(--navy); color: white;
+  padding: .44rem 1.1rem; border-radius: 1px;
+  font-size: .69rem !important;
+}
+.nav-links-desk .nav-cta:hover { background: var(--navy-mid); }
+
+/* ═══════════════════════════════════════
+   A. HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 100svh;
+  background: var(--navy-deep);
+  display: flex; flex-direction: column;
+  padding-top: 56px;
+  position: relative; overflow: hidden;
+}
+@media (min-width: 1024px) { .hero { padding-top: 60px; } }
+
+.hero-bg-word { display: none; }
+
+.hero-topbar {
+  padding: .9rem 1.25rem;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,.055);
+  gap: 1rem;
+}
+@media (min-width: 640px) { .hero-topbar { padding: 1rem 2rem; } }
+@media (min-width: 1024px) { .hero-topbar { padding: 1.1rem 3rem; } }
+
+.hero-loc {
+  font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.22);
+}
+.hero-flag {
+  display: flex; align-items: center; gap: .45rem;
+  font-size: .62rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 500; color: var(--lime); white-space: nowrap;
+}
+.hero-flag-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lime); flex-shrink: 0; }
+
+.hero-body {
+  flex: 1; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 2rem 1.25rem 2.5rem;
+  max-width: var(--max); margin: 0 auto; width: 100%;
+  position: relative; z-index: 2;
+}
+@media (min-width: 640px) { .hero-body { padding: 2.5rem 2rem 3.5rem; } }
+@media (min-width: 1024px) { .hero-body { padding: 3.5rem 3rem 4.5rem; } }
+
+.hero-problem {
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.32); font-weight: 500;
+  margin-bottom: 2.4rem;
+}
+
+h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.8rem, 10vw, 7.5rem);
+  font-weight: 300; line-height: .96; letter-spacing: -.025em;
+  color: var(--white);
+}
+@media (min-width: 480px) { h1 { font-size: clamp(3.2rem, 9vw, 7.5rem); } }
+h1 { margin-bottom: 2.2rem; }
+h1 em { font-style: italic; color: var(--lime); }
+.h1-break {
+  display: block;
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 300; color: rgba(255,255,255,.35);
+  letter-spacing: .01em; margin-top: 1rem; line-height: 1.45;
+  font-style: normal; font-family: var(--sans);
+}
+
+.hero-foot {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: flex; flex-direction: column; gap: 1.6rem;
+}
+@media (min-width: 900px) {
+  .hero-foot { flex-direction: row; align-items: flex-end; gap: 3rem; }
+}
+.hero-sub {
+  font-size: .84rem; color: rgba(255,255,255,.42);
+  line-height: 1.72; font-weight: 300;
+}
+@media (min-width: 768px) { .hero-sub { max-width: 46ch; } }
+.hero-sub strong { color: rgba(255,255,255,.68); font-weight: 400; }
+
+.hero-btns {
+  display: flex; flex-direction: column; gap: .6rem;
+  flex-shrink: 0;
+}
+@media (min-width: 400px) { .hero-btns { flex-direction: row; flex-wrap: wrap; } }
+@media (min-width: 900px) { .hero-btns { flex-direction: column; align-items: flex-end; } }
+
+/* ═══════════════════════════════════════
+   B. PAIN
+═══════════════════════════════════════ */
+.pain {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 768px) { .pain { padding: 6rem 0; } }
+@media (min-width: 1024px) { .pain { padding: 7rem 0; } }
+
+/* full-width headline row */
+.pain-top {
+  margin-bottom: 3rem;
+}
+.pain-headline {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300; line-height: 1.1; color: var(--ink);
+}
+.pain-headline em { font-style: italic; }
+
+/* two-column body */
+.pain-body {
+  display: flex; flex-direction: column; gap: 2rem;
+}
+@media (min-width: 860px) {
+  .pain-body { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: start; }
+}
+
+/* left tile — context block */
+.pain-tile {
+  background: var(--navy);
+  padding: 2rem;
+  border-radius: 2px;
+  border-left: 2px solid var(--lime-rule);
+}
+.pain-tile-label {
+  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+  font-weight: 600; color: var(--lime); opacity: .6; margin-bottom: 1rem;
+}
+.pain-tile-body {
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 300;
+  color: rgba(255,255,255,.72); line-height: 1.55;
+}
+.pain-tile-sub {
+  font-size: .78rem; color: rgba(255,255,255,.32); line-height: 1.75;
+  font-weight: 300; margin-top: 1rem;
+}
+
+/* right — pain list */
+.pain-accent { display: none; }
+.pain-list { display: flex; flex-direction: column; }
+.pain-item {
+  padding: .95rem 0;
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1.1rem 1fr;
+  gap: .75rem; align-items: baseline;
+  cursor: default;
+  transition: padding-left .18s ease;
+}
+.pain-item:hover { padding-left: .3rem; }
+.pain-item:last-child { border-bottom: 1px solid var(--border); }
+.pain-item-dash { color: var(--lime-dim); font-size: .8rem; }
+.pain-item-text { font-size: .87rem; color: var(--ink); line-height: 1.5; font-weight: 500; }
+.pain-item-sub { font-size: .74rem; color: #5e5750; font-weight: 300; margin-top: .15rem; line-height: 1.58; }
+
+/* ═══════════════════════════════════════
+   C. OFFER LADDER
+═══════════════════════════════════════ */
+.offer {
+  padding: 5rem 0;
+  background: var(--navy-deep); color: white;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+@media (min-width: 768px) { .offer { padding: 7rem 0; } }
+@media (min-width: 1024px) { .offer { padding: 8rem 0; } }
+
+.offer-intro {
+  margin-bottom: 3.5rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+@media (min-width: 860px) {
+  .offer-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: end; margin-bottom: 5rem; }
+}
+.offer-headline {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 7vw, 5rem);
+  font-weight: 300; line-height: 1; letter-spacing: -.02em; color: white;
+}
+.offer-headline em { font-style: italic; color: var(--lime); }
+.offer-intro-aside {
+  font-size: .84rem; color: rgba(255,255,255,.45); line-height: 1.8; font-weight: 300;
+}
+
+.offer-track {
+  display: flex; flex-direction: column; gap: 0;
+}
+@media (min-width: 900px) {
+  .offer-track { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+}
+
+.offer-card {
+  padding: 1.8rem 0;
+  border-top: 1px solid rgba(255,255,255,.1);
+  cursor: default; transition: border-color .25s;
+}
+.offer-card:last-child {
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+@media (min-width: 900px) {
+  .offer-card { padding-top: 2rem; border-bottom: none !important; }
+}
+.offer-card:hover { border-color: var(--lime); }
+.offer-card-n { display: none; }
+.offer-card-tag {
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  font-weight: 600; color: var(--lime); opacity: .75; margin-bottom: .5rem;
+}
+.offer-card-title {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+  color: rgba(255,255,255,.88); line-height: 1.2; margin-bottom: .7rem;
+}
+.offer-card-for {
+  font-size: .75rem; color: rgba(255,255,255,.4); font-weight: 300;
+  font-style: italic; margin-bottom: .9rem; line-height: 1.55;
+}
+.offer-card-desc {
+  font-size: .81rem; color: rgba(255,255,255,.5); line-height: 1.8;
+  font-weight: 300; margin-bottom: 1.2rem;
+}
+.offer-card-gets { display: flex; flex-direction: column; gap: .38rem; border-top: 1px solid rgba(255,255,255,.08); padding-top: .9rem; margin-top: .2rem; }
+.offer-card-get {
+  font-size: .75rem; color: rgba(255,255,255,.55);
+  display: flex; align-items: baseline; gap: .5rem;
+}
+.offer-card-get::before { content: '→'; color: var(--lime); opacity: .75; font-size: .68rem; flex-shrink: 0; }
+
+/* ═══════════════════════════════════════
+   D. WORKFLOW EXAMPLES
+═══════════════════════════════════════ */
+.workflows {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+@media (min-width: 768px) { .workflows { padding: 7rem 0; } }
+@media (min-width: 1024px) { .workflows { padding: 8rem 0; } }
+
+.workflows-intro {
+  margin-bottom: 3rem;
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+@media (min-width: 860px) {
+  .workflows-intro { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: end; margin-bottom: 4.5rem; }
+}
+.workflows-headline {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -.015em; color: var(--ink);
+}
+.workflows-headline em { font-style: italic; }
+.workflows-aside { font-size: .84rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+
+/* mobile: single column; desktop: two columns */
+.workflow-grid {
+  display: flex; flex-direction: column; gap: 0;
+}
+@media (min-width: 860px) {
+  .workflow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
+}
+.workflow-col { display: flex; flex-direction: column; }
+.workflow-item {
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: .3rem;
+  cursor: default;
+}
+@media (min-width: 540px) {
+  .workflow-item { flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+}
+.workflow-item:last-child { border-bottom: 1px solid var(--border); }
+.workflow-col:not(:first-child) .workflow-item:first-child {
+  border-top: 1px solid var(--border);
+}
+@media (min-width: 860px) {
+  .workflow-col:not(:first-child) .workflow-item:first-child { border-top: 1px solid var(--border); }
+}
+.workflow-item-name { font-size: .88rem; color: var(--ink); font-weight: 600; line-height: 1.3; }
+.workflow-item-desc { font-size: .75rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin-top: .15rem; }
+.workflow-item-tag {
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  font-weight: 600; color: var(--navy-mid);
+  background: var(--warm); padding: .22rem .6rem; border-radius: 10px;
+  border: 1px solid rgba(24,33,58,.08);
+  white-space: nowrap; align-self: flex-start; flex-shrink: 0; margin-top: .1rem;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.workflow-item:hover .workflow-item-tag { background: var(--lime-faint); border-color: var(--lime-rule); color: var(--navy); }
+@media (min-width: 540px) { .workflow-item-tag { margin-top: 0; } }
+
+/* outcome reveal */
+.workflow-item-outcome {
+  display: none;
+  font-size: .72rem; color: var(--muted);
+  font-weight: 300; line-height: 1.6;
+  margin-top: .5rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border);
+}
+.workflow-item-outcome ul { list-style: none; display: flex; flex-direction: column; gap: .22rem; }
+.workflow-item-outcome li { display: flex; align-items: baseline; gap: .45rem; }
+.workflow-item-outcome li::before { content: '+'; color: var(--lime-dim); font-size: .7rem; flex-shrink: 0; font-weight: 600; }
+
+/* desktop: hover reveal */
+@media (min-width: 860px) {
+  .workflow-item:hover .workflow-item-outcome { display: block; }
+  .workflow-item { transition: padding-left .15s; }
+}
+
+/* mobile: tap to expand */
+.workflow-item.expanded .workflow-item-outcome { display: block; }
+.workflow-item-toggle {
+  display: none;
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1px solid var(--border); background: none;
+  cursor: pointer; flex-shrink: 0; align-self: flex-start; margin-top: .1rem;
+  align-items: center; justify-content: center;
+  font-size: .7rem; color: var(--muted);
+  transition: background .2s, border-color .2s;
+}
+@media (max-width: 859px) {
+  .workflow-item-toggle { display: flex; }
+  .workflow-item.expanded .workflow-item-toggle {
+    background: var(--lime-faint); border-color: var(--lime-rule); color: var(--navy);
+  }
+}
+
+/* ═══════════════════════════════════════
+   E. WHY THIS APPROACH
+═══════════════════════════════════════ */
+.why {
+  padding: 5rem 0;
+  background: var(--navy); color: white;
+}
+@media (min-width: 768px) { .why { padding: 7rem 0; } }
+@media (min-width: 1024px) { .why { padding: 8rem 0; } }
+
+.why-inner {
+  display: flex; flex-direction: column; gap: 3rem;
+}
+@media (min-width: 860px) {
+  .why-inner { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6rem; align-items: start; }
+}
+.why-headline {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  font-weight: 300; line-height: 1.05; letter-spacing: -.02em; color: white; margin-bottom: 1rem;
+}
+.why-headline em { font-style: italic; color: var(--lime); }
+.why-left-body { font-size: .84rem; color: rgba(255,255,255,.32); line-height: 1.82; font-weight: 300; }
+
+.why-points { display: flex; flex-direction: column; }
+.why-point {
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+  display: grid; grid-template-columns: 1.6rem 1fr;
+  gap: 1rem; align-items: start; cursor: default;
+}
+.why-point:last-child { border-bottom: 1px solid rgba(255,255,255,.07); }
+.why-point-n {
+  font-family: var(--serif); font-size: .95rem; font-style: italic;
+  color: rgba(255,255,255,.22); line-height: 1; padding-top: .3rem;
+  transition: color .25s;
+}
+.why-point:hover .why-point-n { color: var(--lime); opacity: .6; }
+.why-point-title {
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 400;
+  color: rgba(255,255,255,.9); line-height: 1.2; margin-bottom: .45rem;
+}
+.why-point-body { font-size: .81rem; color: rgba(255,255,255,.48); line-height: 1.78; font-weight: 300; }
+
+/* ═══════════════════════════════════════
+   G. CTA
+═══════════════════════════════════════ */
+.cta {
+  background: var(--navy-deep);
+  padding: 5.5rem 0 5rem;
+  position: relative; overflow: hidden;
+}
+@media (min-width: 768px) { .cta { padding: 8rem 0 7rem; } }
+@media (min-width: 1024px) { .cta { padding: 10rem 0 9rem; } }
+
+.cta-bg { display: none; }
+
+.cta-inner { position: relative; z-index: 2; }
+.cta-grid {
+  display: flex; flex-direction: column; gap: 3rem;
+}
+@media (min-width: 860px) {
+  .cta-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: center; }
+}
+
+.cta-eyebrow { margin-bottom: 1.2rem; }
+.cta-headline {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 8vw, 5.5rem);
+  font-weight: 300; line-height: .97;
+  letter-spacing: -.02em; color: white; margin-bottom: 1.5rem;
+}
+.cta-headline em { font-style: italic; color: var(--lime); }
+.cta-sub {
+  font-size: .87rem; color: rgba(255,255,255,.48);
+  font-weight: 300; line-height: 1.8; margin-bottom: 2rem;
+}
+.cta-btns { display: flex; flex-direction: column; gap: .6rem; }
+@media (min-width: 400px) { .cta-btns { flex-direction: row; flex-wrap: wrap; } }
+
+/* what happens panel */
+.cta-right {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+@media (min-width: 860px) {
+  .cta-right { padding-top: 0; border-top: none; border-left: 1px solid rgba(255,255,255,.07); padding-left: 5rem; }
+}
+.cta-right-label {
+  font-size: .63rem; letter-spacing: .17em; text-transform: uppercase;
+  font-weight: 600; color: rgba(255,255,255,.3); margin-bottom: 1.5rem;
+}
+.cta-steps { display: flex; flex-direction: column; }
+.cta-step {
+  padding: 1rem 0; border-top: 1px solid rgba(255,255,255,.06);
+  display: grid; grid-template-columns: 1.3rem 1fr; gap: .75rem; align-items: start;
+}
+.cta-step:last-child { border-bottom: 1px solid rgba(255,255,255,.06); }
+.cta-step-n { font-family: var(--serif); font-style: italic; font-size: .88rem; color: var(--lime); opacity: .35; padding-top: .1rem; }
+.cta-step-title { font-size: .82rem; font-weight: 500; color: rgba(255,255,255,.72); margin-bottom: .15rem; }
+.cta-step-sub { font-size: .73rem; color: rgba(255,255,255,.38); font-weight: 300; line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  background: var(--navy-deep);
+  border-top: 1px solid rgba(255,255,255,.04);
+  padding: 3.5rem 0 2rem;
+}
+@media (min-width: 768px) { footer { padding: 4rem 0 2.5rem; } }
+
+.footer-in {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2rem; margin-bottom: 2.5rem;
+}
+@media (min-width: 640px) { .footer-in { grid-template-columns: 1fr 1fr 1fr; } }
+@media (min-width: 900px) { .footer-in { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; } }
+
+.footer-brand {
+  font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+  color: white; margin-bottom: .7rem;
+  display: flex; align-items: center; gap: .45rem;
+  grid-column: 1 / -1;
+}
+@media (min-width: 900px) { .footer-brand { grid-column: auto; } }
+.footer-mark { width: 21px; height: 21px; background: var(--navy-mid); border-radius: 2px; display: flex; align-items: center; justify-content: center; }
+.footer-mark span { font-family: var(--sans); font-size: .48rem; font-weight: 500; color: var(--lime); }
+.footer-tag { font-size: .74rem; color: rgba(255,255,255,.32); line-height: 1.75; font-weight: 300; }
+.footer-col h4 { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.18); font-weight: 500; margin-bottom: .9rem; }
+.footer-col ul { list-style: none; }
+.footer-col li { font-size: .78rem; color: rgba(255,255,255,.38); margin-bottom: .42rem; font-weight: 300; transition: color .2s; }
+.footer-col li:hover { color: rgba(255,255,255,.7); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.05); padding-top: 1.8rem;
+  display: flex; flex-direction: column; gap: .35rem;
+  font-size: .67rem; color: rgba(255,255,255,.12);
+}
+@media (min-width: 640px) {
+  .footer-bottom { flex-direction: row; justify-content: space-between; }
+}
+
+/* ═══════════════════════════════════════
+   STICKY MOBILE CTA BAR
+   Appears on small screens only, gives
+   a persistent bottom call to action
+═══════════════════════════════════════ */
+.mobile-cta-bar {
+  display: flex;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  background: var(--navy-deep);
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: .75rem 1.25rem;
+  padding-bottom: calc(.75rem + env(safe-area-inset-bottom));
+  gap: .6rem; align-items: center;
+  transform: translateY(100%);
+  transition: transform .4s cubic-bezier(.4,0,.2,1);
+}
+.mobile-cta-bar.visible { transform: translateY(0); }
+.mobile-cta-bar .btn { flex: 1; font-size: .68rem; padding: .75rem 1rem; min-height: 44px; }
+@media (min-width: 768px) { .mobile-cta-bar { display: none; } }
+
+/* ═══════════════════════════════════════
+   UTILITY: prevent body scroll when
+   nav drawer is open
+═══════════════════════════════════════ */
+body.nav-open { overflow: hidden; }
+
+/* outcomes section removed — merged into workflow items */
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <span class="nav-mark"><span>RP</span></span>
+    RP Collective
+  </a>
+
+  <!-- Desktop links -->
+  <ul class="nav-links-desk">
+    <li><a href="#offer">Solutions</a></li>
+    <li><a href="rp-collective-advisory.html">Advisory and Training</a></li>
+    <li><a href="#contact" class="nav-cta">Start a conversation</a></li>
+  </ul>
+
+  <!-- Mobile hamburger -->
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" aria-hidden="true">
+  <ul>
+    <li><a href="#offer">Solutions</a></li>
+    <li><a href="#workflows">Workflow examples</a></li>
+    <li><a href="rp-collective-advisory.html">Advisory and Training</a></li>
+    <li><a href="#contact">Get in touch</a></li>
+  </ul>
+  <div class="nav-drawer-cta">
+    <a href="#contact" class="btn btn-lime btn-full">Start a conversation →</a>
+  </div>
+</div>
+
+<!-- ═══ A. HERO ═══ -->
+<section class="hero">
+  <div class="hero-topbar">
+
+    <span class="hero-flag"><span class="hero-flag-dot"></span>AI Workflows · East Africa</span>
+  </div>
+
+  <div class="hero-body">
+    <p class="hero-problem rv">Slow follow-up. Manual routing. Operational drag.</p>
+
+    <h1 class="rv d1">
+      AI workflows that fix<br><em>operational</em> bottlenecks.
+      <span class="h1-break rv d2">From audit to working system, in days, not months.</span>
+    </h1>
+
+    <div class="hero-foot rv d3">
+      <p class="hero-sub">
+        RP Collective identifies where AI can reduce friction in your operations, builds the workflow, and keeps it running.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-lime">Book a free discovery call →</a>
+        <a href="#offer" class="btn btn-ghost-dk">See how it works</a>
+        <a href="rp-collective-assessment.html" class="btn btn-ghost-dk" style="font-size:.68rem;opacity:.7;">Free self-assessment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ B. PAIN ═══ -->
+<section class="pain">
+  <div class="wrap">
+    <div class="pain-top rv">
+      <h2 class="pain-headline">The friction is<br>always <em>operational.</em></h2>
+    </div>
+    <div class="pain-body">
+      <div class="pain-tile rv d1">
+        <div class="pain-tile-label">The pattern</div>
+        <div class="pain-tile-body">Work that should run automatically is still manual. Information exists, but is not where it needs to be. Follow-up depends on individuals, not on a system.</div>
+        <div class="pain-tile-sub">The specific friction varies by team and industry. The underlying pattern is consistent across most operational businesses.</div>
+      </div>
+      <div class="pain-list rv d2">
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Repetitive questions consuming staff time</div>
+            <div class="pain-item-sub">The same queries handled manually every day. The knowledge exists. It is just not accessible.</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Leads and requests waiting too long</div>
+            <div class="pain-item-sub">Response time depends on who is available, not on a reliable process.</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Work tracked across WhatsApp, email, and spreadsheets</div>
+            <div class="pain-item-sub">No single source of truth. Things fall through because coordination runs through messages.</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Manual logging, routing, and reporting</div>
+            <div class="pain-item-sub">People moving data between systems by hand, compiling reports, updating trackers that should run automatically.</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Handoffs that drop context</div>
+            <div class="pain-item-sub">Work changes hands with no reliable structure. Status unclear. Escalations handled inconsistently.</div>
+          </div>
+        </div>
+        <div class="pain-item">
+          <div class="pain-item-dash">—</div>
+          <div>
+            <div class="pain-item-text">Knowledge trapped in people, not systems</div>
+            <div class="pain-item-sub">When someone is unavailable, their knowledge is unavailable. Processes that only one person knows how to run.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ C. OFFER LADDER ═══ -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <div class="offer-intro">
+      <h2 class="offer-headline rv">Three ways to<br>engage <em>RP Collective</em></h2>
+      <p class="offer-intro-aside rv d1">From diagnostic to deployment to ongoing improvement. A clear progression, designed so each stage builds on the last.</p>
+    </div>
+    <div class="offer-track">
+      <div class="offer-card rv d1">
+        <div class="offer-card-n">01</div>
+        <div class="offer-card-tag">First step</div>
+        <div class="offer-card-title">AI Opportunity Audit</div>
+        <div class="offer-card-for">You know something is slow. You are not yet sure where AI is worth building.</div>
+        <p class="offer-card-desc">A focused diagnostic of your operations. We identify where AI can reduce friction, estimate the commercial return, and give you a clear view of what to build first and why.</p>
+        <div class="offer-card-gets">
+          <div class="offer-card-get">Mapped workflow opportunities, ranked by value and effort</div>
+          <div class="offer-card-get">Estimated ROI and time-to-value for each opportunity</div>
+          <div class="offer-card-get">A clear recommendation on what to build first</div>
+          <div class="offer-card-get">A business case you can act on immediately</div>
+        </div>
+      </div>
+      <div class="offer-card rv d2">
+        <div class="offer-card-n">02</div>
+        <div class="offer-card-tag">Core engagement</div>
+        <div class="offer-card-title">AI Workflow Launch</div>
+        <div class="offer-card-for">You have a clear workflow problem. You are ready to build.</div>
+        <p class="offer-card-desc">We design, build, and deploy practical AI workflows into your operations. Not proofs of concept. Solutions your team uses from day one.</p>
+        <div class="offer-card-gets">
+          <div class="offer-card-get">Workflow design around your specific operation</div>
+          <div class="offer-card-get">Build and integration into your existing tools</div>
+          <div class="offer-card-get">Deployment and rollout support</div>
+          <div class="offer-card-get">A running workflow, not just a recommendation</div>
+        </div>
+      </div>
+      <div class="offer-card rv d3">
+        <div class="offer-card-n">03</div>
+        <div class="offer-card-tag">Ongoing</div>
+        <div class="offer-card-title">AI Operations Management</div>
+        <div class="offer-card-for">Your workflows are live. You want them to keep working, improve, and expand over time.</div>
+        <p class="offer-card-desc">We stay involved after launch. Monitoring, optimising, and iterating as the business changes. As each workflow is proven, we identify where to go next.</p>
+        <div class="offer-card-gets">
+          <div class="offer-card-get">Ongoing monitoring and performance review</div>
+          <div class="offer-card-get">Optimisation and iteration as conditions change</div>
+          <div class="offer-card-get">Support for your team as they use the system</div>
+          <div class="offer-card-get">Expansion into adjacent workflow opportunities</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ D. WORKFLOW EXAMPLES ═══ -->
+<section class="workflows" id="workflows">
+  <div class="wrap">
+    <div class="workflows-intro">
+      <h2 class="workflows-headline rv">Common operational<br>workflows we <em>support</em></h2>
+      <p class="workflows-aside rv d1">Examples of the kinds of workflows we help design, build, and run. These are typical patterns across industries, not an exhaustive list.</p>
+    </div>
+    <div class="workflow-grid">
+      <div class="workflow-col">
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Customer support triage</div><div class="workflow-item-desc">Automatically categorise, prioritise, and route incoming support requests.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Faster resolution on high-volume requests</li><li>Less time on manual categorisation</li><li>Support team focused on complex cases</li></ul></div>
+          <div class="workflow-item-tag">Support</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Repetitive FAQ handling</div><div class="workflow-item-desc">Resolve high-volume, repetitive queries without manual intervention.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Staff time freed from answering the same questions</li><li>Consistent, accurate responses at any volume</li><li>Quicker resolution for common queries</li></ul></div>
+          <div class="workflow-item-tag">Support</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Lead qualification and routing</div><div class="workflow-item-desc">Qualify inbound leads and route to the right person automatically.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Faster response to inbound leads</li><li>Fewer missed opportunities</li><li>Cleaner routing to the right person or team</li></ul></div>
+          <div class="workflow-item-tag">Sales</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Follow-up and outreach workflows</div><div class="workflow-item-desc">Reliable, structured follow-up that runs without depending on individuals.</div></div>
+          <div class="workflow-item-outcome"><ul><li>More consistent follow-up without manual chasing</li><li>Fewer leads lost to slow response</li><li>Structured process that runs independently</li></ul></div>
+          <div class="workflow-item-tag">Sales</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Internal request handling</div><div class="workflow-item-desc">Route internal requests to the right owner without manual coordination.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Faster resolution of internal requests</li><li>Less manual coordination between teams</li><li>Clearer ownership and accountability</li></ul></div>
+          <div class="workflow-item-tag">Operations</div>
+        </div>
+      </div>
+      <div class="workflow-col">
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">SOP and policy retrieval</div><div class="workflow-item-desc">Instant access to the right procedures, without searching folders or asking colleagues.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Instant access to the right procedure</li><li>Less time searching or asking colleagues</li><li>Consistent application of policy across teams</li></ul></div>
+          <div class="workflow-item-tag">Knowledge</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Reporting and status workflows</div><div class="workflow-item-desc">Automate routine reporting without manual compilation.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Less time spent chasing updates</li><li>More consistent and timely reporting</li><li>Clearer visibility for operations and management</li></ul></div>
+          <div class="workflow-item-tag">Operations</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Handoff and escalation handling</div><div class="workflow-item-desc">Clean handoffs between teams, with context preserved and escalation paths that run.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Context preserved across team handoffs</li><li>Fewer things falling through the cracks</li><li>Escalations handled consistently</li></ul></div>
+          <div class="workflow-item-tag">Operations</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Maintenance and issue coordination</div><div class="workflow-item-desc">Log, assign, and track operational issues automatically from report to resolution.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Faster assignment and resolution of issues</li><li>Automated tracking from report to close</li><li>Less manual follow-up on open items</li></ul></div>
+          <div class="workflow-item-tag">Facilities</div>
+        </div>
+        <div class="workflow-item rv">
+          <div><div class="workflow-item-name">Branch and site reporting</div><div class="workflow-item-desc">Automated status and performance reporting from multiple locations, without manual data collection.</div></div>
+          <div class="workflow-item-outcome"><ul><li>Automated performance reporting across locations</li><li>Less time on manual data collection</li><li>Timely, consistent visibility at leadership level</li></ul></div>
+          <div class="workflow-item-tag">Operations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ E. WHY THIS APPROACH ═══ -->
+<section class="why">
+  <div class="wrap">
+    <div class="why-inner">
+      <div class="why-left rv">
+        <h2 class="why-headline">Start focused.<br><em>Then expand.</em></h2>
+        <p class="why-left-body">We begin where the friction is highest. A practical, well-chosen starting point, built properly and proven to work. Then we scale what delivers.</p>
+      </div>
+      <div class="why-points rv d1">
+        <div class="why-point">
+          <div class="why-point-n">i</div>
+          <div>
+            <div class="why-point-title">Begin where the friction is highest</div>
+            <p class="why-point-body">Large programmes take months to show value and often stall before anything ships. Starting with the highest-impact opportunity produces results quickly and builds confidence in what AI can do.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-n">ii</div>
+          <div>
+            <div class="why-point-title">Deploy into real operations</div>
+            <p class="why-point-body">A workflow that lives only in a demo has not been tested. We deploy into the actual tools and processes your team uses every day. That is what makes the difference.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-n">iii</div>
+          <div>
+            <div class="why-point-title">Prove it, then build on it</div>
+            <p class="why-point-body">Once a workflow is running, we measure and optimise it. What gets built next is based on what has worked, not on what looked promising in a plan.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-n">iv</div>
+          <div>
+            <div class="why-point-title">Stay involved after launch</div>
+            <p class="why-point-body">Most AI projects fail after go-live because no one is responsible for keeping them running. We stay involved so the system evolves with the business, rather than degrading quietly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ G. CTA ═══ -->
+<section class="cta" id="contact">
+  <div class="wrap">
+    <div class="cta-inner">
+      <div class="cta-grid">
+        <div class="cta-left rv">
+          <div class="cta-eyebrow"><span class="eyebrow eyebrow-lime">Book a free discovery call</span></div>
+          <h2 class="cta-headline">Start with a<br>free discovery<br><em>call.</em></h2>
+          <p class="cta-sub">A practical first conversation to identify where AI could reduce friction in your operations, and whether an audit makes sense as the next step. No pitch. No commitment.</p>
+          <div class="cta-btns">
+            <a href="mailto:hello@rp-collective.com" class="btn btn-lime">Book a free discovery call →</a>
+            <a href="#offer" class="btn btn-ghost-dk">See our offer</a>
+          </div>
+        </div>
+        <div class="cta-right rv d1">
+          <div class="cta-right-label">What the conversation covers</div>
+          <div class="cta-steps">
+            <div class="cta-step">
+              <div class="cta-step-n">i</div>
+              <div>
+                <div class="cta-step-title">Where the friction is</div>
+                <div class="cta-step-sub">We look at where work is slowing down, what is manual that should not be, and where teams are building workarounds.</div>
+              </div>
+            </div>
+            <div class="cta-step">
+              <div class="cta-step-n">ii</div>
+              <div>
+                <div class="cta-step-title">Whether an audit makes sense</div>
+                <div class="cta-step-sub">We assess whether there is a real workflow opportunity worth pursuing, and whether an AI Opportunity Audit is the right next step.</div>
+              </div>
+            </div>
+            <div class="cta-step">
+              <div class="cta-step-n">iii</div>
+              <div>
+                <div class="cta-step-title">A clear view of where to start</div>
+                <div class="cta-step-sub">If there is a clear opportunity, we outline what an audit would cover and what practical workflows could look like.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-in">
+      <div class="footer-brand">
+        <span class="footer-mark"><span>RP</span></span>
+        RP Collective
+      </div>
+      <div style="grid-column: 1 / -1;">
+        <p class="footer-tag">Practical AI for operational teams. From initial audit to deployment, optimisation, and ongoing support.</p>
+      </div>
+      <div class="footer-col">
+        <h4>AI Solutions</h4>
+        <ul>
+          <li>AI Opportunity Audit</li>
+          <li>AI Workflow Launch</li>
+          <li>AI Operations Management</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Advisory and Training</h4>
+        <ul>
+          <li><a href="rp-collective-advisory.html" style="color:inherit;">Leadership AI Training</a></li>
+          <li><a href="rp-collective-advisory.html" style="color:inherit;">Team Workshops</a></li>
+          <li><a href="rp-collective-advisory.html" style="color:inherit;">User Research</a></li>
+          <li><a href="rp-collective-advisory.html" style="color:inherit;">Service and Product Insight</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>RP Collective</h4>
+        <ul>
+          <li>About us</li>
+          <li>Meet the team</li>
+          <li>Get in touch</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Offices</h4>
+        <ul>
+          <li>Nairobi, Kenya</li>
+          <li>London, UK</li>
+          <li>Lille, France</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 RP Collective. All rights reserved.</span>
+      <span>Nairobi · London · Lille</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Sticky mobile CTA bar -->
+<div class="mobile-cta-bar" id="mobileCta">
+  <a href="mailto:hello@rp-collective.com" class="btn btn-lime">Book a free call →</a>
+  <a href="#offer" class="btn btn-ghost-dk">Our offer</a>
+</div>
+
+<script>
+/* ── Enable animations only once JS is confirmed running ── */
+document.body.classList.add('js-ready');
+
+/* ── Workflow outcome tap-to-expand (mobile) ── */
+document.querySelectorAll('.workflow-item').forEach(item => {
+  item.addEventListener('click', function(e) {
+    if (window.innerWidth >= 860) return; // desktop uses hover CSS
+    this.classList.toggle('expanded');
+  });
+});
+
+/* ── Scroll reveal ── */
+const rvEls = document.querySelectorAll('.rv');
+const rvObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.07 });
+rvEls.forEach(el => rvObs.observe(el));
+
+/* Hero reveals immediately */
+document.querySelectorAll('.hero .rv').forEach((el, i) => {
+  setTimeout(() => el.classList.add('in'), 120 + i * 110);
+});
+
+/* ── Hamburger nav ── */
+const toggle = document.querySelector('.nav-toggle');
+const drawer = document.querySelector('.nav-drawer');
+const drawerLinks = drawer.querySelectorAll('a');
+
+toggle.addEventListener('click', () => {
+  const isOpen = toggle.classList.toggle('open');
+  drawer.classList.toggle('open', isOpen);
+  toggle.setAttribute('aria-expanded', isOpen);
+  drawer.setAttribute('aria-hidden', !isOpen);
+  document.body.classList.toggle('nav-open', isOpen);
+});
+
+drawerLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    toggle.classList.remove('open');
+    drawer.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+    drawer.setAttribute('aria-hidden', true);
+    document.body.classLis
