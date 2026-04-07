@@ -29,7 +29,7 @@
   --ink:       #18213a;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans:  'DM Sans', sans-serif;
-  --max:   1080px;
+  --max:   1280px;
 }
 
 /* ─── RESET ─── */
@@ -58,6 +58,7 @@ body::before {
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
 @media (min-width: 640px)  { .wrap { padding: 0 2rem; } }
 @media (min-width: 1024px) { .wrap { padding: 0 3rem; } }
+@media (min-width: 1400px) { .wrap { padding: 0 4rem; } }
 
 /* ─── TYPE ─── */
 .eyebrow {
@@ -248,6 +249,7 @@ nav {
 }
 @media (min-width: 640px) { .hero-body { padding: 2.5rem 2rem 3rem; } }
 @media (min-width: 1024px) { .hero-body { padding: 3rem 3rem 4rem; } }
+@media (min-width: 1400px) { .hero-body { padding: 4rem 4rem 5rem; } }
 
 /* Headline runs full width, footer row below */
 .hero-grid {
@@ -551,7 +553,7 @@ h1 em { font-style: italic; color: var(--lime); }
   padding: 1.2rem 0;
   border-top: 1px solid var(--border);
   display: flex; flex-direction: column; gap: .3rem;
-  cursor: default;
+  cursor: pointer;
 }
 @media (min-width: 540px) {
   .workflow-item { flex-direction: row; align-items: flex-start; justify-content: space-between; gap: 1rem; }
@@ -585,9 +587,16 @@ h1 em { font-style: italic; color: var(--lime); }
   padding-top: .5rem;
   border-top: 1px solid var(--border);
 }
+@media (max-width: 859px) {
+  .workflow-item { padding: 1rem 0; }
+  .workflow-item-outcome { margin-top: .6rem; }
+}
 .workflow-item-outcome ul { list-style: none; display: flex; flex-direction: column; gap: .22rem; }
 .workflow-item-outcome li { display: flex; align-items: baseline; gap: .45rem; }
 .workflow-item-outcome li::before { content: '+'; color: var(--lime-dim); font-size: .7rem; flex-shrink: 0; font-weight: 600; }
+
+/* mobile: tap to expand */
+.workflow-item.expanded .workflow-item-outcome { display: block !important; }
 
 /* desktop: hover reveal */
 @media (min-width: 860px) {
@@ -932,25 +941,38 @@ body.nav-open { overflow: hidden; }
 
 /* Mobile nav fixes */
 @media (max-width: 640px) {
-  #navLua { display: none !important; }
-  .nav-left { gap: 0; }
   nav { padding: 0 1rem; }
+  .nav-left { gap: 0; }
+  #navLua span:first-child { display: none; }
+  #navLua { padding-left: .6rem; margin-left: .4rem; gap: .3rem; }
+}
+@media (max-width: 400px) {
+  #navLua { display: none !important; }
 }
 
 /* Mobile workflow tap expand */
 @media (max-width: 859px) {
-  .workflow-item { cursor: pointer; }
-  .workflow-item.expanded .workflow-item-outcome { display: block; }
-  .workflow-item-toggle { display: flex; }
+  .workflow-item { cursor: pointer; -webkit-tap-highlight-color: rgba(207,232,78,.1); }
+  .workflow-item.expanded .workflow-item-outcome { display: block !important; }
+  .workflow-item-toggle { display: flex !important; }
+  .workflow-item-name::after {
+    content: " +";
+    color: var(--lime-dim);
+    font-size: .8rem;
+    font-weight: 400;
+  }
+  .workflow-item.expanded .workflow-item-name::after {
+    content: " −";
+  }
 }
 
-/* Mobile agents compare — stack columns */
+/* Mobile agents compare — keep 2 cols, shrink text */
 @media (max-width: 640px) {
-  .agents-compare { grid-template-columns: 1fr; }
-  .compare-col:first-child { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .compare-col-head { font-size: .65rem; }
-  .compare-row-title { font-size: .78rem; }
-  .compare-row-body { font-size: .72rem; }
+  .agents-compare { grid-template-columns: 1fr 1fr; }
+  .compare-col-head { font-size: .58rem; padding: .7rem .7rem; letter-spacing: .06em; }
+  .compare-row { padding: .65rem .7rem; gap: .15rem; }
+  .compare-row-title { font-size: .72rem; }
+  .compare-row-body { font-size: .65rem; line-height: 1.5; }
 }
 
 /* Mobile hero header cleanup */
@@ -973,6 +995,20 @@ body.nav-open { overflow: hidden; }
     grid-template-columns: 1fr 1fr !important;
     gap: 1.5rem;
   }
+}
+
+
+/* Mobile hero — reduce empty space */
+@media (max-width: 860px) {
+  .hero { min-height: auto; }
+  .hero-body {
+    padding-top: 2.5rem !important;
+    justify-content: flex-start;
+  }
+  .hero-grid { padding-top: 1.5rem; }
+  .hero-problem { margin-bottom: 1.2rem; }
+  h1 { margin-bottom: 1rem; }
+  .h1-sub { margin-top: 1rem; }
 }
 
 </style>
@@ -1416,59 +1452,99 @@ body.nav-open { overflow: hidden; }
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ── Enable animations only once JS is confirmed running ── */
+/* ── Boot ── */
 document.body.classList.add('js-ready');
 
+/* ── Workflow tap expand ── */
+(function(){
+  function init() {
+    var items = document.querySelectorAll('.workflow-item');
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        if (window.innerWidth >= 860) return;
+        var isOpen = this.classList.contains('expanded');
+        items.forEach(function(i){ i.classList.remove('expanded'); });
+        if (!isOpen) this.classList.add('expanded');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else { init(); }
+})();
 
+/* ── Pain accordion ── */
+(function(){
+  function initPain() {
+    var items = document.querySelectorAll('.pain-item');
+    items.forEach(function(item) {
+      item.addEventListener('click', function() {
+        var isOpen = this.classList.contains('open');
+        items.forEach(function(i){ i.classList.remove('open'); });
+        if (!isOpen) this.classList.add('open');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPain);
+  } else { initPain(); }
+})();
 
-
-/* ── AI agents tech panel toggle ── */
+/* ── Tech panel toggle ── */
 function toggleTech(btn){
   btn.classList.toggle('open');
   var panel = document.getElementById('agentsTechPanel');
-  panel.classList.toggle('open');
+  if (panel) panel.classList.toggle('open');
 }
 
-/* ── Dynamic nav theme: watches which section is behind the nav ── */
-
-
-
-/* ── Workflow outcome tap-to-expand (mobile) ── */
-document.querySelectorAll('.workflow-item').forEach(function(item) {
-  item.addEventListener('click', function(e) {
-    if (window.innerWidth >= 860) return;
-    var wasExpanded = this.classList.contains('expanded');
-    document.querySelectorAll('.workflow-item.expanded').forEach(function(i){ i.classList.remove('expanded'); });
-    if (!wasExpanded) this.classList.add('expanded');
-  });
-});
-
 /* ── Scroll reveal ── */
-const rvEls = document.querySelectorAll('.rv');
-const rvObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+var rvEls = document.querySelectorAll('.rv');
+var rvObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
 }, { threshold: 0.07 });
-rvEls.forEach(el => rvObs.observe(el));
+rvEls.forEach(function(el){ rvObs.observe(el); });
 
 /* Hero reveals immediately */
-document.querySelectorAll('.hero .rv').forEach((el, i) => {
-  setTimeout(() => el.classList.add('in'), 120 + i * 110);
+document.querySelectorAll('.hero .rv').forEach(function(el, i){
+  setTimeout(function(){ el.classList.add('in'); }, 120 + i * 110);
 });
 
 /* ── Hamburger nav ── */
-const toggle = document.querySelector('.nav-toggle');
-const drawer = document.querySelector('.nav-drawer');
-const drawerLinks = drawer.querySelectorAll('a');
+(function(){
+  var toggle = document.querySelector('.nav-toggle');
+  var drawer = document.querySelector('.nav-drawer');
+  if (!toggle || !drawer) return;
+  var drawerLinks = drawer.querySelectorAll('a');
+  toggle.addEventListener('click', function(){
+    var isOpen = toggle.classList.toggle('open');
+    drawer.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    drawer.setAttribute('aria-hidden', !isOpen);
+    document.body.classList.toggle('nav-open', isOpen);
+  });
+  drawerLinks.forEach(function(link){
+    link.addEventListener('click', function(){
+      drawer.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+      drawer.setAttribute('aria-hidden', true);
+      document.body.classList.remove('nav-open');
+    });
+  });
+})();
 
-toggle.addEventListener('click', () => {
-  const isOpen = toggle.classList.toggle('open');
-  drawer.classList.toggle('open', isOpen);
-  toggle.setAttribute('aria-expanded', isOpen);
-  drawer.setAttribute('aria-hidden', !isOpen);
-  document.body.classList.toggle('nav-open', isOpen);
-});
-
-drawerLinks.forEach(link => {
-  link.addEventListener('click', () {
-    drawer.classList.remove('open');
-    toggle.classList.remove('
+/* ── Mobile sticky CTA ── */
+(function(){
+  var bar = document.getElementById('mobileCta');
+  if (!bar) return;
+  var hero = document.querySelector('.hero');
+  function check(){
+    if (!hero) return;
+    bar.classList.toggle('visible', window.scrollY > hero.offsetHeight * 0.7);
+  }
+  window.addEventListener('scroll', check, {passive:true});
+  check();
+})();
+</script>
+</body>
+</html>
