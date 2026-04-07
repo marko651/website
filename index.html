@@ -945,9 +945,10 @@ body.nav-open { overflow: hidden; }
 /* outcomes section removed — merged into workflow items */
 
 /* Mobile nav fixes */
-@media (max-width: 640px) {
-  nav { padding: 0 1rem; display: flex; align-items: center; justify-content: space-between; }
-  .nav-left { gap: 0; flex-shrink: 0; max-width: calc(100% - 60px); overflow: hidden; }
+@media (max-width: 768px) {
+  nav { padding: 0 1rem; }
+  .nav-left { gap: 0; }
+  .nav-lua { display: none !important; }
   #navLua { display: none !important; }
   .nav-logo img { height: 32px !important; }
 }
@@ -1063,6 +1064,20 @@ body.nav-open { overflow: hidden; }
   }
 }
 
+
+/* Force hide nav lua on mobile — belt and braces */
+@media (max-width: 768px) {
+  .nav-lua,
+  #navLua {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+}
 </style>
 </head>
 <body>
