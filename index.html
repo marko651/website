@@ -1052,42 +1052,9 @@ body.nav-open { overflow: hidden; }
 }
 
 
-/* Lua partner strip — mobile only */
-.lua-strip {
-  display: none;
-}
-@media (max-width: 768px) {
-  .lua-strip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .5rem;
-    padding: .5rem 1rem;
-    background: rgba(255,255,255,.04);
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    font-size: .62rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: rgba(255,255,255,.32);
-  }
-  .lua-strip img {
-    height: 14px;
-    width: auto;
-    opacity: .75;
-    flex-shrink: 0;
-  }
-}
-
-
-/* Nav Lua badge — desktop only */
+/* Lua badge handling */
 .nav-lua-desktop {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  border-left: 1px solid rgba(255,255,255,.1);
-  padding-left: 1rem;
-  margin-left: .8rem;
+  display: none;
 }
 .nav-lua-label {
   font-size: .62rem;
@@ -1101,8 +1068,63 @@ body.nav-open { overflow: hidden; }
   color: rgba(255,255,255,.4);
   font-weight: 400;
 }
+
+.lua-strip {
+  display: none;
+}
+
 @media (max-width: 768px) {
-  .nav-lua-desktop { display: none !important; }
+  nav {
+    background: var(--navy-deep);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+
+  .nav-lua-desktop {
+    display: none !important;
+  }
+
+  .lua-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    width: 100%;
+    min-height: 32px;
+    margin-top: 56px;
+    padding: .45rem 1rem;
+    background: var(--navy-deep);
+    border-top: 0;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    font-size: .58rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: rgba(255,255,255,.55);
+    position: relative;
+    z-index: 220;
+  }
+
+  .lua-strip img {
+    height: 13px;
+    width: auto;
+    opacity: .85;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-lua-desktop {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    border-left: 1px solid rgba(255,255,255,.1);
+    padding-left: 1rem;
+    margin-left: .8rem;
+  }
+
+  .lua-strip {
+    display: none !important;
+  }
 }
 
 </style>
