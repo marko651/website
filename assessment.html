@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Operations Readiness Check: RP Collective</title>
+<title>AI Opportunity Readiness Check: RP Collective</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
@@ -175,16 +175,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   <!-- INTRO -->
   <div class="screen active" id="s-intro">
     <div class="intro-screen">
-      <div class="intro-badge"><span class="intro-badge-dot"></span>AI Operations Readiness Check</div>
-      <h1 class="intro-h">See where AI can reduce <em>operational friction.</em></h1>
-      <p class="intro-p">11 focused questions. A personalised assessment of where AI is most likely to deliver real value in your business.</p>
+      <div class="intro-badge"><span class="intro-badge-dot"></span>AI Opportunity Readiness Check</div>
+      <h1 class="intro-h">See where AI can reduce <em>business friction.</em></h1>
+      <p class="intro-p">12 focused questions. A short diagnostic to identify where AI can reduce friction in your business.</p>
       <div class="intro-stats">
-        <div class="intro-stat"><span class="intro-stat-dot"></span>11 questions</div>
+        <div class="intro-stat"><span class="intro-stat-dot"></span>12 questions</div>
         <div class="intro-stat"><span class="intro-stat-dot"></span>Under 5 minutes</div>
         <div class="intro-stat"><span class="intro-stat-dot"></span>Instant report</div>
       </div>
       <button class="btn btn-lime" onclick="startQ()">Start the assessment &rarr;</button>
-      <p class="intro-note">No spam. Results appear immediately.</p>
+      <p class="intro-note">No spam. Enter your email to unlock your report.</p>
     </div>
   </div>
 
@@ -195,7 +195,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
         <div class="card-prog">
           <div class="card-prog-bar"><div class="card-prog-fill" id="progFill" style="width:0%"></div></div>
           <div class="card-prog-meta">
-            <span class="card-prog-label" id="progLabel">Question 1 of 11</span>
+            <span class="card-prog-label" id="progLabel">Question 1 of 12</span>
             <span class="card-prog-pct" id="progPct">0%</span>
           </div>
         </div>
@@ -211,12 +211,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   <!-- EMAIL GATE -->
   <div class="modal-overlay hidden" id="gate">
     <div class="modal">
-      <div class="modal-title">Enter your details to see your<br><em>readiness result.</em></div>
-      <p class="modal-sub">Your personalised assessment and recommended next step will appear instantly.</p>
+      <div class="modal-title">Enter your details to unlock your<br><em>assessment report.</em></div>
+      <p class="modal-sub">Enter your details to see your personalised AI Opportunity Readiness report.</p>
       <input class="q-input" type="text" id="g-name" placeholder="Your first name" autocomplete="given-name">
       <input class="q-input" type="email" id="g-email" placeholder="Your email address" autocomplete="email">
       <button class="btn btn-lime" style="width:100%;margin-top:.4rem" onclick="submitGate()">Reveal my results &rarr;</button>
-      <p class="modal-gate-note">No spam. We will use your details to send your report and follow up if there is a clear fit.</p>
+      <p class="modal-gate-note">We will use this to generate your report and send you a copy.</p>
     </div>
   </div>
 
@@ -225,7 +225,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
     <div class="loading-screen">
       <div class="loading-mark"><span>RP</span></div>
       <h2 class="loading-h">Analysing your answers<span class="ldot">.</span><span class="ldot">.</span><span class="ldot">.</span></h2>
-      <p class="loading-sub">Building your personalised AI Operations Readiness report.</p>
+      <p class="loading-sub">Building your personalised AI Opportunity Readiness report.</p>
       <div class="load-bar-wrap"><div class="load-bar-fill" id="loadBar" style="width:0%"></div></div>
       <p class="load-note" id="loadNote">Reading your operational context...</p>
     </div>
@@ -249,19 +249,9 @@ var Qs = [
   {
     id:'whatDo', section:'Your Business', type:'text',
     text:'What does your business do, and who do you serve?',
-    hint:'One or two sentences is fine.',
+    hint:'One or two sentences is enough.',
     placeholder:'e.g. We provide logistics software to mid-sized freight companies in East Africa.',
     required:true
-  },
-  {
-    id:'industry', section:'Your Business', type:'radio',
-    text:'What industry are you in?',
-    opts:[
-      'Professional Services','Real Estate','Logistics and Transport',
-      'Healthcare','Financial Services','Education',
-      'Hospitality','Retail and Ecommerce','Marketing and Creative',
-      'Technology','Manufacturing','Other'
-    ], required:true
   },
   {
     id:'teamSize', section:'Your Business', type:'radio',
@@ -274,12 +264,11 @@ var Qs = [
     hint:'Select all that apply.',
     opts:[
       'Following up with leads or clients',
-      'Slow follow-up after inquiries or sales conversations',
       'Routing requests to the right person',
       'Answering repetitive questions',
       'Reporting and status updates',
-      'Onboarding new clients or staff',
       'Internal coordination and handoffs',
+      'Onboarding new clients or staff',
       'Manual data entry or logging',
       'Knowledge locked in people, not systems',
       'Other'
@@ -288,7 +277,7 @@ var Qs = [
   {
     id:'offPlate', section:'The Bottlenecks', type:'text',
     text:'What is the single task you most want off your plate?',
-    hint:'Be specific. This often points directly at the highest-value AI opportunity.',
+    hint:'Be specific. This often points directly at the highest-value workflow to improve.',
     placeholder:'e.g. Compiling and sending the weekly client status report manually every Friday...',
     required:true
   },
@@ -305,22 +294,37 @@ var Qs = [
     ], required:true
   },
   {
-    id:'aiExp', section:'AI Readiness', type:'radio',
-    text:'How would you describe your current experience with AI tools?',
+    id:'workLives', section:'Current Workflow', type:'checkbox',
+    text:'Where does this work currently happen?',
+    hint:'Select all that apply.',
     opts:[
-      'We have not used AI tools yet',
-      'We have tried a few tools but nothing has stuck',
-      'We use some AI tools regularly but not systematically',
-      'We are fairly AI-savvy and want to go further'
+      'Email',
+      'WhatsApp',
+      'CRM',
+      'Spreadsheets',
+      'ERP or internal system',
+      'Helpdesk or ticketing tool',
+      'Mostly in people’s heads',
+      'Other'
     ], required:true
   },
   {
-    id:'situation', section:'AI Readiness', type:'radio',
+    id:'workflowMaturity', section:'Current Workflow', type:'radio',
+    text:'Which best describes how this workflow runs today?',
+    opts:[
+      'We already have a defined process and tools',
+      'We have some tools, but the workflow is inconsistent',
+      'The work is still mostly manual',
+      'It depends heavily on specific people'
+    ], required:true
+  },
+  {
+    id:'situation', section:'Current Situation', type:'radio',
     text:'Which best describes your situation right now?',
     opts:[
-      'We know something is slow but are not sure where to start',
-      'We have a specific workflow problem and want to fix it',
-      'We want to explore what AI could improve before deciding where to start',
+      'We know something is slow, but are not sure where to start',
+      'We have a specific workflow problem we want to fix',
+      'We want to explore where AI could help before deciding',
       'We are ready to build and want the right partner'
     ], required:true
   },
@@ -328,20 +332,38 @@ var Qs = [
     id:'urgency', section:'Decision Context', type:'radio',
     text:'How urgent is fixing this?',
     opts:[
-      'Useful but not pressing',
+      'Useful, but not pressing',
       'Important in the next 6 months',
       'High priority in the next 3 months',
       'Urgent, it is already hurting results'
     ], required:true
   },
   {
+    id:'internalOwner', section:'Decision Context', type:'radio',
+    text:'If you decided to improve this, who would likely help drive it internally?',
+    opts:[
+      'Just me',
+      'Founder or CEO',
+      'Operations lead',
+      'Sales lead',
+      'Technical or IT lead',
+      'Department head',
+      'No clear owner yet'
+    ], required:true
+  },
+  {
     id:'decisionMakers', section:'Decision Context', type:'checkbox',
-    text:'Who is involved in decisions about improving your systems or operations?',
+    text:'Who is involved in deciding whether this gets improved?',
     hint:'Select all that apply.',
     opts:[
-      'Just me','Founder / CEO','COO / Operations lead',
-      'Sales lead','Finance lead','IT / Technical lead',
-      'Department heads','Other'
+      'Just me',
+      'Founder or CEO',
+      'COO or operations lead',
+      'Sales lead',
+      'Finance lead',
+      'IT or technical lead',
+      'Department heads',
+      'Other'
     ], required:true
   }
 ];
@@ -518,19 +540,20 @@ function runAnalysis(){
 function buildPrompt(a){
   var btStr = Array.isArray(a.bottlenecks) ? a.bottlenecks.join(', ') : (a.bottlenecks||'');
   var dmStr = Array.isArray(a.decisionMakers) ? a.decisionMakers.join(', ') : (a.decisionMakers||'');
-  return 'You are a senior AI implementation consultant at RP Collective, a practical AI advisory firm in East Africa. You have just received an AI Operations Readiness Check from a potential client.\n\n'
+  return 'You are a senior AI implementation consultant at RP Collective, a practical AI advisory firm in East Africa. You have just received an AI Opportunity Readiness Check from a potential client.\n\n'
     + 'RULES: Be direct, commercially sharp, specific to their situation. No hype. No transformation language. No em dashes. Sound like an experienced consultant, not a chatbot.\n\n'
     + 'CLIENT ANSWERS:\n'
     + 'Business name: ' + (a.company||'') + '\n'
     + 'What they do and who they serve: ' + (a.whatDo||'') + '\n'
-    + 'Industry: ' + (a.industry||'') + '\n'
     + 'Team size: ' + (a.teamSize||'') + '\n'
     + 'Where work breaks down: ' + btStr + '\n'
     + 'Task they most want off their plate: ' + (a.offPlate||'') + '\n'
     + 'Consequence of bottlenecks: ' + (a.consequence||'') + '\n'
-    + 'AI experience: ' + (a.aiExp||'') + '\n'
+    + 'Where this work currently happens: ' + (Array.isArray(a.workLives) ? a.workLives.join(', ') : (a.workLives||'')) + '\n'
+    + 'Workflow maturity: ' + (a.workflowMaturity||'') + '\n'
     + 'Current situation: ' + (a.situation||'') + '\n'
     + 'Urgency: ' + (a.urgency||'') + '\n'
+    + 'Likely internal owner: ' + (a.internalOwner||'') + '\n'
     + 'Decision makers: ' + dmStr + '\n\n'
     + 'Respond ONLY with this JSON object, no markdown, no explanation:\n'
     + '{\n'
@@ -551,10 +574,10 @@ function buildPrompt(a){
     + '  ],\n'
     + '  "quickWin": "One sentence. The single highest-value, lowest-effort starting point for this business.",\n'
     + '  "auditFocus": "2 sentences. What an AI Opportunity Audit would specifically focus on for them.",\n'
-    + '  "watchOuts": "1-2 sentences. Honest flags based on their team size, AI readiness, or urgency.",\n'
+    + '  "watchOuts": "1-2 sentences. Honest flags based on their workflow maturity, implementation readiness, or urgency.",\n'
     + '  "closingNote": "2-3 sentences. A direct, warm message addressed to ' + (a.name||'them') + ' about what happens next. Reference their specific situation."\n'
     + '}\n\n'
-    + 'Generate 2-4 opportunities. Be specific to their industry, team size, and the bottlenecks they selected.';
+    + 'Generate 2-4 opportunities. Be specific to what they do, their team size, workflow maturity, and the bottlenecks they selected.';
 }
 
 // ─── RENDER REPORT ───────────────────────────────────────────────
@@ -584,14 +607,14 @@ function renderReport(d){
     : '';
 
   var mailSub = encodeURIComponent('Discovery call from ' + (ans.company||''));
-  var mailBody = encodeURIComponent('Hi, I just completed the RP Collective AI Operations Readiness Check and would like to book a free discovery call.');
+  var mailBody = encodeURIComponent('Hi, I just completed the RP Collective AI Opportunity Readiness Check and would like to book a free discovery call.');
 
-  var html = '<div class="r-eyebrow">AI Operations Readiness Report</div>'
-    + '<h2 class="r-title"><em>' + (d.headline||'Your AI Readiness Assessment') + '</em></h2>'
+  var html = '<div class="r-eyebrow">AI Opportunity Readiness Report</div>'
+    + '<h2 class="r-title"><em>' + (d.headline||'Your AI Opportunity Assessment') + '</em></h2>'
     + '<p class="r-meta">'
     + 'Prepared for ' + (ans.name||'') + (ans.company ? ' at ' + ans.company : '')
     + ' &nbsp;&middot;&nbsp; ' + date
-    + ' &nbsp;&middot;&nbsp; Readiness: <span class="opp-badge ' + scoreClass + '" style="display:inline-flex;margin-left:.2rem">' + scoreLabel + ' fit</span>'
+    + ' &nbsp;&middot;&nbsp; Opportunity fit: <span class="opp-badge ' + scoreClass + '" style="display:inline-flex;margin-left:.2rem">' + scoreLabel + ' fit</span>'
     + '</p>'
 
     + '<div class="r-sec"><div class="r-sec-label">The Core Problem</div>'
@@ -624,7 +647,7 @@ function renderReport(d){
     + '<div class="ns">'
     + '<div class="ns-item"><div class="ns-n">i</div><div><div class="ns-title">We review this report with you</div><div class="ns-sub">Our team reads your answers before the call so we arrive already focused on your specific operation.</div></div></div>'
     + '<div class="ns-item"><div class="ns-n">ii</div><div><div class="ns-title">Free discovery call, 30 minutes</div><div class="ns-sub">We walk through the opportunities in this report and confirm whether an AI Opportunity Audit makes sense as the next step.</div></div></div>'
-    + '<div class="ns-item"><div class="ns-n">iii</div><div><div class="ns-title">AI Opportunity Audit</div><div class="ns-sub">A structured diagnostic with estimated ROI, effort, and a clear recommendation on what to build first.</div></div></div>'
+    + '<div class="ns-item"><div class="ns-n">iii</div><div><div class="ns-title">AI Opportunity Audit</div><div class="ns-sub">A structured diagnostic with estimated ROI, implementation logic, and a clear recommendation on what to improve first.</div></div></div>'
     + '</div></div>'
 
     + '<div class="r-cta-row">'
@@ -632,7 +655,7 @@ function renderReport(d){
     + '<a href="index.html" class="btn btn-ghost">Back to site</a>'
     + '</div>'
 
-    + '<p class="r-disclaimer">This report is generated by AI based on your questionnaire responses. It is an initial diagnostic read, not a formal audit. The AI Opportunity Audit provides a full validated assessment with commercial recommendations.</p>';
+    + '<p class="r-disclaimer">This report is generated by AI based on your questionnaire responses. It is an initial diagnostic read, not a formal audit. A discovery call and AI Opportunity Audit are where workflow scope, systems, and implementation reality get properly validated.</p>';
 
   document.getElementById('reportWrap').innerHTML = html;
 }
