@@ -538,7 +538,7 @@ function runAnalysis(){
     if(noteEl && ni < notes.length && pct > (ni+1)*16){ noteEl.textContent = notes[ni]; ni++; }
   }, 600);
 
-  fetch(LUA_INTAKE, {
+  fetch("https://webhook.heylua.ai/baseAgent_agent_1775829835301_ozbd0wojm/90b7a238-3b62-48db-ac6d-81894e57e395", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(ans)
