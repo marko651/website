@@ -166,6 +166,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 .btn-pdf svg{flex-shrink:0}
 .pdf-generating{opacity:.5;pointer-events:none;cursor:not-allowed}
 
+/* ASSESSMENT RESPONSE MODAL */
+.assessment-overlay{position:fixed;inset:0;z-index:1200;background:rgba(8,13,24,.86);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:1.1rem}
+.assessment-overlay.hidden{display:none}
+.assessment-modal{width:min(920px,96vw);max-height:88vh;overflow:auto;background:var(--navy);border:1px solid var(--border);border-radius:4px;padding:1rem}
+.assessment-actions{display:flex;justify-content:flex-end;margin-bottom:.7rem}
+.assessment-content{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:1rem}
+.assessment-json{margin-top:1rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:3px;padding:.85rem;max-height:240px;overflow:auto}
+.assessment-json pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:.74rem;line-height:1.6;color:rgba(255,255,255,.72)}
+
 @media print{
   nav,.r-cta-row,.r-disclaimer{display:none!important}
   body{background:#fff!important;color:#111!important}
@@ -258,6 +267,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
     <div class="report-wrap" id="reportWrap"></div>
   </div>
 
+</div>
+
+<!-- ASSESSMENT MODAL -->
+<div class="assessment-overlay hidden" id="assessmentOverlay">
+  <div class="assessment-modal">
+    <div class="assessment-actions">
+      <button class="btn btn-ghost btn-sm" onclick="closeAssessmentOverlay()">Close</button>
+    </div>
+    <div class="assessment-content" id="assessmentContent"></div>
+    <div class="assessment-json">
+      <pre id="assessmentJson"></pre>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -545,8 +567,20 @@ function runAnalysis(){
   })
   .then(function(r){ return r.json(); })
   .then(function(d){
+    // Direct response mode: render report/html immediately from webhook payload.
+    if(d && (d.report || d.html || d.narrative)){
+      clearInterval(window._lt);
+      if(bar) bar.style.width = '100%';
+      setTimeout(function(){
+        renderAssessmentResponse(d);
+        show('s-report');
+      }, 350);
+      return;
+    }
+
+    // Fallback mode: legacy async job flow.
     var jobId = d.jobId;
-    if(!jobId) throw new Error('no jobId');
+    if(!jobId) throw new Error('no direct report or jobId');
     var polls = 0;
     var poller = setInterval(function(){
       polls++;
@@ -581,6 +615,52 @@ function runAnalysis(){
   });
 }
 
+
+function renderAssessmentResponse(payload){
+  var report = payload.report || {};
+  var html = payload.html || '';
+  var narrative = payload.narrative || '';
+
+  // Render into the main report area to ensure users always see results.
+  if(html){
+    document.getElementById('reportWrap').innerHTML = html;
+  } else if(report && report.title){
+    var fallbackHtml =
+      '<div class="r-eyebrow">AI Friction Assessment</div>'
+      + '<h2 class="r-title"><em>' + (report.title || 'Assessment report') + '</em></h2>'
+      + '<p class="r-body" style="margin-bottom:1rem">' + (report.promise || '') + '</p>'
+      + '<div class="callout"><div class="callout-label">Recommended next step</div><div class="callout-body">'
+      + ((report.recommendations && report.recommendations[0] && report.recommendations[0].nextStep) || 'Define one workflow to improve first.')
+      + '</div></div>'
+      + (narrative ? '<div class="r-sec"><div class="r-sec-label">AI narrative</div><div class="r-body">' + narrative + '</div></div>' : '');
+    document.getElementById('reportWrap').innerHTML = fallbackHtml;
+  } else {
+    renderFallback();
+  }
+
+  // Also show a modal overlay with both HTML and raw JSON for clarity/debug visibility.
+  var contentEl = document.getElementById('assessmentContent');
+  var jsonEl = document.getElementById('assessmentJson');
+  if(contentEl){
+    if(html){
+      contentEl.innerHTML = html;
+    } else if(narrative){
+      contentEl.innerHTML = '<p class="r-body">' + narrative + '</p>';
+    } else {
+      contentEl.innerHTML = '<p class="r-body">Assessment generated successfully.</p>';
+    }
+  }
+  if(jsonEl){
+    jsonEl.textContent = JSON.stringify(report, null, 2);
+  }
+  var ov = document.getElementById('assessmentOverlay');
+  if(ov) ov.classList.remove('hidden');
+}
+
+function closeAssessmentOverlay(){
+  var ov = document.getElementById('assessmentOverlay');
+  if(ov) ov.classList.add('hidden');
+}
 
 // ─── RENDER REPORT ───────────────────────────────────────────────
 function renderReport(d){
