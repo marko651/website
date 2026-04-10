@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
 :root {
   --navy:#18213a; --navy-deep:#101828; --navy-mid:#1e2d4a;
@@ -159,6 +161,26 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 .r-cta-row{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.8rem}
 .r-disclaimer{font-size:.65rem;color:rgba(255,255,255,.15);line-height:1.65;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,.06)}
 .flash{border-color:rgba(220,80,80,.5)!important}
+.btn-pdf{background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15)}
+.btn-pdf:hover{background:rgba(255,255,255,.11);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.25)}
+.btn-pdf svg{flex-shrink:0}
+.pdf-generating{opacity:.5;pointer-events:none;cursor:not-allowed}
+
+@media print{
+  nav,.r-cta-row,.r-disclaimer{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  .report-wrap{padding:1.5rem!important;max-width:100%!important}
+  .r-title em,.r-eyebrow,.r-sec-label,.callout-label,.opp-badge.bh{color:#2a5500!important}
+  .r-body,.opp-desc,.callout-body,.ns-sub{color:#333!important}
+  .opp-name,.ns-title{color:#111!important}
+  .r-meta{color:#555!important;border-bottom:1px solid #ddd!important}
+  .opp{border:1px solid #ddd!important}
+  .opp-head{background:#f5f5f5!important}
+  .callout{border:1px solid #ddd!important;border-left:3px solid #7ab800!important;background:#f9f9f9!important}
+  .ns{border:1px solid #ddd!important}
+  .ns-item{border-bottom:1px solid #eee!important}
+  .r-divider{background:#ddd!important}
+}
 </style>
 </head>
 <body>
@@ -498,37 +520,59 @@ function submitGate(){
   runAnalysis();
 }
 
-// ─── ANALYSIS ────────────────────────────────────────────────────
+// ─── ANALYSIS ────────────────────────────────────────────
+var LUA_INTAKE = 'https://webhook.heylua.ai/baseAgent_agent_1775747839060_5xxrk7p7b/assessment-intake';
+var LUA_RESULT = 'https://webhook.heylua.ai/baseAgent_agent_1775747839060_5xxrk7p7b/assessment-result';
+var MAX_POLLS  = 40;
+
 function runAnalysis(){
   show('s-load');
-  var bar = document.getElementById('loadBar');
+  var bar    = document.getElementById('loadBar');
   var noteEl = document.getElementById('loadNote');
-  var notes = ['Reading your operational context...','Identifying bottleneck patterns...','Mapping AI workflow opportunities...','Estimating commercial impact...','Drafting your report...'];
+  var notes  = ['Reading your operational context...','Identifying bottleneck patterns...','Mapping AI workflow opportunities...','Estimating commercial impact...','Drafting your report...'];
   var pct = 0; var ni = 0;
+
   window._lt = setInterval(function(){
-    pct = Math.min(pct + Math.random() * 9 + 2, 90);
+    pct = Math.min(pct + Math.random() * 4 + 1, 88);
     if(bar) bar.style.width = pct + '%';
     if(noteEl && ni < notes.length && pct > (ni+1)*16){ noteEl.textContent = notes[ni]; ni++; }
-  }, 420);
+  }, 600);
 
-  fetch('https://api.anthropic.com/v1/messages', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:1600,
-      messages:[{ role:'user', content: buildPrompt(ans) }]
-    })
+  fetch(LUA_INTAKE, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(ans)
   })
   .then(function(r){ return r.json(); })
   .then(function(d){
-    var raw = (d.content && d.content[0] && d.content[0].text) || '';
-    var m = raw.match(/\{[\s\S]*\}/);
-    if(!m) throw new Error('no json');
-    var rep = JSON.parse(m[0]);
-    clearInterval(window._lt);
-    if(bar) bar.style.width = '100%';
-    setTimeout(function(){ renderReport(rep); show('s-report'); }, 700);
+    var jobId = d.jobId;
+    if(!jobId) throw new Error('no jobId');
+    var polls = 0;
+    var poller = setInterval(function(){
+      polls++;
+      if(polls > MAX_POLLS){
+        clearInterval(poller);
+        clearInterval(window._lt);
+        renderFallback();
+        show('s-report');
+        return;
+      }
+      fetch(LUA_RESULT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ jobId: jobId })
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if(res.status === 'done' && res.report){
+          clearInterval(poller);
+          clearInterval(window._lt);
+          if(bar) bar.style.width = '100%';
+          setTimeout(function(){ renderReport(res.report); show('s-report'); }, 700);
+        }
+      })
+      .catch(function(){});
+    }, 3000);
   })
   .catch(function(){
     clearInterval(window._lt);
@@ -537,48 +581,6 @@ function runAnalysis(){
   });
 }
 
-function buildPrompt(a){
-  var btStr = Array.isArray(a.bottlenecks) ? a.bottlenecks.join(', ') : (a.bottlenecks||'');
-  var dmStr = Array.isArray(a.decisionMakers) ? a.decisionMakers.join(', ') : (a.decisionMakers||'');
-  return 'You are a senior AI implementation consultant at RP Collective, a practical AI advisory firm in East Africa. You have just received an AI Opportunity Readiness Check from a potential client.\n\n'
-    + 'RULES: Be direct, commercially sharp, specific to their situation. No hype. No transformation language. No em dashes. Sound like an experienced consultant, not a chatbot.\n\n'
-    + 'CLIENT ANSWERS:\n'
-    + 'Business name: ' + (a.company||'') + '\n'
-    + 'What they do and who they serve: ' + (a.whatDo||'') + '\n'
-    + 'Team size: ' + (a.teamSize||'') + '\n'
-    + 'Where work breaks down: ' + btStr + '\n'
-    + 'Task they most want off their plate: ' + (a.offPlate||'') + '\n'
-    + 'Consequence of bottlenecks: ' + (a.consequence||'') + '\n'
-    + 'Where this work currently happens: ' + (Array.isArray(a.workLives) ? a.workLives.join(', ') : (a.workLives||'')) + '\n'
-    + 'Workflow maturity: ' + (a.workflowMaturity||'') + '\n'
-    + 'Current situation: ' + (a.situation||'') + '\n'
-    + 'Urgency: ' + (a.urgency||'') + '\n'
-    + 'Likely internal owner: ' + (a.internalOwner||'') + '\n'
-    + 'Decision makers: ' + dmStr + '\n\n'
-    + 'Respond ONLY with this JSON object, no markdown, no explanation:\n'
-    + '{\n'
-    + '  "readinessScore": "High, Medium, or Low fit for AI workflow implementation right now",\n'
-    + '  "readinessReason": "One sentence explaining the score based on their specific situation.",\n'
-    + '  "headline": "A short punchy headline for their report, max 8 words, no em dashes",\n'
-    + '  "coreProblem": "3-4 sentences. What is really going on operationally in this business? Be specific to what they said. Sound like you have read it carefully.",\n'
-    + '  "costOfInaction": "2 sentences. What is this friction actually costing them commercially? Make it concrete and specific.",\n'
-    + '  "opportunities": [\n'
-    + '    {\n'
-    + '      "name": "Specific AI workflow opportunity name",\n'
-    + '      "priority": "High or Medium or Low",\n'
-    + '      "description": "2 sentences. What it is and why it fits their specific answers.",\n'
-    + '      "roi": "e.g. 5-8 hours per week saved, or Faster lead response",\n'
-    + '      "effort": "e.g. 2-3 weeks to deploy",\n'
-    + '      "confidence": "e.g. High fit"\n'
-    + '    }\n'
-    + '  ],\n'
-    + '  "quickWin": "One sentence. The single highest-value, lowest-effort starting point for this business.",\n'
-    + '  "auditFocus": "2 sentences. What an AI Opportunity Audit would specifically focus on for them.",\n'
-    + '  "watchOuts": "1-2 sentences. Honest flags based on their workflow maturity, implementation readiness, or urgency.",\n'
-    + '  "closingNote": "2-3 sentences. A direct, warm message addressed to ' + (a.name||'them') + ' about what happens next. Reference their specific situation."\n'
-    + '}\n\n'
-    + 'Generate 2-4 opportunities. Be specific to what they do, their team size, workflow maturity, and the bottlenecks they selected.';
-}
 
 // ─── RENDER REPORT ───────────────────────────────────────────────
 function renderReport(d){
@@ -652,12 +654,75 @@ function renderReport(d){
 
     + '<div class="r-cta-row">'
     + '<a href="mailto:hello@rp-collective.com?subject=' + mailSub + '&body=' + mailBody + '" class="btn btn-lime">Book a free discovery call &rarr;</a>'
+    + '<button class="btn btn-pdf" id="btnPdf" onclick="downloadPDF()">'
+    + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
+    + ' Download PDF</button>'
     + '<a href="index.html" class="btn btn-ghost">Back to site</a>'
     + '</div>'
 
     + '<p class="r-disclaimer">This report is generated by AI based on your questionnaire responses. It is an initial diagnostic read, not a formal audit. A discovery call and AI Opportunity Audit are where workflow scope, systems, and implementation reality get properly validated.</p>';
 
   document.getElementById('reportWrap').innerHTML = html;
+}
+
+// ─── PDF DOWNLOAD ─────────────────────────────────────────────────
+function downloadPDF(){
+  var btn = document.getElementById('btnPdf');
+  if(!btn) return;
+  var origHTML = btn.innerHTML;
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Generating...';
+  btn.classList.add('pdf-generating');
+
+  var reportEl = document.getElementById('reportWrap');
+  var ctaRow = reportEl.querySelector('.r-cta-row');
+  var disclaimer = reportEl.querySelector('.r-disclaimer');
+  if(ctaRow) ctaRow.style.display = 'none';
+  if(disclaimer) disclaimer.style.display = 'none';
+
+  html2canvas(reportEl, {
+    scale: 2,
+    useCORS: true,
+    backgroundColor: '#101828',
+    logging: false,
+    windowWidth: 700
+  }).then(function(canvas){
+    var imgData = canvas.toDataURL('image/png');
+    var jsPDFLib = window.jspdf.jsPDF;
+    var pdf = new jsPDFLib({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    var pageW = pdf.internal.pageSize.getWidth();
+    var pageH = pdf.internal.pageSize.getHeight();
+    var margin = 10;
+    var usableW = pageW - margin * 2;
+    var scale = usableW / (canvas.width / 2); // account for retina scale:2
+    var totalH = (canvas.height / 2) * scale;
+    var pageContentH = pageH - margin * 2;
+    var pages = Math.ceil(totalH / pageContentH);
+
+    for(var i = 0; i < pages; i++){
+      if(i > 0) pdf.addPage();
+      var srcY = (i * pageContentH / scale) * 2;
+      var srcH = Math.min((pageContentH / scale) * 2, canvas.height - srcY);
+      var sliceCanvas = document.createElement('canvas');
+      sliceCanvas.width = canvas.width;
+      sliceCanvas.height = srcH;
+      var ctx = sliceCanvas.getContext('2d');
+      ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+      var sliceData = sliceCanvas.toDataURL('image/png');
+      var sliceDisplayH = (srcH / 2) * scale;
+      pdf.addImage(sliceData, 'PNG', margin, margin, usableW, sliceDisplayH);
+    }
+
+    var fname = 'RP_Collective_' + (ans.company || ans.name || 'Report').replace(/[^a-zA-Z0-9]/g, '_') + '_AI_Readiness.pdf';
+    pdf.save(fname);
+  }).catch(function(err){
+    console.error('PDF error:', err);
+    alert('Could not generate PDF. Please use your browser\'s Print > Save as PDF option.');
+  }).finally(function(){
+    if(ctaRow) ctaRow.style.display = '';
+    if(disclaimer) disclaimer.style.display = '';
+    btn.innerHTML = origHTML;
+    btn.classList.remove('pdf-generating');
+  });
 }
 
 function renderFallback(){
