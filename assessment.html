@@ -147,12 +147,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 .r-body{font-size:.84rem;color:rgba(255,255,255,.48);line-height:1.85;font-weight:300}
 .r-body p+p{margin-top:.8rem}
 .r-body strong{color:rgba(255,255,255,.72);font-weight:500}
+.r-body em{color:rgba(255,255,255,.64)}
+.r-body ul{padding-left:1.2rem;margin:.65rem 0}
+.r-body li+li{margin-top:.35rem}
 .report-two{display:grid;grid-template-columns:1fr;gap:1.2rem}
 .insight-panel,.callout{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-left:2px solid var(--lime-rule);border-radius:2px;padding:1.25rem}
 .insight-panel-muted{border-left-color:rgba(255,255,255,.09)}
 .callout-label{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--lime);opacity:.55;margin-bottom:.55rem}
 .callout-body{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.78;font-weight:300}
 .callout-body p+p{margin-top:.75rem}
+.callout-body strong{color:rgba(255,255,255,.72);font-weight:500}
 .opp-grid{display:grid;grid-template-columns:1fr;gap:.85rem}
 .opp{border:1px solid rgba(255,255,255,.08);border-radius:2px;overflow:hidden;background:rgba(255,255,255,.02)}
 .opp-head{display:flex;align-items:flex-start;justify-content:space-between;padding:1rem 1.05rem;background:rgba(255,255,255,.025);gap:1rem}
@@ -192,7 +196,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   .q-text{font-size:1.55rem}
   .report-title,.r-title{font-size:3.4rem}
   .r-sec-h{font-size:1.85rem}
-  .opp-metrics{grid-template-columns:repeat(3,1fr)}
+  .opp-metrics{grid-template-columns:repeat(2,1fr)}
 }
 @media(min-width:860px){
   .report-shell{padding:4rem 2rem 6rem}
@@ -665,6 +669,59 @@ function escapeHTML(v){
   });
 }
 
+function textList(v){
+  if(Array.isArray(v)){
+    return v.map(function(item){ return compactText(item); }).filter(Boolean).filter(function(item){
+      return item.toLowerCase() !== 'other';
+    });
+  }
+  var txt = compactText(v);
+  return txt ? [txt] : [];
+}
+
+function joinReadable(items){
+  var arr = (items || []).filter(Boolean);
+  if(arr.length === 0) return '';
+  if(arr.length === 1) return arr[0];
+  if(arr.length === 2) return arr[0] + ' and ' + arr[1];
+  return arr.slice(0, -1).join(', ') + ', and ' + arr[arr.length - 1];
+}
+
+function trimPhrase(v){
+  return compactText(v).replace(/[.?!,:;]+$/g, '');
+}
+
+function lowerFirst(v){
+  var txt = compactText(v);
+  if(!txt) return '';
+  return txt.charAt(0).toLowerCase() + txt.slice(1);
+}
+
+function renderInlineMarkdown(v){
+  var html = escapeHTML(v);
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  html = html.replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?:;]|$)/g, '$1<em>$2</em>');
+  html = html.replace(/(^|[\s(])_([^_\n]+)_(?=[\s).,!?:;]|$)/g, '$1<em>$2</em>');
+  return html;
+}
+
+function renderMarkdownBlocks(v){
+  var text = stringifyText(v);
+  if(!text) return '';
+  return text.split(/\n{2,}/).map(function(block){
+    var lines = block.split('\n').map(function(line){ return line.trim(); }).filter(Boolean);
+    if(!lines.length) return '';
+    var isList = lines.every(function(line){ return /^[-*]\s+/.test(line); });
+    if(isList){
+      return '<ul>' + lines.map(function(line){
+        return '<li>' + renderInlineMarkdown(line.replace(/^[-*]\s+/, '')) + '</li>';
+      }).join('') + '</ul>';
+    }
+    return '<p>' + lines.map(function(line){ return renderInlineMarkdown(line); }).join('<br>') + '</p>';
+  }).join('');
+}
+
 function renderParagraphs(v){
   var text = stringifyText(v);
   if(!text) return '';
@@ -698,6 +755,144 @@ function normalizeFitLabel(value){
   if(lower.indexOf('low') > -1 || lower.indexOf('early') > -1) return 'Low';
   if(lower.indexOf('medium') > -1 || lower.indexOf('moderate') > -1) return 'Medium';
   return txt;
+}
+
+function isPlaceholderFinding(value){
+  var lower = compactText(value).toLowerCase();
+  if(!lower) return true;
+  return lower.indexOf('reduce operational friction') > -1
+    || lower.indexOf('where ai can reduce operational friction') > -1
+    || lower.indexOf('answers point to operational friction') > -1
+    || lower.indexOf('worth validating before selecting tools') > -1
+    || lower.indexOf('initial read on where ai may') > -1;
+}
+
+function friendlyLocationLabel(value){
+  var txt = compactText(value);
+  var lower = txt.toLowerCase();
+  if(lower === 'email') return 'email';
+  if(lower === 'whatsapp') return 'WhatsApp';
+  if(lower === 'crm') return 'the CRM';
+  if(lower === 'spreadsheets') return 'spreadsheets';
+  if(lower.indexOf('erp') > -1) return 'the ERP or internal system';
+  if(lower.indexOf('helpdesk') > -1) return 'the helpdesk or ticketing tool';
+  if(lower.indexOf('people') > -1) return "people's heads";
+  return lowerFirst(txt);
+}
+
+function buildWorkflowContext(answers){
+  answers = answers || {};
+  var maturity = compactText(answers.workflowMaturity).toLowerCase();
+  var locations = textList(answers.workLives).slice(0, 3).map(friendlyLocationLabel);
+  var sentence = '';
+
+  if(maturity.indexOf('mostly manual') > -1) sentence = 'Right now, that workflow is still mostly manual';
+  else if(maturity.indexOf('inconsistent') > -1) sentence = 'Right now, that workflow spans some tools but still runs inconsistently';
+  else if(maturity.indexOf('depends heavily') > -1) sentence = 'Right now, that workflow depends heavily on specific people';
+  else if(maturity.indexOf('defined process') > -1) sentence = 'Right now, that workflow already has some structure';
+
+  if(locations.length){
+    sentence += (sentence ? ' across ' : 'The work currently happens across ') + joinReadable(locations);
+  }
+  if(sentence) return sentence + ', which makes it harder to track, hand off, and repeat consistently.';
+  return '';
+}
+
+function buildImpactSentence(answers){
+  answers = answers || {};
+  var consequence = compactText(answers.consequence).toLowerCase();
+  var urgency = compactText(answers.urgency).toLowerCase();
+  var sentence = '';
+
+  if(consequence.indexOf('revenue') > -1 || consequence.indexOf('leads go cold') > -1) sentence = 'When it slips, leads go cold and revenue is put at risk.';
+  else if(consequence.indexOf('client') > -1) sentence = 'When it slips, clients feel the inconsistency and the experience suffers.';
+  else if(consequence.indexOf('team gets overloaded') > -1) sentence = 'When it slips, the team gets pulled into avoidable admin and reactive work.';
+  else if(consequence.indexOf('visibility') > -1 || consequence.indexOf('decisions') > -1) sentence = 'When it slips, visibility drops and decision-making gets slower.';
+  else if(consequence.indexOf('growth slows') > -1) sentence = 'When it slips, the current workflow becomes a cap on growth.';
+  else if(consequence.indexOf('mix') > -1) sentence = 'When it slips, the business feels it through slower response times, extra manual work, and weaker visibility.';
+
+  if(urgency.indexOf('already hurting results') > -1){
+    if(sentence) return sentence.replace(/\.$/, '') + ', and your urgency rating suggests it is already hurting results.';
+    return 'Your urgency rating suggests this is already hurting results.';
+  }
+  if(urgency.indexOf('next 3 months') > -1){
+    if(sentence) return sentence.replace(/\.$/, '') + ', making it a near-term operational priority.';
+    return 'This reads like a near-term operational priority.';
+  }
+  return sentence;
+}
+
+function deriveCoreProblem(report, answers, summary){
+  var task = trimPhrase(answers && answers.offPlate);
+  var bottlenecks = textList(answers && answers.bottlenecks).slice(0, 2).map(lowerFirst);
+  var parts = [];
+
+  if(task) parts.push('The clearest friction point is ' + task + '.');
+  else if(bottlenecks.length) parts.push('The clearest friction point is ' + joinReadable(bottlenecks) + '.');
+
+  var workflowContext = buildWorkflowContext(answers);
+  var impact = buildImpactSentence(answers);
+  if(workflowContext) parts.push(workflowContext);
+  if(impact) parts.push(impact);
+
+  return firstText(parts.join(' '), summary, 'Your answers highlight one repeat workflow that is still absorbing too much manual effort and depends on clearer ownership before AI is layered in.');
+}
+
+function opportunityTheme(item, answers, idx){
+  item = item || {};
+  var text = (firstText(item.name, item.title, item.workflow, item.area, item.opportunity) + ' ' + firstText(item.description, item.summary, item.reason, item.why)).toLowerCase();
+  if(!compactText(text)) text = (trimPhrase(answers && answers.offPlate) + ' ' + textList(answers && answers.bottlenecks).join(' ')).toLowerCase();
+
+  if(/lead|client|follow[- ]?up|reply|question|support|inbox|email|whatsapp/.test(text)) return 'response';
+  if(/report|status|dashboard|visibility|decision|analytics/.test(text)) return 'reporting';
+  if(/route|handoff|handoffs|coordination|assign|triage/.test(text)) return 'handoff';
+  if(/onboard|knowledge|faq|documentation|training/.test(text)) return 'knowledge';
+  if(/data entry|logging|spreadsheet|crm|erp|internal system/.test(text)) return 'data';
+  return ['response','handoff','reporting'][idx % 3];
+}
+
+function inferOpportunityROI(item, answers, idx){
+  var theme = opportunityTheme(item, answers, idx);
+  var consequence = compactText(answers && answers.consequence).toLowerCase();
+
+  if(theme === 'response'){
+    if(consequence.indexOf('revenue') > -1) return 'High upside if faster response protects pipeline and revenue';
+    if(consequence.indexOf('client') > -1) return 'Strong service upside from quicker, more consistent replies';
+    return 'Likely to reduce response lag and manual follow-up load';
+  }
+  if(theme === 'reporting') return 'Strong time savings plus clearer operational visibility';
+  if(theme === 'handoff') return 'Likely to reduce dropped tasks and coordination delays';
+  if(theme === 'knowledge') return 'Likely to cut interruptions and speed up onboarding';
+  if(theme === 'data') return 'Steady efficiency gain from less rework and cleaner records';
+  return 'Targeted time savings in a repeat workflow';
+}
+
+function inferOpportunityComplexity(item, answers, idx){
+  var theme = opportunityTheme(item, answers, idx);
+  var maturity = compactText(answers && answers.workflowMaturity).toLowerCase();
+  var locations = textList(answers && answers.workLives).map(function(value){ return value.toLowerCase(); });
+  var integrationHeavy = locations.some(function(value){
+    return value.indexOf('crm') > -1 || value.indexOf('erp') > -1 || value.indexOf('helpdesk') > -1;
+  });
+
+  if(theme === 'response' && !integrationHeavy) return maturity.indexOf('mostly manual') > -1 ? 'Low to moderate complexity' : 'Moderate complexity';
+  if(theme === 'reporting') return integrationHeavy ? 'Moderate complexity' : 'Low to moderate complexity';
+  if(theme === 'handoff') return maturity.indexOf('depends heavily') > -1 ? 'Moderate to high complexity' : 'Moderate complexity';
+  if(theme === 'knowledge') return 'Moderate complexity';
+  if(theme === 'data') return integrationHeavy ? 'Moderate to high complexity' : 'Moderate complexity';
+  return integrationHeavy ? 'Moderate complexity' : 'Low to moderate complexity';
+}
+
+function inferOpportunityTimeline(item, answers, idx, complexity){
+  var theme = opportunityTheme(item, answers, idx);
+  var lower = compactText(complexity).toLowerCase();
+
+  if(lower.indexOf('high') > -1) return '6+ weeks once workflow rules and systems are mapped';
+  if(lower.indexOf('moderate') > -1 && lower.indexOf('low') === -1){
+    if(theme === 'reporting' || theme === 'data') return '4-6 weeks after discovery and data mapping';
+    return '3-5 weeks for a scoped pilot';
+  }
+  return '2-4 weeks for a focused pilot';
 }
 
 function badgeClass(value){
@@ -744,7 +939,7 @@ function sanitizeReportHtml(html){
   }
 }
 
-function normalizeOpportunities(source, fallbackText, fitLabel){
+function normalizeOpportunities(source, fallbackText, fitLabel, answers){
   var arr = [];
   if(Array.isArray(source)) arr = source;
   else if(source && typeof source === 'object') arr = Object.keys(source).map(function(k){ return source[k]; });
@@ -752,33 +947,41 @@ function normalizeOpportunities(source, fallbackText, fitLabel){
 
   var normalized = arr.map(function(item, idx){
     if(typeof item === 'string'){
+      var simpleItem = { description: item };
+      var simpleComplexity = inferOpportunityComplexity(simpleItem, answers, idx);
       return {
         name: 'Workflow opportunity ' + (idx + 1),
         priority: 'Medium',
         description: item,
-        roi: 'To be estimated',
-        effort: 'Discovery required',
+        roi: inferOpportunityROI(simpleItem, answers, idx),
+        complexity: simpleComplexity,
+        timeline: inferOpportunityTimeline(simpleItem, answers, idx, simpleComplexity),
         confidence: fitLabel + ' fit'
       };
     }
     item = item || {};
+    var complexity = firstText(item.complexity, item.effort, item.deployment, inferOpportunityComplexity(item, answers, idx));
     return {
       name: firstText(item.name, item.title, item.workflow, item.area, item.opportunity, 'Workflow opportunity ' + (idx + 1)),
       priority: normalizeFitLabel(firstText(item.priority, item.impact, item.score, 'Medium')),
       description: firstText(item.description, item.summary, item.reason, item.why, item.nextStep, fallbackText),
-      roi: firstText(item.roi, item.expectedROI, item.value, item.return, 'To be estimated'),
-      effort: firstText(item.effort, item.deployment, item.timeline, item.complexity, 'Discovery required'),
+      roi: firstText(item.roi, item.expectedROI, item.value, item.return, inferOpportunityROI(item, answers, idx)),
+      complexity: complexity,
+      timeline: firstText(item.timeline, item.timeframe, item.deliveryWindow, item.implementationWindow, inferOpportunityTimeline(item, answers, idx, complexity)),
       confidence: firstText(item.confidence, item.fit, fitLabel + ' fit')
     };
   }).filter(function(item){ return compactText(item.name) || compactText(item.description); });
 
   if(normalized.length === 0){
+    var fallbackItem = { description: fallbackText };
+    var fallbackComplexity = inferOpportunityComplexity(fallbackItem, answers, 0);
     normalized.push({
       name: 'First workflow to validate',
       priority: 'Medium',
       description: fallbackText || 'Use the assessment answers to choose one workflow, confirm the process owner, and validate what can be automated first.',
-      roi: 'To be estimated',
-      effort: 'Discovery required',
+      roi: inferOpportunityROI(fallbackItem, answers, 0),
+      complexity: fallbackComplexity,
+      timeline: inferOpportunityTimeline(fallbackItem, answers, 0, fallbackComplexity),
       confidence: fitLabel + ' fit'
     });
   }
@@ -788,6 +991,7 @@ function normalizeOpportunities(source, fallbackText, fitLabel){
 function normalizeAssessmentPayload(payload){
   var report = (payload && payload.report) ? payload.report : (payload || {});
   var html = payload && payload.html ? String(payload.html) : '';
+  var answers = (payload && payload.answers) || ans || {};
   var htmlHeadline = extractHtmlText(html, ['.r-title','h1','h2']);
   var htmlSummary = extractHtmlText(html, ['.r-body','p']);
   var fitLabel = normalizeFitLabel(firstText(report.readinessScore, report.opportunityFit, report.fit, report.score, payload.readinessScore));
@@ -800,14 +1004,15 @@ function normalizeAssessmentPayload(payload){
   var summary = firstText(report.summary, report.executiveSummary, report.promise, payload.narrative, htmlSummary);
   var coreProblem = firstText(report.coreProblem, report.problem, report.diagnosis, report.bottleneck, summary);
   var costOfInaction = firstText(report.costOfInaction, report.cost, report.risk, report.commercialImpact, 'Left unresolved, this friction can keep showing up as slower response times, inconsistent handoffs, lost visibility, and extra manual work for the team.');
+  var resolvedCoreProblem = isPlaceholderFinding(coreProblem) ? deriveCoreProblem(report, answers, summary) : coreProblem;
 
   return {
     headline: firstText(report.headline, report.title, payload.title, htmlHeadline, 'Your AI Opportunity Assessment'),
     summary: summary || 'Here is an initial read on where AI may reduce operational friction, based on the answers you provided.',
     fitLabel: fitLabel,
-    coreProblem: coreProblem || 'Your answers point to operational friction that is worth validating before selecting tools or building automations.',
+    coreProblem: resolvedCoreProblem || 'Your answers point to operational friction that is worth validating before selecting tools or building automations.',
     costOfInaction: costOfInaction,
-    opportunities: normalizeOpportunities(recommendations, quickWin || coreProblem, fitLabel),
+    opportunities: normalizeOpportunities(recommendations, quickWin || resolvedCoreProblem, fitLabel, answers),
     quickWin: quickWin || 'Start by choosing one workflow with a clear owner, visible friction, and enough repeat volume to make automation measurable.',
     auditFocus: firstText(report.auditFocus, report.focusAreas, report.audit, report.validationPlan, 'Map the current workflow, identify the data and systems involved, confirm the operational owner, and estimate the value of reducing manual work.'),
     watchOuts: firstText(report.watchOuts, report.considerations, report.risks, 'Validate data access, handoff rules, and ownership before implementation so the solution fits the way the team actually works.'),
@@ -824,6 +1029,15 @@ function formatHeadline(text){
 }
 
 function renderOpportunityCard(o){
+  var metrics = [
+    { label: 'Expected ROI', value: o.roi },
+    { label: 'Complexity', value: o.complexity || o.effort },
+    { label: 'Indicative timeline', value: o.timeline },
+    { label: 'Fit', value: o.confidence }
+  ].filter(function(metric){ return compactText(metric.value); }).map(function(metric){
+    return '<div class="opp-m"><strong>' + escapeHTML(metric.label) + '</strong><span>' + escapeHTML(metric.value) + '</span></div>';
+  }).join('');
+
   return '<article class="opp">'
     + '<div class="opp-head">'
     + '<div class="opp-name">' + escapeHTML(o.name) + '</div>'
@@ -832,9 +1046,7 @@ function renderOpportunityCard(o){
     + '<div class="opp-body">'
     + '<p class="opp-desc">' + escapeHTML(o.description) + '</p>'
     + '<div class="opp-metrics">'
-    + '<div class="opp-m"><strong>Expected ROI</strong><span>' + escapeHTML(o.roi) + '</span></div>'
-    + '<div class="opp-m"><strong>Deployment</strong><span>' + escapeHTML(o.effort) + '</span></div>'
-    + '<div class="opp-m"><strong>Fit</strong><span>' + escapeHTML(o.confidence) + '</span></div>'
+    + metrics
     + '</div></div></article>';
 }
 
@@ -845,7 +1057,7 @@ function renderReportPage(d){
   var preparedFor = compactText(ans.name || userName || 'You') + (compactText(ans.company) ? ' at ' + compactText(ans.company) : '');
   var opps = (d.opportunities || []).map(renderOpportunityCard).join('');
   var closing = d.closingNote
-    ? '<section class="report-section"><div class="report-section-head"><div class="r-sec-label">A Note for ' + escapeHTML(ans.name || 'You') + '</div></div><div class="r-body">' + renderParagraphs(d.closingNote) + '</div></section>'
+    ? '<section class="report-section"><div class="report-section-head"><div class="r-sec-label">A Note for ' + escapeHTML(ans.name || 'You') + '</div></div><div class="r-body">' + renderMarkdownBlocks(d.closingNote) + '</div></section>'
     : '';
   var rich = d.rawHtml
     ? '<section class="report-section"><div class="report-section-head"><div class="r-sec-label">Generated Detail</div><div class="r-sec-h">The full assessment response</div></div><div class="rich-report">' + d.rawHtml + '</div></section>'
