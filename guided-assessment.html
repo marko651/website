@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI-Guided Assessment: RP Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#101828;--navy-2:#18213a;--panel:#121d33;--lime:#cfe84e;--lime-dim:#aeca35;--white:#fff;--muted:rgba(255,255,255,.52);--line:rgba(255,255,255,.09);--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}html,body{min-height:100%;background:var(--navy);color:var(--white);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}body::before{content:'';position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(207,232,78,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(207,232,78,.025) 1px,transparent 1px);background-size:80px 80px}a{color:inherit;text-decoration:none}.page{min-height:100svh;display:flex;flex-direction:column;position:relative}.topbar{height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;border-bottom:1px solid var(--line);background:rgba(16,24,40,.92);backdrop-filter:blur(18px);position:sticky;top:0;z-index:10}.brand{font-family:var(--serif);font-size:1.1rem;font-weight:600;letter-spacing:.02em}.brand span{display:block;font-family:var(--sans);font-size:.42rem;letter-spacing:.42em;color:var(--lime);margin-top:-.42rem}.toplinks{display:flex;gap:.8rem;align-items:center}.toplink,.mode-btn{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.52);background:transparent;border:1px solid var(--line);padding:.55rem .82rem;cursor:pointer}.mode-btn{color:var(--lime);border-color:rgba(207,232,78,.3)}.shell{flex:1;display:grid;grid-template-columns:1fr;gap:1rem;width:min(1180px,100%);margin:0 auto;padding:1rem}.intro{border:1px solid var(--line);background:rgba(255,255,255,.025);padding:1.2rem;display:flex;flex-direction:column;gap:1rem}.eyebrow{font-size:.62rem;letter-spacing:.17em;text-transform:uppercase;color:var(--lime);font-weight:600}.intro h1{font-family:var(--serif);font-size:2.05rem;font-weight:300;line-height:1.04;letter-spacing:0;max-width:13ch}.intro h1 em{font-style:italic;color:var(--lime)}.intro p{font-size:.82rem;color:var(--muted);font-weight:300;max-width:54ch}.signals{display:grid;grid-template-columns:1fr;gap:.5rem;margin-top:.2rem}.signal{border-top:1px solid var(--line);padding-top:.58rem}.signal strong{display:block;font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.68);font-weight:600;margin-bottom:.12rem}.signal span{display:block;font-size:.74rem;color:rgba(255,255,255,.42);font-weight:300}.fallback{margin-top:auto;padding-top:.7rem;border-top:1px solid var(--line);font-size:.74rem;color:rgba(255,255,255,.42)}.fallback a{color:var(--lime)}.chat-card{min-height:640px;border:1px solid var(--line);background:rgba(255,255,255,.02);display:flex;flex-direction:column;overflow:hidden}.chat-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem 1rem;border-bottom:1px solid var(--line);background:rgba(255,255,255,.025)}.chat-title{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.7);font-weight:600}.chat-status{font-size:.72rem;color:rgba(255,255,255,.38)}#assessmentChat{height:640px;min-height:0}.expanded .topbar{position:relative}.expanded .shell{width:100%;max-width:none;grid-template-columns:1fr;padding:0}.expanded .intro{display:none}.expanded .chat-card{min-height:calc(100svh - 54px);border-left:none;border-right:none;border-bottom:none}.expanded #assessmentChat{height:calc(100svh - 106px)}.loading-note{display:flex;align-items:center;justify-content:center;height:100%;min-height:260px;color:rgba(255,255,255,.38);font-size:.86rem;text-align:center;padding:2rem}@media(min-width:780px){.topbar{padding:0 2rem}.shell{grid-template-columns:250px minmax(0,1fr);gap:1.1rem;padding:1rem 1.4rem 1.4rem}.intro{padding:1rem}.intro h1{font-size:2.25rem}.chat-card{min-height:calc(100svh - 82px)}#assessmentChat{height:calc(100svh - 138px);min-height:610px}.signals{grid-template-columns:1fr 1fr}}@media(min-width:1080px){.shell{grid-template-columns:280px minmax(0,1fr)}.intro h1{font-size:2.45rem}.signals{grid-template-columns:1fr}}
+.chat-card{background:#f7f8fb;border-color:rgba(255,255,255,.12);box-shadow:0 24px 70px rgba(0,0,0,.24);position:relative}.chat-head{display:none}.chat-title{color:rgba(255,255,255,.82)}.chat-status{color:rgba(207,232,78,.66)}#assessmentChat{background:#f7f8fb;color:#101828;position:relative;overflow:hidden;isolation:isolate;z-index:1;padding-top:.85rem}#assessmentChat>div:not(.loading-note){position:relative!important;inset:auto!important;width:100%!important;height:calc(100% - .85rem)!important;max-height:100%!important}#assessmentChat,#assessmentChat :where(div,p,span,button,input,textarea,a,section,article){font-family:var(--sans)!important;letter-spacing:0!important}#assessmentChat p,#assessmentChat [class*="message"],#assessmentChat [class*="Message"]{font-family:var(--sans)!important;font-size:.92rem!important;line-height:1.55!important;color:#101828!important}#assessmentChat p:first-of-type{margin-top:.5rem!important}#assessmentChat .lua-pop-widget,#assessmentChat [class*="widget"],#assessmentChat [class*="Widget"]{position:relative!important;inset:auto!important;font-family:var(--sans)!important;background:#f7f8fb!important;color:#101828!important;border:0!important;box-shadow:none!important;width:100%!important;height:100%!important;max-height:100%!important}#assessmentChat .lua-pop-chat-header{font-family:var(--sans)!important;background:#101828!important;color:#fff!important;border-bottom:1px solid rgba(16,24,40,.12)!important}#assessmentChat .lua-pop-button,#assessmentChat button{font-family:var(--sans)!important;border-radius:6px!important}#assessmentChat input,#assessmentChat textarea{font-family:var(--sans)!important;font-size:.9rem!important;color:#101828!important}.expanded .chat-card{box-shadow:none}
+</style>
+</head>
+<body>
+<div class="page" id="page">
+  <header class="topbar">
+    <a class="brand" href="index.html">RP<span>COLLECTIVE</span></a>
+    <div class="toplinks">
+      <a class="toplink" href="assessment.html">Quick form</a>
+      <button class="mode-btn" type="button" id="expandBtn" aria-expanded="false">Expand chat</button>
+    </div>
+  </header>
+  <main class="shell">
+    <aside class="intro">
+      <div class="eyebrow">AI-guided assessment</div>
+      <h1>Map the workflow worth <em>testing first.</em></h1>
+      <p>The agent will ask focused questions about your business, current workflow, coordination drag, tools, urgency, and decision context. At the end, it will generate an AI Opportunity Snapshot you can review or share.</p>
+      <div class="signals">
+        <div class="signal"><strong>Output</strong><span>A practical AI Opportunity Snapshot, not a pass/fail score.</span></div>
+        <div class="signal"><strong>Next step</strong><span>Use the snapshot to decide whether an AI Operations Audit makes sense.</span></div>
+        <div class="signal"><strong>Focus</strong><span>Commercial friction, ownership, examples, and workflow volume.</span></div>
+        <div class="signal"><strong>Fallback</strong><span>The quick form is still available if chat is inconvenient.</span></div>
+      </div>
+      <div class="fallback">Prefer a structured questionnaire? <a href="assessment.html">Use the quick form</a>.</div>
+    </aside>
+    <section class="chat-card" aria-label="AI-guided assessment chat">
+      <div class="chat-head"><div class="chat-title">Assessment agent</div><div class="chat-status">Answer naturally. The agent will guide the rest.</div></div>
+      <div id="assessmentChat"><div class="loading-note">Loading the AI-guided assessment...</div></div>
+    </section>
+  </main>
+</div>
+<script src="https://lua-ai-global.github.io/lua-pop/lua-pop.umd.js"></script>
+<script>
+var LUA_AGENT_ID = 'baseAgent_agent_1776930059751_0hjrpso8q';
+function createAssessmentSessionId(){
+  var id = window.crypto && crypto.randomUUID ? crypto.randomUUID() : String(Date.now());
+  return 'rp-guided-assessment-' + id;
+}
+function initEmbeddedAssessment(){
+  if(!window.LuaPop || window.__assessmentChatReady) return;
+  window.__assessmentChatReady = true;
+  window.__assessmentWidget = window.LuaPop.init({
+    agentId: LUA_AGENT_ID,
+    environment: 'production',
+    sessionId: createAssessmentSessionId(),
+    displayMode: 'embedded',
+    embeddedDisplayConfig: {
+      targetContainerId: 'assessmentChat',
+      useContainerHeight: true,
+      conversationStarters: [
+        'Start the assessment',
+        'I want to find my highest-value AI workflow',
+        'Help me turn operational drag into a snapshot'
+      ]
+    },
+    chatTitle: 'AI-Guided Assessment',
+    chatHeaderSubtitle: { visible: true, brandName: 'RP Collective' },
+    chatTitleHeaderStyles: {
+      background: '#101828',
+      color: '#ffffff',
+      borderBottom: '1px solid rgba(255,255,255,.12)'
+    },
+    attachmentsEnabled: false,
+    microphoneEnabled: false,
+    voiceModeEnabled: false,
+    disablePreviewOnLinks: true,
+    chatInputPlaceholder: 'Answer the assessment question...',
+    welcomeMessage: 'Hi, I can run the AI-guided assessment here. Tell me your company name and the workflow that is creating the most chasing or missed follow-through.',
+    runtimeContext: 'source:guided_assessment_page,mode:embedded_assessment'
+  });
+}
+function toggleExpanded(){
+  var page = document.getElementById('page');
+  var btn = document.getElementById('expandBtn');
+  var expanded = page.classList.toggle('expanded');
+  btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  btn.textContent = expanded ? 'Compact view' : 'Expand chat';
+}
+document.getElementById('expandBtn').addEventListener('click', toggleExpanded);
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initEmbeddedAssessment);
+}else{
+  initEmbeddedAssessment();
+}
+window.addEventListener('load', initEmbeddedAssessment);
+</script>
+</body>
+</html>

@@ -79,6 +79,7 @@ body::before {
 }
 .btn-lime { background: var(--lime); color: var(--navy-deep); }
 .btn-lime:hover, .btn-lime:active { background: var(--lime-dim); box-shadow: 0 4px 16px rgba(207,232,78,.22); transform: translateY(-1px); }
+.btn:disabled { opacity: .55; transform: none; cursor: wait; }
 .btn-ghost-dk { background: transparent; color: rgba(255,255,255,.6); border: 1px solid rgba(255,255,255,.2); }
 .btn-ghost-dk:hover, .btn-ghost-dk:active { color: white; border-color: var(--lime); }
 .btn-ghost-lt { background: transparent; color: var(--muted); border: 1px solid var(--border); }
@@ -1226,7 +1227,7 @@ body.nav-open { overflow: hidden; }
     <li><a href="how.html">How It Works</a></li>
 </ul>
   <div class="nav-drawer-cta">
-    <a href="assessment.html" class="btn btn-lime btn-full">Take the free assessment →</a>
+    <a class="btn btn-lime btn-full" href="guided-assessment.html">Start AI-guided assessment →</a>
   </div>
 </div>
 
@@ -1267,8 +1268,8 @@ body.nav-open { overflow: hidden; }
           </div>
         </div>
         <div class="hero-btns">
-          <a href="assessment.html" class="btn btn-lime">Take the free assessment →</a>
-          <a href="#contact" class="btn btn-ghost-dk">Book a discovery call →</a>
+          <a class="btn btn-lime" href="guided-assessment.html">Start AI-guided assessment →</a>
+          <a href="assessment.html" class="btn btn-ghost-dk">Prefer the quick form? →</a>
           <a href="#offer" class="btn btn-ghost-dk btn-sm-ghost">See how it works →</a>
         </div>
       </div>
@@ -1516,11 +1517,11 @@ body.nav-open { overflow: hidden; }
       <div class="cta-grid">
         <div class="cta-left rv">
           <div class="cta-eyebrow"><span class="eyebrow eyebrow-lime">Get started</span></div>
-          <h2 class="cta-headline">Start with the<br>free <em>assessment.</em></h2>
-          <p class="cta-sub">Five minutes. A personalised readiness report and a clear view of where AI is most likely to reduce friction in your operations. If there is a clear fit, we will recommend a discovery call as the next step.</p>
+          <h2 class="cta-headline">Start with an<br><em>AI-guided</em> assessment.</h2>
+          <p class="cta-sub">A practical agent asks the intake questions, follows up on vague answers, and turns your operating context into a focused AI Opportunity Snapshot. The quick form is still available if you prefer it.</p>
           <div class="cta-btns">
-            <a href="assessment.html" class="btn btn-lime">Take the free assessment →</a>
-            <a href="/cdn-cgi/l/email-protection#adc4c3cbc2eddfdd80cec2c1c1c8ced9c4dbc883cec2c0" class="btn btn-ghost-dk">Book a discovery call</a>
+            <a class="btn btn-lime" href="guided-assessment.html">Start AI-guided assessment →</a>
+            <a href="assessment.html" class="btn btn-ghost-dk">Use the quick form</a>
           </div>
         </div>
         <div class="cta-right rv d1">
@@ -1597,7 +1598,7 @@ body.nav-open { overflow: hidden; }
         <ul>
           <li>About us</li>
           <li>Meet the team</li>
-          <li><a href="/cdn-cgi/l/email-protection#fb92959d94bb898bd6989497979e988f928d9ed5989496">Get in touch</a></li>
+          <li><a href="mailto:info@rp-collective.com">Get in touch</a></li>
         </ul>
       </div>
 
@@ -1612,11 +1613,11 @@ body.nav-open { overflow: hidden; }
 
 <!-- Sticky mobile CTA bar -->
 <div class="mobile-cta-bar" id="mobileCta">
-  <a href="/cdn-cgi/l/email-protection#2c45424a436c5e5c014f434040494f58455a49024f4341" class="btn btn-lime">Book a free call →</a>
+  <a class="btn btn-lime" href="guided-assessment.html">Start assessment →</a>
   <a href="#offer" class="btn btn-ghost-dk">Our offer</a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 /* ── Boot ── */
 document.body.classList.add('js-ready');
 

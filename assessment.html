@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Opportunity Readiness Check: RP Collective</title>
+<title>AI Opportunity Assessment: RP Collective</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
@@ -126,52 +126,65 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 
 /* REPORT */
 .report-wrap{width:100%;animation:cardIn .4s ease}
-.report-shell{width:100%;max-width:1080px;margin:0 auto;padding:3.2rem 1.5rem 5.5rem}
-.report-hero{padding:2.6rem 0 2.4rem;border-bottom:1px solid rgba(255,255,255,.07)}
-.report-hero-grid{display:flex;flex-direction:column;gap:2rem}
+.report-shell{width:100%;max-width:1120px;margin:0 auto;padding:2rem 1.25rem 4.5rem}
+.report-hero{padding:1.8rem 0 1.6rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.report-hero-grid{display:flex;flex-direction:column;gap:1.35rem}
+.report-hero-main{max-width:820px}
 .report-kicker,.r-eyebrow{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--lime);opacity:.65;margin-bottom:.9rem}
-.report-title,.r-title{font-family:var(--serif);font-size:2.45rem;font-weight:300;line-height:.98;letter-spacing:0;color:var(--white);max-width:12ch;margin-bottom:1rem;overflow-wrap:anywhere}
-.report-title em,.r-title em{font-style:italic;color:var(--lime)}
-.report-intro{font-size:.9rem;color:rgba(255,255,255,.48);line-height:1.84;font-weight:300;max-width:58ch}
-.report-meta{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.8rem;padding-top:1.3rem;border-top:1px solid rgba(255,255,255,.06)}
-.report-meta-item{font-size:.7rem;color:rgba(255,255,255,.26);font-weight:300;letter-spacing:.03em}
-.report-score-panel{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);border-left:2px solid var(--lime-rule);border-radius:2px;padding:1.35rem;align-self:stretch}
-.score-label{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.28);margin-bottom:.65rem}
-.score-value{font-family:var(--serif);font-size:2.4rem;font-weight:300;line-height:1;color:var(--lime);margin-bottom:.8rem}
-.score-copy{font-size:.76rem;line-height:1.7;color:rgba(255,255,255,.38);font-weight:300}
-.report-section{padding:2.5rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.report-title,.r-title{font-family:var(--serif);font-size:2rem;font-weight:300;line-height:1.08;letter-spacing:0;color:var(--white);max-width:25ch;margin-bottom:0;overflow-wrap:anywhere}
+.report-title em,.r-title em{font-style:normal;color:var(--lime)}
+.report-intro{font-size:.88rem;color:rgba(255,255,255,.62);line-height:1.72;font-weight:300;max-width:70ch}
+.report-meta{display:flex;gap:.8rem 1.1rem;flex-wrap:wrap;margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06)}
+.report-meta-item{font-size:.7rem;color:rgba(255,255,255,.42);font-weight:300;letter-spacing:.03em}
+.report-score-panel{border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.025);border-left:2px solid var(--lime-rule);border-radius:2px;padding:.9rem 1rem;align-self:start}
+.score-label{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.4);margin-bottom:.42rem}
+.score-value{font-family:var(--serif);font-size:1.55rem;font-weight:300;line-height:1;color:var(--lime);margin-bottom:.42rem}
+.score-copy{font-size:.74rem;line-height:1.58;color:rgba(255,255,255,.52);font-weight:300}
+.report-section{padding:1.55rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .report-section:last-child{border-bottom:none}
-.report-section-head{display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.4rem}
+.report-section-head{display:flex;flex-direction:column;gap:.45rem;margin-bottom:.95rem}
 .r-sec-label{font-size:.61rem;letter-spacing:.17em;text-transform:uppercase;font-weight:600;color:var(--lime);opacity:.58}
-.r-sec-h{font-family:var(--serif);font-size:1.45rem;font-weight:300;color:var(--white);line-height:1.12;letter-spacing:0;overflow-wrap:anywhere}
-.r-body{font-size:.84rem;color:rgba(255,255,255,.48);line-height:1.85;font-weight:300}
+.r-sec-h{font-family:var(--serif);font-size:1.35rem;font-weight:300;color:var(--white);line-height:1.12;letter-spacing:0;overflow-wrap:anywhere}
+.r-body{font-size:.84rem;color:rgba(255,255,255,.6);line-height:1.78;font-weight:300}
 .r-body p+p{margin-top:.8rem}
 .r-body strong{color:rgba(255,255,255,.72);font-weight:500}
 .r-body em{color:rgba(255,255,255,.64)}
 .r-body ul{padding-left:1.2rem;margin:.65rem 0}
 .r-body li+li{margin-top:.35rem}
-.report-two{display:grid;grid-template-columns:1fr;gap:1.2rem}
-.insight-panel,.callout{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-left:2px solid var(--lime-rule);border-radius:2px;padding:1.25rem}
+.report-brief{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
+.report-brief-main{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-left:2px solid var(--lime-rule);border-radius:2px;padding:1.15rem}
+.report-two,.report-panel-grid{display:grid;grid-template-columns:1fr;gap:.85rem}
+.report-memo{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid rgba(255,255,255,.07)}
+.memo-block{display:grid;grid-template-columns:1fr;gap:.4rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.memo-label{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--lime);opacity:.62}
+.memo-body{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.72;font-weight:300}
+.memo-body p+p{margin-top:.75rem}
+.insight-panel,.callout{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.075);border-left:2px solid var(--lime-rule);border-radius:2px;padding:1rem}
 .insight-panel-muted{border-left-color:rgba(255,255,255,.09)}
 .callout-label{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--lime);opacity:.55;margin-bottom:.55rem}
-.callout-body{font-size:.8rem;color:rgba(255,255,255,.48);line-height:1.78;font-weight:300}
+.callout-body{font-size:.8rem;color:rgba(255,255,255,.6);line-height:1.68;font-weight:300}
 .callout-body p+p{margin-top:.75rem}
 .callout-body strong{color:rgba(255,255,255,.72);font-weight:500}
-.opp-grid{display:grid;grid-template-columns:1fr;gap:.85rem}
+.opp-grid{display:grid;grid-template-columns:1fr;gap:.75rem}
 .opp{border:1px solid rgba(255,255,255,.08);border-radius:2px;overflow:hidden;background:rgba(255,255,255,.02)}
-.opp-head{display:flex;align-items:flex-start;justify-content:space-between;padding:1rem 1.05rem;background:rgba(255,255,255,.025);gap:1rem}
-.opp-name{font-family:var(--serif);font-size:1.12rem;font-weight:400;color:rgba(255,255,255,.88);line-height:1.18}
+.opp-head{display:flex;align-items:flex-start;justify-content:space-between;padding:.85rem .95rem;background:rgba(255,255,255,.025);gap:1rem}
+.opp-name{font-family:var(--serif);font-size:1.02rem;font-weight:400;color:rgba(255,255,255,.88);line-height:1.18}
 .opp-badge{font-size:.57rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;padding:.2rem .55rem;border-radius:10px;white-space:nowrap;flex-shrink:0}
 .bh{background:var(--lime-pale);color:var(--lime);border:1px solid var(--lime-rule)}
 .bm{background:rgba(255,200,80,.07);color:rgba(255,200,80,.68);border:1px solid rgba(255,200,80,.17)}
 .bl{background:rgba(255,255,255,.04);color:rgba(255,255,255,.32);border:1px solid rgba(255,255,255,.09)}
-.opp-body{padding:1rem 1.05rem;border-top:1px solid rgba(255,255,255,.05)}
-.opp-desc{font-size:.79rem;color:rgba(255,255,255,.42);line-height:1.78;font-weight:300;margin-bottom:.85rem}
-.opp-metrics{display:grid;grid-template-columns:1fr;gap:.65rem;padding-top:.85rem;border-top:1px solid rgba(255,255,255,.05)}
+.opp-body{padding:.85rem .95rem;border-top:1px solid rgba(255,255,255,.05)}
+.opp-desc{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.68;font-weight:300;margin-bottom:.75rem}
+.opp-metrics{display:grid;grid-template-columns:1fr;gap:.55rem;padding-top:.75rem;border-top:1px solid rgba(255,255,255,.05)}
 .opp-m strong{display:block;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.32);font-weight:600;margin-bottom:.1rem}
 .opp-m span{font-size:.74rem;color:rgba(255,255,255,.55);font-weight:300;line-height:1.55}
+.validation-grid{display:grid;grid-template-columns:1fr;gap:.45rem;padding-left:0!important;margin:0!important;list-style:none}
+.validation-grid li{position:relative;padding:.65rem .75rem .65rem 1.9rem;border:1px solid rgba(255,255,255,.075);background:rgba(255,255,255,.02);border-radius:2px;font-size:.78rem;line-height:1.45}
+.validation-grid li::before{content:'';position:absolute;left:.75rem;top:.95rem;width:.42rem;height:.42rem;border-radius:50%;background:var(--lime);opacity:.65}
+.validation-grid li+li{margin-top:0}
+.report-final{display:grid;grid-template-columns:1fr;gap:1rem;align-items:start}
 .report-steps{border:1px solid rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
-.report-step{padding:1rem 1.05rem;border-bottom:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:1.5rem 1fr;gap:.85rem;align-items:start}
+.report-step{padding:.82rem .95rem;border-bottom:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:1.3rem 1fr;gap:.7rem;align-items:start}
 .report-step:last-child{border-bottom:none}
 .report-step-n{font-family:var(--serif);font-style:italic;font-size:.9rem;color:var(--lime);opacity:.38}
 .report-step-title{font-size:.82rem;font-weight:500;color:rgba(255,255,255,.72);margin-bottom:.15rem}
@@ -184,30 +197,570 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 .rich-report ul,.rich-report ol{padding-left:1.2rem;margin:.65rem 0}
 .rich-report a{color:var(--lime)}
 .report-actions,.r-cta-row{display:flex;gap:.65rem;flex-wrap:wrap;margin-top:2rem;margin-bottom:1.6rem}
+.review-cta-status{flex-basis:100%;min-height:1em;margin-top:-.85rem;font-size:.69rem;line-height:1.5;color:rgba(255,255,255,.36)}
+.review-cta-status.ok{color:rgba(207,232,78,.68)}
+.review-cta-status.warn{color:rgba(255,255,255,.52)}
 .r-disclaimer{font-size:.66rem;color:rgba(255,255,255,.17);line-height:1.65;padding-top:1.35rem;border-top:1px solid rgba(255,255,255,.06)}
 .flash{border-color:rgba(220,80,80,.5)!important}
 .btn-pdf{background:rgba(255,255,255,.07);color:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.15)}
 .btn-pdf:hover{background:rgba(255,255,255,.11);color:rgba(255,255,255,.85);border-color:rgba(255,255,255,.25)}
 .btn-pdf svg{flex-shrink:0}
 .pdf-generating{opacity:.5;pointer-events:none;cursor:not-allowed}
+.pdf-export-host{position:absolute;left:-20000px;top:0;width:1120px;pointer-events:none;z-index:-1;background:#fff}
+.pdf-export-page{width:1120px;height:1633px;background:#fff;overflow:hidden;color:#111}
+.pdf-export-host .report-shell{max-width:none;width:100%;padding:2.4rem 2.6rem 3rem;background:#fff;color:#111}
+.pdf-export-host .report-hero{padding:0 0 2.4rem}
+.pdf-export-host .report-section{padding:2rem 0}
+.pdf-export-host .report-two{grid-template-columns:1fr}
+.pdf-export-host .report-brief,.pdf-export-host .report-panel-grid,.pdf-export-host .report-final{grid-template-columns:1fr}
+.pdf-export-host .opp-grid{grid-template-columns:1fr}
+.pdf-export-host .opp,.pdf-export-host .insight-panel,.pdf-export-host .report-brief-main,.pdf-export-host .report-steps,.pdf-export-host .rich-report,.pdf-export-host .report-section{break-inside:avoid;page-break-inside:avoid}
+.pdf-export-host .pdf-cover{display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:1px solid #d9dce3;padding-bottom:1rem;margin-bottom:1.6rem}
+.pdf-export-host .pdf-brand{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:#111;letter-spacing:.03em}
+.pdf-export-host .pdf-brand span{display:block;font-family:var(--sans);font-size:.42rem;letter-spacing:.42em;color:#617500;margin-top:-.25rem}
+.pdf-export-host .pdf-doc-type{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:#667085;font-weight:600}
+.pdf-export-host .report-title,.pdf-export-host .r-title,.pdf-export-host .r-sec-h,.pdf-export-host .score-value{color:#111!important}
+.pdf-export-host .report-title em,.pdf-export-host .r-title em,.pdf-export-host .report-kicker,.pdf-export-host .r-sec-label,.pdf-export-host .callout-label{color:#627500!important}
+.pdf-export-host .report-intro,.pdf-export-host .report-meta-item,.pdf-export-host .score-copy,.pdf-export-host .r-body,.pdf-export-host .opp-desc,.pdf-export-host .callout-body,.pdf-export-host .memo-body,.pdf-export-host .report-step-sub{color:#344054!important}
+.pdf-export-host .opp-name,.pdf-export-host .report-step-title{color:#111!important}
+.pdf-export-host .report-hero,.pdf-export-host .report-section,.pdf-export-host .memo-block{border-bottom:1px solid #d9dce3!important}
+.pdf-export-host .report-score-panel,.pdf-export-host .insight-panel,.pdf-export-host .report-brief-main,.pdf-export-host .opp,.pdf-export-host .report-steps,.pdf-export-host .validation-grid li{border:1px solid #d9dce3!important;background:#fff!important}
+.pdf-export-host .opp-head{background:#f6f7f9!important;border-bottom:1px solid #e4e7ec!important}
+.pdf-export-host .report-step{border-bottom:1px solid #e4e7ec!important}
+.pdf-export-host .validation-grid li::before{background:#627500!important}
+.pdf-export-host .opp-metrics{grid-template-columns:1fr 1fr}
+.pdf-export-host .opp-m strong{color:#667085!important}
+.pdf-export-host .opp-m span{color:#344054!important}
+.pdf-export-host .report-actions,.pdf-export-host .r-cta-row,.pdf-export-host .r-disclaimer{display:none!important}
 
 @media(min-width:640px){
   .intro-h{font-size:3rem}
   .q-text{font-size:1.55rem}
-  .report-title,.r-title{font-size:3.4rem}
-  .r-sec-h{font-size:1.85rem}
+  .report-title,.r-title{font-size:2.35rem}
+  .r-sec-h{font-size:1.65rem}
   .opp-metrics{grid-template-columns:repeat(2,1fr)}
+  .validation-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(min-width:720px){
+  .report-shell{padding:1.35rem 1.6rem 4rem}
+  .report-hero{padding:1.15rem 0 1rem}
+  .report-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,300px);gap:1.6rem;align-items:start}
+  .report-title,.r-title{font-size:2.55rem;max-width:26ch}
+  .report-meta{margin-top:.9rem;padding-top:.85rem}
 }
 @media(min-width:860px){
-  .report-shell{padding:4rem 2rem 6rem}
-  .report-hero{padding:3rem 0}
-  .report-hero-grid{display:grid;grid-template-columns:1.45fr .8fr;gap:4rem;align-items:end}
+  .report-shell{padding:1.6rem 2rem 4.5rem}
+  .report-hero{padding:1.35rem 0 1.2rem}
+  .report-hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,300px);gap:2rem;align-items:start}
   .intro-h{font-size:3.8rem}
   .q-text{font-size:1.75rem}
-  .report-title,.r-title{font-size:5rem}
-  .r-sec-h{font-size:2.15rem}
+  .report-title,.r-title{font-size:2.75rem;max-width:28ch}
+  .r-sec-h{font-size:1.8rem}
+  .report-brief{grid-template-columns:minmax(0,1.35fr) minmax(280px,.75fr)}
   .report-two{grid-template-columns:1fr 1fr}
-  .opp-grid{grid-template-columns:repeat(3,1fr)}
+  .report-panel-grid{grid-template-columns:repeat(2,1fr)}
+  .memo-block{grid-template-columns:minmax(170px,.34fr) minmax(0,1fr);gap:1.2rem}
+  .opp-grid{grid-template-columns:1fr 1fr}
+  .opp{display:grid;grid-template-columns:minmax(180px,.78fr) minmax(0,1fr)}
+  .opp-head{border-right:1px solid rgba(255,255,255,.05)}
+  .opp-body{border-top:none}
+  .report-final{grid-template-columns:minmax(0,1fr) minmax(320px,.8fr)}
+  .report-actions,.r-cta-row{align-items:center;margin-top:1.2rem;margin-bottom:1rem}
+}
+
+/* PREMIUM REPORT SKIN */
+.report-wrap{padding:1.25rem}
+.report-shell{
+  max-width:1080px;
+  margin:1rem auto 3rem;
+  padding:1.25rem;
+  background:#f7f4ec;
+  color:#172033;
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 28px 90px rgba(0,0,0,.26);
+}
+.report-hero{
+  padding:0 0 1.1rem;
+  border-bottom:1px solid #dcd6c9;
+}
+.report-hero-grid{gap:1rem}
+.report-kicker,.r-eyebrow,.r-sec-label,.callout-label,.memo-label{
+  color:#6f801a;
+  opacity:1;
+  letter-spacing:.15em;
+}
+.report-title,.r-title{
+  color:#172033;
+  font-size:1.95rem;
+  max-width:23ch;
+}
+.report-title em,.r-title em{color:#6f801a}
+.report-meta{
+  margin-top:1rem;
+  padding-top:.85rem;
+  border-top:1px solid #ded8cc;
+}
+.report-meta-item{color:#6b7280}
+.report-score-panel{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-left:3px solid #cfe84e;
+  border-radius:4px;
+  padding:1rem;
+  box-shadow:0 12px 28px rgba(23,32,51,.06);
+}
+.score-label{color:#6b7280}
+.score-value{
+  color:#172033;
+  font-size:1.35rem;
+}
+.score-copy{color:#586174}
+.report-section{
+  padding:1.15rem 0;
+  border-bottom:1px solid #ded8cc;
+}
+.report-section-head{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.3rem;
+  margin-bottom:.8rem;
+}
+.r-sec-h{
+  color:#172033;
+  font-size:1.25rem;
+}
+.r-body,.report-intro,.callout-body,.memo-body,.opp-desc,.report-step-sub{
+  color:#495466;
+}
+.r-body strong,.callout-body strong{color:#172033}
+.report-brief{
+  grid-template-columns:1fr;
+  gap:.8rem;
+}
+.report-brief-main,.insight-panel,.callout{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-left:3px solid #cfe84e;
+  border-radius:4px;
+  padding:1rem;
+  box-shadow:0 10px 26px rgba(23,32,51,.045);
+}
+.report-memo{
+  border-top:1px solid #dcd6c9;
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  overflow:hidden;
+}
+.memo-block{
+  padding:.95rem 1rem;
+  border-bottom:1px solid #e4ded2;
+}
+.memo-block:last-child{border-bottom:none}
+.memo-body{
+  font-size:.82rem;
+  line-height:1.68;
+}
+.opp-grid{gap:.8rem}
+.opp-grid .opp:only-child{grid-column:1/-1}
+.opp{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  box-shadow:0 10px 26px rgba(23,32,51,.045);
+}
+.opp-head{
+  background:#172033;
+  border-right:0;
+  border-bottom:0;
+}
+.opp-name{color:#fff;font-size:1rem}
+.opp-body{border-top:0}
+.opp-metrics{border-top:1px solid #e4ded2}
+.opp-m strong{color:#7b8494}
+.opp-m span{color:#495466}
+.validation-groups{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.75rem;
+}
+.validation-group{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  padding:.9rem 1rem;
+  box-shadow:0 10px 24px rgba(23,32,51,.035);
+}
+.validation-group-title{
+  margin-bottom:.45rem;
+  color:#172033;
+  font-size:.63rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.validation-group ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.validation-group li{
+  position:relative;
+  padding:.42rem 0 .42rem 1rem;
+  color:#495466;
+  font-size:.79rem;
+  line-height:1.48;
+}
+.validation-group li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:.9rem;
+  width:.34rem;
+  height:.34rem;
+  border-radius:50%;
+  background:#6f801a;
+}
+.report-final{
+  align-items:stretch;
+  gap:1rem;
+}
+.report-steps{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+}
+.report-step{border-bottom:1px solid #e4ded2}
+.report-step-n{color:#6f801a;opacity:.85}
+.report-step-title{color:#172033}
+.report-actions,.r-cta-row{
+  margin:1.25rem 0 1rem;
+  padding:1rem;
+  background:#172033;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;
+}
+.review-cta-status{color:rgba(255,255,255,.6)}
+.r-disclaimer{
+  color:rgba(255,255,255,.45);
+  border-top:1px solid rgba(255,255,255,.08);
+}
+.btn-pdf{
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.72);
+  border-color:rgba(255,255,255,.18);
+}
+.pdf-export-host .report-shell{
+  margin:0;
+  background:#fff!important;
+  box-shadow:none!important;
+  border:none!important;
+}
+.pdf-export-host .report-brief-main,
+.pdf-export-host .insight-panel,
+.pdf-export-host .callout,
+.pdf-export-host .report-memo,
+.pdf-export-host .opp,
+.pdf-export-host .report-steps,
+.pdf-export-host .validation-group{
+  background:#fff!important;
+  border-color:#d9dce3!important;
+  box-shadow:none!important;
+}
+.pdf-export-host .opp-head{background:#f6f7f9!important}
+.pdf-export-host .opp-name{color:#111!important}
+.pdf-export-host .validation-group-title{color:#111!important}
+.pdf-export-host .validation-group li{color:#344054!important}
+.pdf-export-host .validation-group li::before{background:#627500!important}
+
+@media(min-width:640px){
+  .report-wrap{padding:1.5rem}
+  .report-shell{padding:1.5rem}
+  .report-title,.r-title{font-size:2.35rem}
+  .validation-groups{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:720px){
+  .report-shell{padding:1.6rem 1.85rem 2rem}
+  .report-hero{padding:0 0 1.15rem}
+  .report-hero-grid{grid-template-columns:minmax(0,1fr) minmax(230px,290px);gap:1.5rem}
+  .report-title,.r-title{font-size:2.45rem;max-width:24ch}
+  .report-section-head{
+    grid-template-columns:minmax(145px,.26fr) minmax(0,1fr);
+    align-items:baseline;
+  }
+}
+@media(min-width:860px){
+  .report-shell{padding:1.8rem 2.1rem 2.25rem}
+  .report-hero-grid{grid-template-columns:minmax(0,1fr) minmax(250px,300px)}
+  .report-title,.r-title{font-size:2.7rem;max-width:25ch}
+  .report-brief{grid-template-columns:minmax(0,1.3fr) minmax(275px,.7fr)}
+  .memo-block{grid-template-columns:minmax(155px,.27fr) minmax(0,1fr)}
+  .opp{grid-template-columns:minmax(210px,.62fr) minmax(0,1fr)}
+  .opp-head{border-right:0}
+  .report-final{grid-template-columns:minmax(0,1fr) minmax(330px,.78fr)}
+}
+
+/* MEMO V2 REPORT STRUCTURE */
+.report-shell{
+  max-width:1120px;
+  padding:1.15rem 1.2rem 1.5rem;
+}
+.report-hero{
+  padding-bottom:1rem;
+}
+.report-title,.r-title{
+  font-size:1.82rem;
+  line-height:1.04;
+  max-width:26ch;
+}
+.report-score-panel{
+  box-shadow:none;
+}
+.score-value{
+  font-family:var(--sans);
+  font-size:1.02rem;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.memo-section{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.9rem;
+  padding:1.1rem 0;
+}
+.memo-section-head{
+  display:grid;
+  grid-template-columns:2.2rem minmax(0,1fr);
+  gap:.8rem;
+  align-items:start;
+}
+.section-number{
+  width:2.2rem;
+  height:2.2rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #d6cfbf;
+  background:#fffdf7;
+  color:#6f801a;
+  font-size:.62rem;
+  letter-spacing:.08em;
+  font-weight:700;
+}
+.memo-section .report-section-head{
+  display:block;
+  margin:0;
+}
+.memo-section .r-sec-h{
+  max-width:18ch;
+}
+.exec-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.7rem;
+}
+.exec-card{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  padding:.95rem;
+}
+.exec-label,.signal-label,.hypothesis-label,.risk-label{
+  color:#6f801a;
+  font-size:.6rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:.45rem;
+}
+.exec-value{
+  color:#172033;
+  font-size:.92rem;
+  line-height:1.55;
+}
+.signal-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.6rem;
+}
+.signal-card{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  padding:.85rem .9rem;
+}
+.signal-value{
+  color:#495466;
+  font-size:.82rem;
+  line-height:1.52;
+}
+.hypothesis-card{
+  display:grid;
+  grid-template-columns:1fr;
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  overflow:hidden;
+}
+.hypothesis-main{
+  padding:1rem;
+  border-bottom:1px solid #e4ded2;
+}
+.hypothesis-main h3{
+  font-family:var(--serif);
+  color:#172033;
+  font-size:1.35rem;
+  font-weight:400;
+  line-height:1.15;
+  margin-bottom:.55rem;
+}
+.hypothesis-copy p{
+  color:#495466;
+  font-size:.84rem;
+  line-height:1.68;
+}
+.hypothesis-side{
+  display:grid;
+  grid-template-columns:1fr;
+}
+.hypothesis-metric,.supporting-angle{
+  padding:.85rem 1rem;
+  border-bottom:1px solid #e4ded2;
+}
+.hypothesis-metric:last-child,.supporting-angle:last-child{border-bottom:none}
+.hypothesis-metric strong,.supporting-angle strong{
+  display:block;
+  color:#7b8494;
+  font-size:.61rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-bottom:.25rem;
+}
+.hypothesis-metric span,.supporting-angle span,.supporting-angle p{
+  color:#495466;
+  font-size:.79rem;
+  line-height:1.5;
+}
+.supporting-angle span{
+  display:block;
+  color:#172033;
+  font-weight:600;
+  margin-bottom:.25rem;
+}
+.risk-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.75rem;
+}
+.risk-primary,.risk-estimate,.deployment-card{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  padding:1rem;
+}
+.risk-primary p,.risk-estimate p,.deployment-card p{
+  color:#495466;
+  font-size:.84rem;
+  line-height:1.7;
+}
+.agent-workflow{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.85rem;
+}
+.agent-workflow-copy{
+  background:#fffdf7;
+  border:1px solid #ded8cc;
+  border-radius:4px;
+  padding:1rem;
+}
+.agent-workflow-copy p{
+  color:#495466;
+  font-size:.84rem;
+  line-height:1.7;
+}
+.workflow-flow{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.45rem;
+}
+.workflow-step{
+  position:relative;
+  display:grid;
+  grid-template-columns:2.3rem minmax(0,1fr);
+  gap:.65rem;
+  align-items:start;
+  background:#172033;
+  color:#fff;
+  border-radius:4px;
+  padding:.72rem .8rem;
+}
+.workflow-step span{
+  color:#cfe84e;
+  font-size:.62rem;
+  letter-spacing:.1em;
+  font-weight:700;
+}
+.workflow-step p{
+  color:rgba(255,255,255,.86);
+  font-size:.79rem;
+  line-height:1.45;
+}
+.report-final.memo-section{
+  grid-template-columns:1fr;
+}
+.report-final .r-body{
+  margin-top:.65rem;
+  max-width:36rem;
+}
+.report-actions,.r-cta-row{
+  justify-content:flex-start;
+  align-items:center;
+}
+.pdf-export-host .section-number,
+.pdf-export-host .exec-card,
+.pdf-export-host .signal-card,
+.pdf-export-host .hypothesis-card,
+.pdf-export-host .risk-primary,
+.pdf-export-host .risk-estimate,
+.pdf-export-host .agent-workflow-copy,
+.pdf-export-host .deployment-card,
+.pdf-export-host .workflow-step{
+  box-shadow:none!important;
+}
+.pdf-export-host .workflow-step{
+  background:#f6f7f9!important;
+  border:1px solid #d9dce3!important;
+}
+.pdf-export-host .workflow-step p,
+.pdf-export-host .workflow-step span{
+  color:#344054!important;
+}
+
+@media(min-width:640px){
+  .report-title,.r-title{font-size:2.15rem}
+  .exec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signal-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:860px){
+  .report-shell{padding:1.55rem 1.85rem 1.9rem}
+  .report-title,.r-title{font-size:2.28rem;max-width:27ch}
+  .memo-section{
+    grid-template-columns:240px minmax(0,1fr);
+    gap:1.35rem;
+    padding:1.35rem 0;
+  }
+  .memo-section .r-sec-h{font-size:1.34rem}
+  .exec-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .hypothesis-card{grid-template-columns:minmax(0,1.15fr) minmax(240px,.72fr)}
+  .hypothesis-main{border-bottom:none;border-right:1px solid #e4ded2}
+  .risk-grid{grid-template-columns:minmax(0,1.35fr) minmax(270px,.75fr)}
+  .agent-workflow{grid-template-columns:minmax(260px,.7fr) minmax(0,1fr)}
+  .workflow-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .report-final.memo-section{
+    grid-template-columns:240px minmax(0,1fr);
+  }
 }
 
 @media print{
@@ -217,7 +770,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   .report-shell{padding:1.5rem!important;max-width:100%!important}
   .report-title,.r-title,.r-sec-h,.score-value{color:#111!important}
   .report-title em,.r-title em,.report-kicker,.r-eyebrow,.r-sec-label,.callout-label,.opp-badge.bh{color:#2a5500!important}
-  .report-intro,.report-meta-item,.score-copy,.r-body,.opp-desc,.callout-body,.report-step-sub,.rich-report p,.rich-report li{color:#333!important}
+  .report-intro,.report-meta-item,.score-copy,.r-body,.opp-desc,.callout-body,.memo-body,.report-step-sub,.rich-report p,.rich-report li{color:#333!important}
   .opp-name,.report-step-title,.rich-report h1,.rich-report h2,.rich-report h3{color:#111!important}
   .report-hero,.report-section{border-bottom:1px solid #ddd!important}
   .report-score-panel,.insight-panel,.opp,.report-steps,.rich-report{border:1px solid #ddd!important;background:#fff!important}
@@ -242,16 +795,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   <!-- INTRO -->
   <div class="screen active" id="s-intro">
     <div class="intro-screen">
-      <div class="intro-badge"><span class="intro-badge-dot"></span>AI Opportunity Readiness Check</div>
+      <div class="intro-badge"><span class="intro-badge-dot"></span>AI Opportunity Assessment</div>
       <h1 class="intro-h">See where AI can reduce <em>business friction.</em></h1>
       <p class="intro-p">12 focused questions. A short diagnostic to identify where AI can reduce friction in your business.</p>
       <div class="intro-stats">
         <div class="intro-stat"><span class="intro-stat-dot"></span>12 questions</div>
         <div class="intro-stat"><span class="intro-stat-dot"></span>Under 5 minutes</div>
-        <div class="intro-stat"><span class="intro-stat-dot"></span>Instant report</div>
+        <div class="intro-stat"><span class="intro-stat-dot"></span>Instant snapshot</div>
       </div>
       <button class="btn btn-lime" onclick="startQ()">Start the assessment &rarr;</button>
-      <p class="intro-note">No spam. Enter your email to unlock your report.</p>
+      <p class="intro-note">No spam. Enter your email to unlock your snapshot.</p>
     </div>
   </div>
 
@@ -278,12 +831,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
   <!-- EMAIL GATE -->
   <div class="modal-overlay hidden" id="gate">
     <div class="modal">
-      <div class="modal-title">Enter your details to unlock your<br><em>assessment report.</em></div>
-      <p class="modal-sub">Enter your details to see your personalised AI Opportunity Readiness report.</p>
+      <div class="modal-title">Enter your details to unlock your<br><em>AI Opportunity Snapshot.</em></div>
+      <p class="modal-sub">Enter your details to see your personalised AI Opportunity Snapshot.</p>
       <input class="q-input" type="text" id="g-name" placeholder="Your first name" autocomplete="given-name">
       <input class="q-input" type="email" id="g-email" placeholder="Your email address" autocomplete="email">
       <button class="btn btn-lime" style="width:100%;margin-top:.4rem" onclick="submitGate()">Reveal my results &rarr;</button>
-      <p class="modal-gate-note">We will use this to generate your report and send you a copy.</p>
+      <p class="modal-gate-note">We will use this to generate your snapshot and send you a copy.</p>
     </div>
   </div>
 
@@ -292,7 +845,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
     <div class="loading-screen">
       <div class="loading-mark"><span>RP</span></div>
       <h2 class="loading-h">Analysing your answers<span class="ldot">.</span><span class="ldot">.</span><span class="ldot">.</span></h2>
-      <p class="loading-sub">Building your personalised AI Opportunity Readiness report.</p>
+      <p class="loading-sub">Building your personalised AI Opportunity Snapshot.</p>
       <div class="load-bar-wrap"><div class="load-bar-fill" id="loadBar" style="width:0%"></div></div>
       <p class="load-note" id="loadNote">Reading your operational context...</p>
     </div>
@@ -305,6 +858,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:52px;display:flex;ali
 
 </div>
 
+<script src="https://lua-ai-global.github.io/lua-pop/lua-pop.umd.js"></script>
 <script>
 // ─── QUESTIONS ───────────────────────────────────────────────────
 var Qs = [
@@ -566,9 +1120,157 @@ function submitGate(){
 }
 
 // ─── ANALYSIS ────────────────────────────────────────────
-var LUA_INTAKE = '/api/assessment-intake';
-var LUA_RESULT = '/api/assessment-result';
-var MAX_POLLS  = 40;
+// Lua's webhook gateway requires ?channel=web when called from a dev origin
+// (localhost, file://). It's a no-op on whitelisted production origins, so
+// we always include it for safety.
+var LUA_INTAKE = 'https://webhook.heylua.ai/baseAgent_agent_1776930059751_0hjrpso8q/assessment-intake?channel=web';
+var LUA_REPORT_LOOKUP = 'https://webhook.heylua.ai/baseAgent_agent_1776930059751_0hjrpso8q/get-assessment-report?channel=web';
+var LUA_AGENT_ID = 'baseAgent_agent_1776930059751_0hjrpso8q';
+var REPORT_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function initLuaReviewChat(){
+  if(!window.LuaPop || window.__luaReviewChatReady) return;
+  window.LuaPop.init({
+    agentId: LUA_AGENT_ID,
+    environment: 'production',
+    position: 'bottom-right',
+    buttonText: 'Book Review',
+    buttonColor: '#cfe84e',
+    popupButtonStyles: {
+      backgroundColor: '#cfe84e',
+      color: '#101828',
+      borderRadius: '999px',
+      boxShadow: '0 10px 28px rgba(0,0,0,.28)',
+      fontSize: '12px',
+      padding: '10px 14px'
+    },
+    chatTitle: 'AI Opportunity Review',
+    runtimeContext: 'source:assessment,cta:ai_opportunity_review'
+  });
+  window.__luaReviewChatReady = true;
+}
+
+function findLuaPopButton(source){
+  var host = document.getElementById('lua-shadow-root');
+  var shadowButton = host && host.shadowRoot ? host.shadowRoot.querySelector('.lua-pop-button') : null;
+  if(shadowButton) return shadowButton;
+  var direct = document.querySelector('.lua-pop-button');
+  if(direct && direct !== source) return direct;
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('button'));
+  return buttons.find(function(button){
+    if(button === source || (button.closest && button.closest('.report-actions'))) return false;
+    var label = ((button.getAttribute('aria-label') || '') + ' ' + (button.textContent || '')).toLowerCase();
+    return label.indexOf('book ai review') >= 0 || label.indexOf('ai opportunity review') >= 0 || label.indexOf('open support chat') >= 0;
+  }) || null;
+}
+
+function setReviewCtaStatus(source, message, tone){
+  var actions = source && source.closest ? source.closest('.report-actions') : document.querySelector('.report-actions');
+  if(!actions) return;
+  var status = actions.querySelector('.review-cta-status');
+  if(!status){
+    status = document.createElement('div');
+    status.className = 'review-cta-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    actions.appendChild(status);
+  }
+  status.className = 'review-cta-status' + (tone ? ' ' + tone : '');
+  status.textContent = message || '';
+}
+
+function openLuaReview(source){
+  initLuaReviewChat();
+  var trigger = source && source.nodeType === 1 ? source : null;
+  var original = trigger ? trigger.innerHTML : '';
+  var attempts = 0;
+  var maxAttempts = 18;
+  if(trigger){
+    trigger.disabled = true;
+    trigger.innerHTML = 'Opening booking chat...';
+  }
+  setReviewCtaStatus(trigger, 'Opening booking chat...', 'ok');
+  var timer = setInterval(function(){
+    attempts++;
+    initLuaReviewChat();
+    var button = findLuaPopButton(trigger);
+    if(button && typeof button.click === 'function'){
+      clearInterval(timer);
+      button.click();
+      setReviewCtaStatus(trigger, 'Booking chat opened.', 'ok');
+      if(trigger){
+        trigger.disabled = false;
+        trigger.innerHTML = original;
+      }
+      setTimeout(function(){ setReviewCtaStatus(trigger, ''); }, 3000);
+      return;
+    }
+    if(attempts >= maxAttempts){
+      clearInterval(timer);
+      setReviewCtaStatus(trigger, 'Booking chat is still loading. Use the Book AI Review bubble in the lower-right corner.', 'warn');
+      if(trigger){
+        trigger.disabled = false;
+        trigger.innerHTML = original;
+      }
+    }
+  }, 250);
+}
+
+function initSavedReportLookup(){
+  var params;
+  try { params = new URLSearchParams(location.search); } catch(e) { console.warn('initSavedReportLookup: URLSearchParams unsupported', e); return; }
+  var id = params.get('id');
+  console.log('initSavedReportLookup: id from URL =', id);
+  if(!id) return;
+  if(!REPORT_ID_PATTERN.test(id)){
+    console.warn('initSavedReportLookup: id failed UUID pattern check, clearing URL');
+    clearReportFromUrl();
+    return;
+  }
+  loadReportById(id);
+}
+
+function initAssessmentPage(){
+  initLuaReviewChat();
+  initSavedReportLookup();
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initAssessmentPage);
+} else {
+  initAssessmentPage();
+}
+
+function parseAssessmentJsonResponse(r){
+  return r.text().then(function(raw){
+    var payload = {};
+    try {
+      payload = raw ? JSON.parse(raw) : {};
+    } catch(e) {
+      throw new Error('assessment webhook returned invalid JSON');
+    }
+
+    if(!r.ok || (payload && payload.status === 'error')){
+      throw new Error((payload && payload.message) || 'assessment webhook failed');
+    }
+
+    return payload;
+  });
+}
+
+function unwrapAssessmentPayload(payload){
+  if(!payload || typeof payload !== 'object') return payload || {};
+
+  if(payload.report || payload.html || payload.narrative) return payload;
+
+  var wrapped = payload.body || payload.result || payload.data;
+  if(typeof wrapped === 'string'){
+    try { wrapped = JSON.parse(wrapped); } catch(e) {}
+  }
+
+  if(wrapped && typeof wrapped === 'object') return wrapped;
+  return payload;
+}
 
 function runAnalysis(){
   show('s-load');
@@ -583,55 +1285,37 @@ function runAnalysis(){
     if(noteEl && ni < notes.length && pct > (ni+1)*16){ noteEl.textContent = notes[ni]; ni++; }
   }, 600);
 
-  fetch("https://webhook.heylua.ai/baseAgent_agent_1775829835301_ozbd0wojm/90b7a238-3b62-48db-ac6d-81894e57e395", {
+  fetch(LUA_INTAKE, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(ans)
   })
-  .then(function(r){ return r.json(); })
+  .then(parseAssessmentJsonResponse)
   .then(function(d){
-    // Direct response mode: render report/html immediately from webhook payload.
-    if(d && (d.report || d.html || d.narrative)){
-      clearInterval(window._lt);
-      if(bar) bar.style.width = '100%';
-      setTimeout(function(){
-        renderAssessmentResponse(d);
-        show('s-report');
-      }, 350);
-      return;
+    var payload = unwrapAssessmentPayload(d);
+    window.__lastAssessmentResponse = d;
+    window.__lastAssessmentPayload = payload;
+
+    if(!payload || (!payload.report && !payload.html && !payload.narrative)){
+      throw new Error('assessment webhook response did not include report/html/narrative');
     }
 
-    // Fallback mode: legacy async job flow.
-    var jobId = d.jobId;
-    if(!jobId) throw new Error('no direct report or jobId');
-    var polls = 0;
-    var poller = setInterval(function(){
-      polls++;
-      if(polls > MAX_POLLS){
-        clearInterval(poller);
-        clearInterval(window._lt);
+    clearInterval(window._lt);
+    if(bar) bar.style.width = '100%';
+    setTimeout(function(){
+      try {
+        renderAssessmentResponse(payload);
+        rememberReportInUrl(payload && payload.reportId);
+        show('s-report');
+      } catch(renderErr) {
+        console.error('Assessment report render failed:', renderErr, payload);
         renderFallback();
         show('s-report');
-        return;
       }
-      fetch(LUA_RESULT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ jobId: jobId })
-      })
-      .then(function(r){ return r.json(); })
-      .then(function(res){
-        if(res.status === 'done' && res.report){
-          clearInterval(poller);
-          clearInterval(window._lt);
-          if(bar) bar.style.width = '100%';
-          setTimeout(function(){ renderReport(res.report); show('s-report'); }, 700);
-        }
-      })
-      .catch(function(){});
-    }, 3000);
+    }, 350);
   })
-  .catch(function(){
+  .catch(function(err){
+    console.error('Assessment report request failed:', err);
     clearInterval(window._lt);
     renderFallback();
     show('s-report');
@@ -641,6 +1325,67 @@ function runAnalysis(){
 
 function renderAssessmentResponse(payload){
   renderReportPage(normalizeAssessmentPayload(payload || {}));
+}
+
+function rememberReportInUrl(id){
+  if(!id || !REPORT_ID_PATTERN.test(String(id))) return;
+  try {
+    history.replaceState({}, '', location.pathname + '?id=' + encodeURIComponent(id));
+  } catch(e) { /* older browsers without history API: leave URL untouched */ }
+}
+
+function clearReportFromUrl(){
+  try { history.replaceState({}, '', location.pathname); } catch(e) {}
+}
+
+function loadReportById(id){
+  console.log('loadReportById: starting fetch for id', id);
+  show('s-load');
+  var bar    = document.getElementById('loadBar');
+  var noteEl = document.getElementById('loadNote');
+  if(noteEl) noteEl.textContent = 'Loading your snapshot...';
+  if(bar) bar.style.width = '40%';
+
+  var url = LUA_REPORT_LOOKUP + '&id=' + encodeURIComponent(id);
+  console.log('loadReportById: POST', url);
+
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ id: id })
+  })
+    .then(parseAssessmentJsonResponse)
+    .then(function(d){
+      console.log('loadReportById: webhook returned', d);
+      if(d && d.error){
+        var err = new Error(d.error);
+        err.code = d.code;
+        throw err;
+      }
+      var payload = unwrapAssessmentPayload(d);
+      window.__lastAssessmentResponse = d;
+      window.__lastAssessmentPayload = payload;
+
+      if(!payload || (!payload.report && !payload.html)){
+        throw new Error('saved report response did not include report/html');
+      }
+
+      if(bar) bar.style.width = '100%';
+      setTimeout(function(){
+        try {
+          renderAssessmentResponse(payload);
+          show('s-report');
+        } catch(renderErr) {
+          console.error('Saved report render failed:', renderErr, payload);
+          if(noteEl) noteEl.textContent = 'Could not render report: ' + (renderErr && renderErr.message || 'unknown error') + ' (id: ' + id + ')';
+        }
+      }, 200);
+    })
+    .catch(function(err){
+      console.error('Saved report fetch failed:', err);
+      if(noteEl) noteEl.textContent = 'Could not load report: ' + (err && err.message || 'unknown error') + ' (id: ' + id + ')';
+      if(bar) bar.style.width = '0%';
+    });
 }
 
 // ─── RENDER REPORT ───────────────────────────────────────────────
@@ -747,161 +1492,6 @@ function pickText(obj, keys){
   return '';
 }
 
-function normalizeFitLabel(value){
-  var txt = compactText(value);
-  if(!txt) return 'Medium';
-  var lower = txt.toLowerCase();
-  if(lower.indexOf('high') > -1 || lower.indexOf('urgent') > -1 || lower.indexOf('strong') > -1) return 'High';
-  if(lower.indexOf('low') > -1 || lower.indexOf('early') > -1) return 'Low';
-  if(lower.indexOf('medium') > -1 || lower.indexOf('moderate') > -1) return 'Medium';
-  return txt;
-}
-
-function isPlaceholderFinding(value){
-  var lower = compactText(value).toLowerCase();
-  if(!lower) return true;
-  return lower.indexOf('reduce operational friction') > -1
-    || lower.indexOf('where ai can reduce operational friction') > -1
-    || lower.indexOf('answers point to operational friction') > -1
-    || lower.indexOf('worth validating before selecting tools') > -1
-    || lower.indexOf('initial read on where ai may') > -1;
-}
-
-function friendlyLocationLabel(value){
-  var txt = compactText(value);
-  var lower = txt.toLowerCase();
-  if(lower === 'email') return 'email';
-  if(lower === 'whatsapp') return 'WhatsApp';
-  if(lower === 'crm') return 'the CRM';
-  if(lower === 'spreadsheets') return 'spreadsheets';
-  if(lower.indexOf('erp') > -1) return 'the ERP or internal system';
-  if(lower.indexOf('helpdesk') > -1) return 'the helpdesk or ticketing tool';
-  if(lower.indexOf('people') > -1) return "people's heads";
-  return lowerFirst(txt);
-}
-
-function buildWorkflowContext(answers){
-  answers = answers || {};
-  var maturity = compactText(answers.workflowMaturity).toLowerCase();
-  var locations = textList(answers.workLives).slice(0, 3).map(friendlyLocationLabel);
-  var sentence = '';
-
-  if(maturity.indexOf('mostly manual') > -1) sentence = 'Right now, that workflow is still mostly manual';
-  else if(maturity.indexOf('inconsistent') > -1) sentence = 'Right now, that workflow spans some tools but still runs inconsistently';
-  else if(maturity.indexOf('depends heavily') > -1) sentence = 'Right now, that workflow depends heavily on specific people';
-  else if(maturity.indexOf('defined process') > -1) sentence = 'Right now, that workflow already has some structure';
-
-  if(locations.length){
-    sentence += (sentence ? ' across ' : 'The work currently happens across ') + joinReadable(locations);
-  }
-  if(sentence) return sentence + ', which makes it harder to track, hand off, and repeat consistently.';
-  return '';
-}
-
-function buildImpactSentence(answers){
-  answers = answers || {};
-  var consequence = compactText(answers.consequence).toLowerCase();
-  var urgency = compactText(answers.urgency).toLowerCase();
-  var sentence = '';
-
-  if(consequence.indexOf('revenue') > -1 || consequence.indexOf('leads go cold') > -1) sentence = 'When it slips, leads go cold and revenue is put at risk.';
-  else if(consequence.indexOf('client') > -1) sentence = 'When it slips, clients feel the inconsistency and the experience suffers.';
-  else if(consequence.indexOf('team gets overloaded') > -1) sentence = 'When it slips, the team gets pulled into avoidable admin and reactive work.';
-  else if(consequence.indexOf('visibility') > -1 || consequence.indexOf('decisions') > -1) sentence = 'When it slips, visibility drops and decision-making gets slower.';
-  else if(consequence.indexOf('growth slows') > -1) sentence = 'When it slips, the current workflow becomes a cap on growth.';
-  else if(consequence.indexOf('mix') > -1) sentence = 'When it slips, the business feels it through slower response times, extra manual work, and weaker visibility.';
-
-  if(urgency.indexOf('already hurting results') > -1){
-    if(sentence) return sentence.replace(/\.$/, '') + ', and your urgency rating suggests it is already hurting results.';
-    return 'Your urgency rating suggests this is already hurting results.';
-  }
-  if(urgency.indexOf('next 3 months') > -1){
-    if(sentence) return sentence.replace(/\.$/, '') + ', making it a near-term operational priority.';
-    return 'This reads like a near-term operational priority.';
-  }
-  return sentence;
-}
-
-function deriveCoreProblem(report, answers, summary){
-  var task = trimPhrase(answers && answers.offPlate);
-  var bottlenecks = textList(answers && answers.bottlenecks).slice(0, 2).map(lowerFirst);
-  var parts = [];
-
-  if(task) parts.push('The clearest friction point is ' + task + '.');
-  else if(bottlenecks.length) parts.push('The clearest friction point is ' + joinReadable(bottlenecks) + '.');
-
-  var workflowContext = buildWorkflowContext(answers);
-  var impact = buildImpactSentence(answers);
-  if(workflowContext) parts.push(workflowContext);
-  if(impact) parts.push(impact);
-
-  return firstText(parts.join(' '), summary, 'Your answers highlight one repeat workflow that is still absorbing too much manual effort and depends on clearer ownership before AI is layered in.');
-}
-
-function opportunityTheme(item, answers, idx){
-  item = item || {};
-  var text = (firstText(item.name, item.title, item.workflow, item.area, item.opportunity) + ' ' + firstText(item.description, item.summary, item.reason, item.why)).toLowerCase();
-  if(!compactText(text)) text = (trimPhrase(answers && answers.offPlate) + ' ' + textList(answers && answers.bottlenecks).join(' ')).toLowerCase();
-
-  if(/lead|client|follow[- ]?up|reply|question|support|inbox|email|whatsapp/.test(text)) return 'response';
-  if(/report|status|dashboard|visibility|decision|analytics/.test(text)) return 'reporting';
-  if(/route|handoff|handoffs|coordination|assign|triage/.test(text)) return 'handoff';
-  if(/onboard|knowledge|faq|documentation|training/.test(text)) return 'knowledge';
-  if(/data entry|logging|spreadsheet|crm|erp|internal system/.test(text)) return 'data';
-  return ['response','handoff','reporting'][idx % 3];
-}
-
-function inferOpportunityROI(item, answers, idx){
-  var theme = opportunityTheme(item, answers, idx);
-  var consequence = compactText(answers && answers.consequence).toLowerCase();
-
-  if(theme === 'response'){
-    if(consequence.indexOf('revenue') > -1) return 'High upside if faster response protects pipeline and revenue';
-    if(consequence.indexOf('client') > -1) return 'Strong service upside from quicker, more consistent replies';
-    return 'Likely to reduce response lag and manual follow-up load';
-  }
-  if(theme === 'reporting') return 'Strong time savings plus clearer operational visibility';
-  if(theme === 'handoff') return 'Likely to reduce dropped tasks and coordination delays';
-  if(theme === 'knowledge') return 'Likely to cut interruptions and speed up onboarding';
-  if(theme === 'data') return 'Steady efficiency gain from less rework and cleaner records';
-  return 'Targeted time savings in a repeat workflow';
-}
-
-function inferOpportunityComplexity(item, answers, idx){
-  var theme = opportunityTheme(item, answers, idx);
-  var maturity = compactText(answers && answers.workflowMaturity).toLowerCase();
-  var locations = textList(answers && answers.workLives).map(function(value){ return value.toLowerCase(); });
-  var integrationHeavy = locations.some(function(value){
-    return value.indexOf('crm') > -1 || value.indexOf('erp') > -1 || value.indexOf('helpdesk') > -1;
-  });
-
-  if(theme === 'response' && !integrationHeavy) return maturity.indexOf('mostly manual') > -1 ? 'Low to moderate complexity' : 'Moderate complexity';
-  if(theme === 'reporting') return integrationHeavy ? 'Moderate complexity' : 'Low to moderate complexity';
-  if(theme === 'handoff') return maturity.indexOf('depends heavily') > -1 ? 'Moderate to high complexity' : 'Moderate complexity';
-  if(theme === 'knowledge') return 'Moderate complexity';
-  if(theme === 'data') return integrationHeavy ? 'Moderate to high complexity' : 'Moderate complexity';
-  return integrationHeavy ? 'Moderate complexity' : 'Low to moderate complexity';
-}
-
-function inferOpportunityTimeline(item, answers, idx, complexity){
-  var theme = opportunityTheme(item, answers, idx);
-  var lower = compactText(complexity).toLowerCase();
-
-  if(lower.indexOf('high') > -1) return '6+ weeks once workflow rules and systems are mapped';
-  if(lower.indexOf('moderate') > -1 && lower.indexOf('low') === -1){
-    if(theme === 'reporting' || theme === 'data') return '4-6 weeks after discovery and data mapping';
-    return '3-5 weeks for a scoped pilot';
-  }
-  return '2-4 weeks for a focused pilot';
-}
-
-function badgeClass(value){
-  var lower = compactText(value).toLowerCase();
-  if(lower.indexOf('high') > -1 || lower.indexOf('strong') > -1 || lower.indexOf('urgent') > -1) return 'bh';
-  if(lower.indexOf('low') > -1 || lower.indexOf('early') > -1) return 'bl';
-  return 'bm';
-}
-
 function extractHtmlText(html, selectors){
   if(!html || typeof DOMParser === 'undefined') return '';
   try{
@@ -939,7 +1529,7 @@ function sanitizeReportHtml(html){
   }
 }
 
-function normalizeOpportunities(source, fallbackText, fitLabel, answers){
+function normalizeOpportunities(source, fallbackText){
   var arr = [];
   if(Array.isArray(source)) arr = source;
   else if(source && typeof source === 'object') arr = Object.keys(source).map(function(k){ return source[k]; });
@@ -947,76 +1537,82 @@ function normalizeOpportunities(source, fallbackText, fitLabel, answers){
 
   var normalized = arr.map(function(item, idx){
     if(typeof item === 'string'){
-      var simpleItem = { description: item };
-      var simpleComplexity = inferOpportunityComplexity(simpleItem, answers, idx);
       return {
         name: 'Workflow opportunity ' + (idx + 1),
-        priority: 'Medium',
         description: item,
-        roi: inferOpportunityROI(simpleItem, answers, idx),
-        complexity: simpleComplexity,
-        timeline: inferOpportunityTimeline(simpleItem, answers, idx, simpleComplexity),
-        confidence: fitLabel + ' fit'
+        businessValue: '',
+        complexity: '',
+        timeline: ''
       };
     }
     item = item || {};
-    var complexity = firstText(item.complexity, item.effort, item.deployment, inferOpportunityComplexity(item, answers, idx));
     return {
       name: firstText(item.name, item.title, item.workflow, item.area, item.opportunity, 'Workflow opportunity ' + (idx + 1)),
-      priority: normalizeFitLabel(firstText(item.priority, item.impact, item.score, 'Medium')),
       description: firstText(item.description, item.summary, item.reason, item.why, item.nextStep, fallbackText),
-      roi: firstText(item.roi, item.expectedROI, item.value, item.return, inferOpportunityROI(item, answers, idx)),
-      complexity: complexity,
-      timeline: firstText(item.timeline, item.timeframe, item.deliveryWindow, item.implementationWindow, inferOpportunityTimeline(item, answers, idx, complexity)),
-      confidence: firstText(item.confidence, item.fit, fitLabel + ' fit')
+      businessValue: firstText(item.businessValue, item.roi, item.expectedROI, item.value, item.return),
+      complexity: firstText(item.complexity, item.effort, item.deployment),
+      timeline: firstText(item.timeline, item.timeframe, item.deliveryWindow, item.implementationWindow)
     };
   }).filter(function(item){ return compactText(item.name) || compactText(item.description); });
 
   if(normalized.length === 0){
-    var fallbackItem = { description: fallbackText };
-    var fallbackComplexity = inferOpportunityComplexity(fallbackItem, answers, 0);
     normalized.push({
       name: 'First workflow to validate',
-      priority: 'Medium',
       description: fallbackText || 'Use the assessment answers to choose one workflow, confirm the process owner, and validate what can be automated first.',
-      roi: inferOpportunityROI(fallbackItem, answers, 0),
-      complexity: fallbackComplexity,
-      timeline: inferOpportunityTimeline(fallbackItem, answers, 0, fallbackComplexity),
-      confidence: fitLabel + ' fit'
+      businessValue: '',
+      complexity: '',
+      timeline: ''
     });
   }
-  return normalized.slice(0, 6);
+  return normalized.slice(0, 2);
 }
 
 function normalizeAssessmentPayload(payload){
   var report = (payload && payload.report) ? payload.report : (payload || {});
+  var payloadAnswers = payload && payload.answers && typeof payload.answers === 'object' ? payload.answers : {};
   var html = payload && payload.html ? String(payload.html) : '';
-  var answers = (payload && payload.answers) || ans || {};
   var htmlHeadline = extractHtmlText(html, ['.r-title','h1','h2']);
   var htmlSummary = extractHtmlText(html, ['.r-body','p']);
-  var fitLabel = normalizeFitLabel(firstText(report.readinessScore, report.opportunityFit, report.fit, report.score, payload.readinessScore));
-  var quickWin = firstText(report.quickWin, report.startingPoint, report.recommendedStartingPoint, report.nextStep, report.recommendation);
-  var recommendations = report.recommendations || report.opportunities || report.opportunityAreas;
-  if(Array.isArray(report.recommendations) && report.recommendations[0]){
-    quickWin = firstText(quickWin, report.recommendations[0].nextStep, report.recommendations[0].description);
+  var workflowWorthExploring = firstText(report.workflowWorthExploring, report.quickWin, report.startingPoint, report.recommendedStartingPoint);
+  var recommendations = report.opportunities || report.recommendations || report.opportunityAreas;
+  if(Array.isArray(report.opportunities) && report.opportunities[0]){
+    workflowWorthExploring = firstText(workflowWorthExploring, report.opportunities[0].description);
+  } else if(Array.isArray(report.recommendations) && report.recommendations[0]){
+    workflowWorthExploring = firstText(workflowWorthExploring, report.recommendations[0].nextStep, report.recommendations[0].description);
   }
 
   var summary = firstText(report.summary, report.executiveSummary, report.promise, payload.narrative, htmlSummary);
-  var coreProblem = firstText(report.coreProblem, report.problem, report.diagnosis, report.bottleneck, summary);
-  var costOfInaction = firstText(report.costOfInaction, report.cost, report.risk, report.commercialImpact, 'Left unresolved, this friction can keep showing up as slower response times, inconsistent handoffs, lost visibility, and extra manual work for the team.');
-  var resolvedCoreProblem = isPlaceholderFinding(coreProblem) ? deriveCoreProblem(report, answers, summary) : coreProblem;
+  var costOfInaction = firstText(report.costOfInaction, report.cost, report.risk, report.commercialImpact, 'Left unresolved, this friction shows up as slower response times, inconsistent handoffs, lost visibility, and extra manual work for the team.');
+  var coordinationCostEstimate = firstText(report.coordinationCostEstimate, report.crudeCoordinationCostEstimate, report.costEstimate, 'A crude coordination-cost estimate measures weekly volume, minutes lost per update or handoff, senior time spent reconstructing status, late client responses, and missed follow-through.');
+  var firstDeploymentHypothesis = firstText(report.firstDeploymentHypothesis, report.deploymentHypothesis, report.firstDeployment, 'If validated, the first deployment focuses on update capture, routing, reminders, unresolved-item tracking, and weekly status summaries. We avoid automating decisions until ownership rules and escalation paths are clear.');
+  var validation = Array.isArray(report.whatWeWouldValidate) && report.whatWeWouldValidate.length
+    ? report.whatWeWouldValidate
+    : [
+      '3 to 5 recent field deployment, maintenance, request, or handoff examples',
+      'A sample weekly client report or status update if one exists',
+      'The current tracker, spreadsheet, ERP view, or internal record format',
+      'The current WhatsApp or email handoff flow',
+      'The main ERP or internal system involved',
+      'Number of active sites, clients, projects, or open workstreams',
+      'Rough weekly volume of updates, requests, blockers, or follow-ups',
+      'Who owns updates, approvals, and escalations'
+    ];
 
   return {
-    headline: firstText(report.headline, report.title, payload.title, htmlHeadline, 'Your AI Opportunity Assessment'),
-    summary: summary || 'Here is an initial read on where AI may reduce operational friction, based on the answers you provided.',
-    fitLabel: fitLabel,
-    coreProblem: resolvedCoreProblem || 'Your answers point to operational friction that is worth validating before selecting tools or building automations.',
-    costOfInaction: costOfInaction,
-    opportunities: normalizeOpportunities(recommendations, quickWin || resolvedCoreProblem, fitLabel, answers),
-    quickWin: quickWin || 'Start by choosing one workflow with a clear owner, visible friction, and enough repeat volume to make automation measurable.',
-    auditFocus: firstText(report.auditFocus, report.focusAreas, report.audit, report.validationPlan, 'Map the current workflow, identify the data and systems involved, confirm the operational owner, and estimate the value of reducing manual work.'),
-    watchOuts: firstText(report.watchOuts, report.considerations, report.risks, 'Validate data access, handoff rules, and ownership before implementation so the solution fits the way the team actually works.'),
-    closingNote: firstText(report.closingNote, report.note, report.finalNote, payload.narrative),
+    headline: firstText(report.headline, report.title, payload.title, htmlHeadline, 'Your AI Opportunity Snapshot'),
+    whatAnswersSuggest: firstText(report.whatAnswersSuggest, summary, 'Your answers point to one repeat workflow where AI reduces manual work, improves visibility, and helps the team respond faster.'),
+    workflowWorthExploring: workflowWorthExploring || 'The first workflow to test is the one with a clear owner, visible friction, and enough repeat volume to make support measurable.',
+    whyThisMayMatter: firstText(report.whyThisMayMatter, costOfInaction, 'If this remains manual, the cost shows up as slower responses, missed follow-ups, manual chasing, unclear ownership, poor visibility, and leadership time spent pulling updates together.'),
+    howAgentCouldHelp: firstText(report.howAgentCouldHelp, report.agentSupport, 'An AI agent captures requests, asks follow-up questions, routes work, logs updates, triggers reminders, and produces lightweight reports.'),
+    coordinationCostEstimate: coordinationCostEstimate,
+    firstDeploymentHypothesis: firstDeploymentHypothesis,
+    opportunities: normalizeOpportunities(recommendations, workflowWorthExploring),
+    whatWeWouldValidate: validation.map(function(item){ return compactText(item); }).filter(Boolean),
+    recommendedNextStep: firstText(report.recommendedNextStep, report.closingNote, report.note, report.finalNote, 'Book a 30-minute AI Opportunity Review. The assessment gives us enough context for a focused conversation and helps us validate whether an AI Operations Audit makes sense.'),
+    disclaimer: firstText(report.disclaimer, 'This is an initial AI-generated snapshot based on your questionnaire responses. It is not a formal audit or implementation recommendation.'),
+    preparedName: firstText(payloadAnswers.name, ans.name, userName, 'You'),
+    preparedCompany: firstText(payloadAnswers.company, ans.company),
+    sourceAnswers: payloadAnswers,
     rawHtml: sanitizeReportHtml(html)
   };
 }
@@ -1030,10 +1626,9 @@ function formatHeadline(text){
 
 function renderOpportunityCard(o){
   var metrics = [
-    { label: 'Expected ROI', value: o.roi },
+    { label: 'Why it matters', value: o.businessValue || o.roi },
     { label: 'Complexity', value: o.complexity || o.effort },
-    { label: 'Indicative timeline', value: o.timeline },
-    { label: 'Fit', value: o.confidence }
+    { label: 'Indicative timeline', value: o.timeline }
   ].filter(function(metric){ return compactText(metric.value); }).map(function(metric){
     return '<div class="opp-m"><strong>' + escapeHTML(metric.label) + '</strong><span>' + escapeHTML(metric.value) + '</span></div>';
   }).join('');
@@ -1041,7 +1636,6 @@ function renderOpportunityCard(o){
   return '<article class="opp">'
     + '<div class="opp-head">'
     + '<div class="opp-name">' + escapeHTML(o.name) + '</div>'
-    + '<div class="opp-badge ' + badgeClass(o.priority) + '">' + escapeHTML(o.priority) + ' priority</div>'
     + '</div>'
     + '<div class="opp-body">'
     + '<p class="opp-desc">' + escapeHTML(o.description) + '</p>'
@@ -1050,31 +1644,211 @@ function renderOpportunityCard(o){
     + '</div></div></article>';
 }
 
+function groupValidationItems(items){
+  var groups = [
+    { title: 'Examples', pattern: /example|sample|recent|report/i, items: [] },
+    { title: 'Systems', pattern: /tracker|spreadsheet|ERP|system|tool|WhatsApp|email|format/i, items: [] },
+    { title: 'Volume', pattern: /volume|number|weekly|active|frequency|count/i, items: [] },
+    { title: 'Ownership', pattern: /owner|owns|approval|escalation|decision|publishing/i, items: [] }
+  ];
+  (items || []).forEach(function(item){
+    var text = compactText(item);
+    if(!text) return;
+    var match = groups.find(function(group){ return group.pattern.test(text); });
+    (match || groups[0]).items.push(text);
+  });
+  return groups.filter(function(group){ return group.items.length; }).map(function(group){
+    return '<article class="validation-group"><div class="validation-group-title">' + escapeHTML(group.title) + '</div><ul>'
+      + group.items.map(function(item){ return '<li>' + escapeHTML(item) + '</li>'; }).join('')
+      + '</ul></article>';
+  }).join('');
+}
+
+function firstSentence(v){
+  var txt = compactText(v);
+  if(!txt) return '';
+  var match = txt.match(/^(.{40,220}?[.!?])\s/);
+  if(match) return match[1];
+  return txt.length > 210 ? txt.slice(0, 207).replace(/\s+\S*$/, '') + '...' : txt;
+}
+
+function cleanSignalText(v){
+  return compactText(v)
+    .replace(/Mostly in people(?:â€™|')s heads/gi, 'Knowledge held by specific people')
+    .replace(/^A mix of the above$/i, 'Several commercial costs show up at once')
+    .replace(/^We /, '')
+    .replace(/^The work /, 'Work ');
+}
+
+function sourceAnswersForReport(d){
+  var src = d && d.sourceAnswers && typeof d.sourceAnswers === 'object' ? d.sourceAnswers : {};
+  var merged = {};
+  Object.keys(ans || {}).forEach(function(key){ merged[key] = ans[key]; });
+  Object.keys(src || {}).forEach(function(key){ merged[key] = src[key]; });
+  return merged;
+}
+
+function buildReportSignals(d){
+  var a = sourceAnswersForReport(d);
+  var candidates = [
+    { label: 'Business context', value: a.whatDo },
+    { label: 'Workflow pressure', value: a.offPlate || d.workflowWorthExploring },
+    { label: 'Commercial consequence', value: a.consequence },
+    { label: 'Where work lives', value: textList(a.workLives).join(', ') },
+    { label: 'Current maturity', value: a.workflowMaturity },
+    { label: 'Owner and urgency', value: [a.internalOwner, a.urgency].map(cleanSignalText).filter(Boolean).join(' / ') },
+    { label: 'Decision context', value: textList(a.decisionMakers).join(', ') }
+  ];
+  var signals = candidates.map(function(item){
+    return { label: item.label, value: cleanSignalText(item.value) };
+  }).filter(function(item){ return item.value; });
+  if(signals.length < 4){
+    signals = signals.concat([
+      { label: 'Assessment pattern', value: firstSentence(d.whatAnswersSuggest) },
+      { label: 'Cost signal', value: firstSentence(d.whyThisMayMatter) },
+      { label: 'Validation focus', value: firstSentence((d.whatWeWouldValidate || [])[0]) },
+      { label: 'Deployment guardrail', value: firstSentence(d.firstDeploymentHypothesis) }
+    ].map(function(item){
+      return { label: item.label, value: cleanSignalText(item.value) };
+    }).filter(function(item){ return item.value; }));
+  }
+  var seen = {};
+  return signals.filter(function(item){
+    var key = item.value.toLowerCase();
+    if(seen[key]) return false;
+    seen[key] = true;
+    return true;
+  }).slice(0, 6);
+}
+
+function renderSignals(d){
+  var signals = buildReportSignals(d);
+  if(!signals.length) return '';
+  return '<div class="signal-grid">'
+    + signals.map(function(signal){
+      return '<article class="signal-card"><div class="signal-label">' + escapeHTML(signal.label) + '</div><div class="signal-value">' + escapeHTML(signal.value) + '</div></article>';
+    }).join('')
+    + '</div>';
+}
+
+function renderExecutiveSnapshot(d){
+  var a = sourceAnswersForReport(d);
+  var urgency = cleanSignalText(a.urgency);
+  var consequence = cleanSignalText(a.consequence);
+  var owner = cleanSignalText(a.internalOwner);
+  var snapshot = [
+    { label: 'Primary hypothesis', value: firstSentence(d.headline || d.whatAnswersSuggest) },
+    { label: 'Workflow worth testing', value: firstSentence(d.workflowWorthExploring) },
+    { label: 'Commercial risk', value: firstSentence(d.whyThisMayMatter) },
+    { label: 'Why now', value: firstText([urgency, consequence].filter(Boolean).join(' / '), owner ? owner + ' is close enough to help validate it.' : '') }
+  ].filter(function(item){ return item.value; });
+  return '<div class="exec-grid">'
+    + snapshot.map(function(item){
+      return '<article class="exec-card"><div class="exec-label">' + escapeHTML(item.label) + '</div><div class="exec-value">' + escapeHTML(item.value) + '</div></article>';
+    }).join('')
+    + '</div>';
+}
+
+function renderSectionShell(num, label, title, bodyClass, bodyHtml){
+  return '<section class="report-section memo-section">'
+    + '<div class="memo-section-head">'
+    + '<div class="section-number">' + escapeHTML(num) + '</div>'
+    + '<div><div class="r-sec-label">' + escapeHTML(label) + '</div><div class="r-sec-h">' + escapeHTML(title) + '</div></div>'
+    + '</div>'
+    + '<div class="' + bodyClass + '">' + bodyHtml + '</div>'
+    + '</section>';
+}
+
+function renderWorkflowHypothesis(d){
+  var opportunities = (d.opportunities || []).slice(0, 2);
+  var primary = opportunities[0] || { name: 'Workflow worth testing first', description: d.workflowWorthExploring };
+  var metrics = [
+    { label: 'Why it matters', value: primary.businessValue },
+    { label: 'Complexity', value: primary.complexity },
+    { label: 'Review question', value: primary.timeline || 'Can the workflow be scoped clearly enough for an AI Operations Audit?' }
+  ].filter(function(item){ return compactText(item.value); });
+  var supporting = opportunities[1];
+  return '<article class="hypothesis-card">'
+    + '<div class="hypothesis-main">'
+    + '<div class="hypothesis-label">Workflow worth testing first</div>'
+    + '<h3>' + escapeHTML(primary.name || 'Workflow worth testing first') + '</h3>'
+    + '<div class="hypothesis-copy">' + renderParagraphs(primary.description || d.workflowWorthExploring) + '</div>'
+    + '</div>'
+    + '<div class="hypothesis-side">'
+    + metrics.map(function(metric){
+      return '<div class="hypothesis-metric"><strong>' + escapeHTML(metric.label) + '</strong><span>' + escapeHTML(metric.value) + '</span></div>';
+    }).join('')
+    + (supporting ? '<div class="supporting-angle"><strong>Supporting angle</strong><span>' + escapeHTML(supporting.name) + '</span><p>' + escapeHTML(firstSentence(supporting.description)) + '</p></div>' : '')
+    + '</div>'
+    + '</article>';
+}
+
+function buildWorkflowSteps(d){
+  var a = sourceAnswersForReport(d);
+  var combined = [a.offPlate, a.whatDo, d.workflowWorthExploring, d.howAgentCouldHelp].map(compactText).join(' ').toLowerCase();
+  if(/menu|image|price|discount|catalog|restaurant|shop|food/.test(combined)){
+    return [
+      'Restaurant or shop update arrives',
+      'Agent extracts menu, image, and price inputs',
+      'Agent asks for missing details',
+      'Discount rules are applied',
+      'Human reviews exceptions',
+      'System or spreadsheet is updated',
+      'Weekly unresolved-items summary is prepared'
+    ];
+  }
+  if(/field|site|maintenance|deployment|project|status/.test(combined)){
+    return [
+      'Field update arrives',
+      'Agent captures site, client, issue, urgency, owner, and deadline',
+      'Agent asks for missing details',
+      'Update is logged in the tracker',
+      'Owner receives reminders if no update is provided',
+      'Unresolved items are escalated',
+      'Weekly client status summary is prepared'
+    ];
+  }
+  return [
+    'Request or update arrives',
+    'Agent captures the key details',
+    'Agent asks for missing information',
+    'Work is routed to the right owner',
+    'The update is logged in the system of record',
+    'Reminders trigger when work stalls',
+    'A weekly unresolved-items summary is prepared'
+  ];
+}
+
+function renderAgentWorkflow(d){
+  var steps = buildWorkflowSteps(d);
+  return '<div class="agent-workflow">'
+    + '<div class="agent-workflow-copy">' + renderParagraphs(d.howAgentCouldHelp) + '</div>'
+    + '<div class="workflow-flow">'
+    + steps.map(function(step, idx){
+      return '<div class="workflow-step"><span>' + String(idx + 1).padStart(2, '0') + '</span><p>' + escapeHTML(step) + '</p></div>';
+    }).join('')
+    + '</div>'
+    + '</div>';
+}
+
 function renderReportPage(d){
   var date = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-  var mailSub = encodeURIComponent('Discovery call from ' + (ans.company||''));
-  var mailBody = encodeURIComponent('Hi, I just completed the RP Collective AI Opportunity Readiness Check and would like to book a free discovery call.');
-  var preparedFor = compactText(ans.name || userName || 'You') + (compactText(ans.company) ? ' at ' + compactText(ans.company) : '');
-  var opps = (d.opportunities || []).map(renderOpportunityCard).join('');
-  var closing = d.closingNote
-    ? '<section class="report-section"><div class="report-section-head"><div class="r-sec-label">A Note for ' + escapeHTML(ans.name || 'You') + '</div></div><div class="r-body">' + renderMarkdownBlocks(d.closingNote) + '</div></section>'
-    : '';
-  var rich = d.rawHtml
-    ? '<section class="report-section"><div class="report-section-head"><div class="r-sec-label">Generated Detail</div><div class="r-sec-h">The full assessment response</div></div><div class="rich-report">' + d.rawHtml + '</div></section>'
-    : '';
+  var preparedFor = compactText(d.preparedName || ans.name || userName || 'You') + (compactText(d.preparedCompany || ans.company) ? ' at ' + compactText(d.preparedCompany || ans.company) : '');
+  var validation = (d.whatWeWouldValidate || []).map(function(item){ return '<li>' + escapeHTML(item) + '</li>'; }).join('');
+  var validationGroups = groupValidationItems(d.whatWeWouldValidate || []);
+  var rich = '';
 
   var html = '<div class="report-shell" id="reportPdf">'
     + '<section class="report-hero">'
     + '<div class="report-hero-grid">'
-    + '<div>'
-    + '<div class="report-kicker">AI Opportunity Readiness Report</div>'
+    + '<div class="report-hero-main">'
+    + '<div class="report-kicker">AI Opportunity Snapshot</div>'
     + '<h1 class="report-title">' + formatHeadline(d.headline) + '</h1>'
-    + '<p class="report-intro">' + escapeHTML(d.summary) + '</p>'
     + '</div>'
     + '<aside class="report-score-panel">'
-    + '<div class="score-label">Opportunity fit</div>'
-    + '<div class="score-value">' + escapeHTML(d.fitLabel) + '</div>'
-    + '<p class="score-copy">Use this as an initial read. The next step is to validate one workflow, the owner, and the systems involved before implementation.</p>'
+    + '<div class="score-label">Next step</div>'
+    + '<div class="score-value">Review</div>'
+    + '<p class="score-copy">Use this as a starting point for a focused AI Opportunity Review, not as a final audit or implementation recommendation.</p>'
     + '</aside>'
     + '</div>'
     + '<div class="report-meta">'
@@ -1084,63 +1858,236 @@ function renderReportPage(d){
     + '</div>'
     + '</section>'
 
-    + '<section class="report-section">'
-    + '<div class="report-two">'
-    + '<div class="insight-panel"><div class="callout-label">The Core Problem</div><div class="callout-body">' + renderParagraphs(d.coreProblem) + '</div></div>'
-    + '<div class="insight-panel insight-panel-muted"><div class="callout-label">What This Is Costing You</div><div class="callout-body">' + renderParagraphs(d.costOfInaction) + '</div></div>'
-    + '</div>'
-    + '</section>'
-
-    + '<section class="report-section">'
-    + '<div class="report-section-head">'
-    + '<div class="r-sec-label">AI Workflow Opportunities</div>'
-    + '<div class="r-sec-h">Where AI can reduce friction in your operations</div>'
-    + '</div>'
-    + '<div class="opp-grid">' + opps + '</div>'
-    + '</section>'
-
-    + '<section class="report-section">'
-    + '<div class="report-two">'
-    + '<div class="insight-panel"><div class="callout-label">Recommended Starting Point</div><div class="callout-body">' + renderParagraphs(d.quickWin) + '</div></div>'
-    + '<div class="insight-panel insight-panel-muted"><div class="callout-label">Audit Focus Areas</div><div class="callout-body">' + renderParagraphs(d.auditFocus) + '</div></div>'
-    + '</div>'
-    + '</section>'
-
-    + '<section class="report-section">'
-    + '<div class="report-section-head"><div class="r-sec-label">Honest Considerations</div><div class="r-sec-h">What to validate before building</div></div>'
-    + '<div class="r-body">' + renderParagraphs(d.watchOuts) + '</div>'
-    + '</section>'
+    + renderSectionShell('01', 'Executive snapshot', 'The short version', 'exec-body', renderExecutiveSnapshot(d))
+    + renderSectionShell('02', 'Signals from your answers', 'The evidence we are reacting to', 'signals-body', renderSignals(d) || '<div class="r-body">' + renderParagraphs(d.whatAnswersSuggest) + '</div>')
+    + renderSectionShell('03', 'Workflow hypothesis', 'The workflow worth testing first', 'hypothesis-body', renderWorkflowHypothesis(d))
+    + renderSectionShell('04', 'Commercial coordination risk', 'Why this matters commercially', 'risk-body', '<div class="risk-grid"><div class="risk-primary">' + renderParagraphs(d.whyThisMayMatter) + '</div><div class="risk-estimate"><div class="risk-label">Crude coordination cost estimate</div>' + renderParagraphs(d.coordinationCostEstimate) + '</div></div>')
+    + renderSectionShell('05', 'Agent workflow', 'What the agent would actually do', 'agent-body', renderAgentWorkflow(d))
+    + renderSectionShell('06', 'Validation inputs', 'What we need to validate', 'validation-groups', validationGroups || '<ul class="validation-grid">' + validation + '</ul>')
+    + renderSectionShell('07', 'Deployment hypothesis', 'A sensible first build if the review confirms it', 'deployment-body', '<div class="deployment-card">' + renderParagraphs(d.firstDeploymentHypothesis) + '</div>')
 
     + rich
-    + closing
 
-    + '<section class="report-section">'
-    + '<div class="report-section-head"><div class="r-sec-label">What Happens Next</div><div class="r-sec-h">A practical path from report to working system</div></div>'
+    + '<section class="report-section report-final memo-section">'
+    + '<div class="memo-section-head">'
+    + '<div class="section-number">08</div>'
+    + '<div>'
+    + '<div class="report-section-head"><div class="r-sec-label">Recommended next step</div><div class="r-sec-h">Book a 30-minute AI Opportunity Review</div></div>'
+    + '<div class="r-body">' + renderParagraphs(d.recommendedNextStep) + '</div>'
+    + '</div>'
+    + '</div>'
     + '<div class="report-steps">'
-    + '<div class="report-step"><div class="report-step-n">i</div><div><div class="report-step-title">We review this report with you</div><div class="report-step-sub">Our team reads your answers before the call so we arrive already focused on your specific operation.</div></div></div>'
-    + '<div class="report-step"><div class="report-step-n">ii</div><div><div class="report-step-title">Free discovery call, 30 minutes</div><div class="report-step-sub">We walk through the opportunities in this report and confirm whether an AI Opportunity Audit makes sense as the next step.</div></div></div>'
-    + '<div class="report-step"><div class="report-step-n">iii</div><div><div class="report-step-title">AI Opportunity Audit</div><div class="report-step-sub">A structured diagnostic with estimated ROI, implementation logic, and a clear recommendation on what to improve first.</div></div></div>'
+    + '<div class="report-step"><div class="report-step-n">i</div><div><div class="report-step-title">We review this snapshot with you</div><div class="report-step-sub">Our team reads your answers before the call so we arrive already focused on your specific operation.</div></div></div>'
+    + '<div class="report-step"><div class="report-step-n">ii</div><div><div class="report-step-title">AI Opportunity Review, 30 minutes</div><div class="report-step-sub">We validate whether the workflow is frequent, owned, and valuable enough to investigate properly.</div></div></div>'
+    + '<div class="report-step"><div class="report-step-n">iii</div><div><div class="report-step-title">AI Operations Audit</div><div class="report-step-sub">If the review confirms the opportunity, the audit maps workflow scope, systems, examples, risks, and first deployment logic.</div></div></div>'
     + '</div>'
     + '</section>'
 
     + '<div class="report-actions">'
-    + '<a href="mailto:hello@rp-collective.com?subject=' + mailSub + '&body=' + mailBody + '" class="btn btn-lime">Book a free discovery call &rarr;</a>'
-    + '<button class="btn btn-pdf" id="btnPdf" onclick="downloadPDF()">'
+    + '<button type="button" class="btn btn-lime" onclick="openLuaReview(this)">Book a 30-minute AI Opportunity Review &rarr;</button>'
+    + '<button type="button" class="btn btn-pdf" id="btnPdf" onclick="downloadPDF()" onpointerdown="downloadPDF()" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){downloadPDF()}">'
     + '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
     + ' Download PDF</button>'
     + '<a href="index.html" class="btn btn-ghost">Back to site</a>'
     + '</div>'
 
-    + '<p class="r-disclaimer">This report is generated by AI based on your questionnaire responses. It is an initial diagnostic read, not a formal audit. A discovery call and AI Opportunity Audit are where workflow scope, systems, and implementation reality get properly validated.</p>'
+    + '<p class="r-disclaimer">' + escapeHTML(d.disclaimer) + '</p>'
     + '</div>';
 
   document.getElementById('reportWrap').innerHTML = html;
 }
 
 // ─── PDF DOWNLOAD ─────────────────────────────────────────────────
+var PDF_EXPORT_WIDTH = 1120;
+var PDF_EXPORT_HEIGHT = 1633;
+
+function createPdfExportHost(){
+  var host = document.createElement('div');
+  host.className = 'pdf-export-host';
+  host.style.width = PDF_EXPORT_WIDTH + 'px';
+  document.body.appendChild(host);
+  return host;
+}
+
+function createPdfExportPage(host){
+  var page = document.createElement('div');
+  page.className = 'pdf-export-page';
+  page.style.width = PDF_EXPORT_WIDTH + 'px';
+  page.style.height = PDF_EXPORT_HEIGHT + 'px';
+  var shell = document.createElement('div');
+  shell.className = 'report-shell';
+  if(!host.children.length){
+    shell.appendChild(createPdfCover());
+  }
+  page.appendChild(shell);
+  host.appendChild(page);
+  return { page: page, shell: shell };
+}
+
+function createPdfCover(){
+  var cover = document.createElement('div');
+  cover.className = 'pdf-cover';
+  cover.innerHTML = '<div class="pdf-brand">RP<span>COLLECTIVE</span></div><div class="pdf-doc-type">AI Opportunity Snapshot</div>';
+  return cover;
+}
+
+function directChildrenMatching(container, selector){
+  return Array.prototype.filter.call(container.children || [], function(child){
+    return !selector || child.matches(selector);
+  });
+}
+
+function chunkItems(items, size){
+  var chunks = [];
+  for(var i = 0; i < items.length; i += size){
+    chunks.push(items.slice(i, i + size));
+  }
+  return chunks;
+}
+
+function buildChunkedSection(section, containerSelector, items){
+  var clone = section.cloneNode(false);
+  Array.prototype.forEach.call(section.children, function(child){
+    if(!child.matches || !child.matches(containerSelector)){
+      clone.appendChild(child.cloneNode(true));
+    }
+  });
+
+  var container = section.querySelector(containerSelector);
+  if(container){
+    var containerClone = container.cloneNode(false);
+    items.forEach(function(item){
+      containerClone.appendChild(item.cloneNode(true));
+    });
+    clone.appendChild(containerClone);
+  }
+  return clone;
+}
+
+function splitSectionBlocks(section, containerSelector, itemSelector, chunkSize){
+  var container = section.querySelector(containerSelector);
+  if(!container) return [section.cloneNode(true)];
+
+  var items = directChildrenMatching(container, itemSelector);
+  if(items.length <= chunkSize) return [section.cloneNode(true)];
+
+  return chunkItems(items, chunkSize).map(function(group){
+    return buildChunkedSection(section, containerSelector, group);
+  });
+}
+
+function explodePdfBlock(node){
+  if(!node || !node.classList) return [node.cloneNode(true)];
+  if(node.classList.contains('report-hero')) return [node.cloneNode(true)];
+  if(!node.classList.contains('report-section')) return [node.cloneNode(true)];
+
+  if(node.querySelector('.opp-grid')) return splitSectionBlocks(node, '.opp-grid', '.opp', 2);
+  if(node.querySelector('.report-panel-grid')) return splitSectionBlocks(node, '.report-panel-grid', '.insight-panel', 2);
+  if(node.querySelector('.report-two')) return splitSectionBlocks(node, '.report-two', '.insight-panel', 1);
+  if(node.querySelector('.report-steps')) return splitSectionBlocks(node, '.report-steps', '.report-step', 2);
+  if(node.querySelector('.rich-report')) return splitSectionBlocks(node, '.rich-report', '', 3);
+  if(node.querySelector('.r-body')) return splitSectionBlocks(node, '.r-body', '', 2);
+  return [node.cloneNode(true)];
+}
+
+function canSplitPdfBlock(node){
+  return !!(node && node.querySelector && (
+    node.querySelector('.opp-grid .opp:nth-child(2)') ||
+    node.querySelector('.report-panel-grid .insight-panel:nth-child(2)') ||
+    node.querySelector('.report-two .insight-panel:nth-child(2)') ||
+    node.querySelector('.report-steps .report-step:nth-child(2)') ||
+    node.querySelector('.rich-report > :nth-child(2)') ||
+    node.querySelector('.r-body > :nth-child(2)')
+  ));
+}
+
+function splitOversizedPdfBlock(node){
+  if(node.querySelector('.opp-grid')) return splitSectionBlocks(node, '.opp-grid', '.opp', 1);
+  if(node.querySelector('.report-panel-grid')) return splitSectionBlocks(node, '.report-panel-grid', '.insight-panel', 1);
+  if(node.querySelector('.report-two')) return splitSectionBlocks(node, '.report-two', '.insight-panel', 1);
+  if(node.querySelector('.report-steps')) return splitSectionBlocks(node, '.report-steps', '.report-step', 1);
+  if(node.querySelector('.rich-report')) return splitSectionBlocks(node, '.rich-report', '', 1);
+  if(node.querySelector('.r-body')) return splitSectionBlocks(node, '.r-body', '', 1);
+  return [node.cloneNode(true)];
+}
+
+function pdfPageFits(pageObj){
+  return pageObj.page.scrollHeight <= pageObj.page.clientHeight + 1;
+}
+
+function tryAppendPdfBlock(pageObj, block){
+  var clone = block.cloneNode(true);
+  pageObj.shell.appendChild(clone);
+  if(pdfPageFits(pageObj)) return true;
+  pageObj.shell.removeChild(clone);
+  return false;
+}
+
+function placePdfBlock(block, host, pages){
+  var current = pages[pages.length - 1];
+  if(tryAppendPdfBlock(current, block)) return;
+
+  if(current.shell.children.length > 0){
+    current = createPdfExportPage(host);
+    pages.push(current);
+    if(tryAppendPdfBlock(current, block)) return;
+  }
+
+  if(canSplitPdfBlock(block)){
+    splitOversizedPdfBlock(block).forEach(function(smaller){
+      placePdfBlock(smaller, host, pages);
+    });
+    return;
+  }
+
+  current.shell.appendChild(block.cloneNode(true));
+}
+
+function buildPdfPages(reportEl){
+  var host = createPdfExportHost();
+  var pages = [createPdfExportPage(host)];
+  var reportClone = reportEl.cloneNode(true);
+  Array.prototype.forEach.call(reportClone.querySelectorAll('.report-actions,.r-cta-row,.r-disclaimer'), function(node){
+    if(node.parentNode) node.parentNode.removeChild(node);
+  });
+  var topLevel = Array.prototype.slice.call(reportClone.children || []);
+
+  topLevel.forEach(function(node){
+    explodePdfBlock(node).forEach(function(block){
+      placePdfBlock(block, host, pages);
+    });
+  });
+
+  return {
+    host: host,
+    pages: pages.filter(function(page){
+      return page.shell.children.length > 0;
+    })
+  };
+}
+
+function renderPdfPages(pages, pdf, margin, usableW, usableH){
+  return pages.reduce(function(chain, pageObj, idx){
+    return chain.then(function(){
+      return html2canvas(pageObj.page, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        windowWidth: PDF_EXPORT_WIDTH,
+        windowHeight: PDF_EXPORT_HEIGHT
+      }).then(function(canvas){
+        if(idx > 0) pdf.addPage();
+        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', margin, margin, usableW, usableH);
+      });
+    });
+  }, Promise.resolve());
+}
+
 function downloadPDF(){
   var btn = document.getElementById('btnPdf');
   if(!btn) return;
+  if(btn.classList.contains('pdf-generating')) return;
   var origHTML = btn.innerHTML;
   btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Generating...';
   btn.classList.add('pdf-generating');
@@ -1148,71 +2095,152 @@ function downloadPDF(){
   var reportEl = document.getElementById('reportPdf') || document.getElementById('reportWrap');
   var ctaRow = reportEl.querySelector('.report-actions, .r-cta-row');
   var disclaimer = reportEl.querySelector('.r-disclaimer');
+  var exportHost = null;
+  var pdfPreviewWindow = null;
+  try{
+    pdfPreviewWindow = window.open('', '_blank');
+    if(pdfPreviewWindow && pdfPreviewWindow.document){
+      pdfPreviewWindow.document.write('<!doctype html><title>Preparing PDF</title><body style="font-family:Arial,sans-serif;padding:32px;color:#111">Preparing your AI Opportunity Snapshot...</body>');
+      pdfPreviewWindow.document.close();
+    }
+  }catch(err){
+    pdfPreviewWindow = null;
+  }
   if(ctaRow) ctaRow.style.display = 'none';
   if(disclaimer) disclaimer.style.display = 'none';
 
-  html2canvas(reportEl, {
-    scale: 2,
-    useCORS: true,
-    backgroundColor: '#101828',
-    logging: false,
-    windowWidth: 1120
-  }).then(function(canvas){
-    var imgData = canvas.toDataURL('image/png');
+  try{
+    var exportState = buildPdfPages(reportEl);
+    exportHost = exportState.host;
+    var exportPages = exportState.pages;
+    if(exportPages.length === 0) throw new Error('No export pages generated');
+
     var jsPDFLib = window.jspdf.jsPDF;
     var pdf = new jsPDFLib({ orientation: 'portrait', unit: 'mm', format: 'a4' });
     var pageW = pdf.internal.pageSize.getWidth();
     var pageH = pdf.internal.pageSize.getHeight();
     var margin = 10;
     var usableW = pageW - margin * 2;
-    var scale = usableW / (canvas.width / 2); // account for retina scale:2
-    var totalH = (canvas.height / 2) * scale;
-    var pageContentH = pageH - margin * 2;
-    var pages = Math.ceil(totalH / pageContentH);
+    var usableH = pageH - margin * 2;
 
-    for(var i = 0; i < pages; i++){
-      if(i > 0) pdf.addPage();
-      var srcY = (i * pageContentH / scale) * 2;
-      var srcH = Math.min((pageContentH / scale) * 2, canvas.height - srcY);
-      var sliceCanvas = document.createElement('canvas');
-      sliceCanvas.width = canvas.width;
-      sliceCanvas.height = srcH;
-      var ctx = sliceCanvas.getContext('2d');
-      ctx.drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
-      var sliceData = sliceCanvas.toDataURL('image/png');
-      var sliceDisplayH = (srcH / 2) * scale;
-      pdf.addImage(sliceData, 'PNG', margin, margin, usableW, sliceDisplayH);
-    }
-
-    var fname = 'RP_Collective_' + (ans.company || ans.name || 'Report').replace(/[^a-zA-Z0-9]/g, '_') + '_AI_Readiness.pdf';
-    pdf.save(fname);
-  }).catch(function(err){
-    console.error('PDF error:', err);
-    alert('Could not generate PDF. Please use your browser\'s Print > Save as PDF option.');
-  }).finally(function(){
+    renderPdfPages(exportPages, pdf, margin, usableW, usableH).then(function(){
+      var fname = 'RP_Collective_' + (ans.company || ans.name || 'Snapshot').replace(/[^a-zA-Z0-9]/g, '_') + '_AI_Opportunity_Snapshot.pdf';
+      var blob = pdf.output('blob');
+      var blobUrl = URL.createObjectURL(blob);
+      var link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = fname;
+      link.rel = 'noopener';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      if(pdfPreviewWindow){
+        pdfPreviewWindow.location.href = blobUrl;
+      }else{
+        window.open(blobUrl, '_blank', 'noopener');
+      }
+      setTimeout(function(){ URL.revokeObjectURL(blobUrl); }, 60000);
+    }).catch(function(err){
+      console.error('PDF error:', err);
+      if(pdfPreviewWindow && !pdfPreviewWindow.closed) pdfPreviewWindow.close();
+      alert('Could not generate PDF. Please use your browser\'s Print > Save as PDF option.');
+    }).finally(function(){
+      if(exportHost && exportHost.parentNode) exportHost.parentNode.removeChild(exportHost);
+      if(ctaRow) ctaRow.style.display = '';
+      if(disclaimer) disclaimer.style.display = '';
+      btn.innerHTML = origHTML;
+      btn.classList.remove('pdf-generating');
+    });
+  }catch(err){
+    if(pdfPreviewWindow && !pdfPreviewWindow.closed) pdfPreviewWindow.close();
+    if(exportHost && exportHost.parentNode) exportHost.parentNode.removeChild(exportHost);
     if(ctaRow) ctaRow.style.display = '';
     if(disclaimer) disclaimer.style.display = '';
     btn.innerHTML = origHTML;
     btn.classList.remove('pdf-generating');
+    console.error('PDF setup error:', err);
+    alert('Could not prepare the PDF. Please use your browser\'s Print > Save as PDF option.');
+  }
+}
+
+function buildFallbackReportData(){
+  var company = compactText(ans.company || 'your business');
+  var task = compactText(ans.offPlate || 'the repeat workflow you described');
+  var bottlenecks = Array.isArray(ans.bottlenecks) ? ans.bottlenecks.filter(Boolean) : [];
+  var workLives = Array.isArray(ans.workLives) ? ans.workLives.filter(Boolean) : [];
+  var firstWorkflow = task || 'The first workflow to test is the repeat handoff with the clearest owner and highest business drag.';
+  var cleanChoice = function(value){
+    var lower = String(value || '').toLowerCase();
+    if(lower.indexOf('mix of the above') >= 0) return 'several commercial effects at once';
+    if(lower.indexOf('mostly in people') >= 0) return 'informal knowledge held by specific people';
+    return value;
+  };
+  var channelText = workLives.length ? workLives.slice(0, 4).map(cleanChoice).join(', ') : 'the tools and channels your team already uses';
+  var frictionText = bottlenecks.length ? bottlenecks.slice(0, 4).map(cleanChoice).join(', ').toLowerCase() : 'manual follow-up, handoffs, and visibility gaps';
+  var signal = (task + ' ' + bottlenecks.join(' ') + ' ' + compactText(ans.whatDo)).toLowerCase();
+  var pressurePoint = 'the repeat workflow described in the assessment';
+  if(/campaign|media|marketing|creative|agency|communications|pr|event|activation/.test(signal)){
+    pressurePoint = 'campaign update visibility and client follow-through';
+  }else if(/field|deployment|maintenance|site|project team|telecom|power|ict/.test(signal)){
+    pressurePoint = 'field deployment and maintenance update coordination';
+  }else if(/status|report|visibility|management/.test(signal)){
+    pressurePoint = 'status reporting and operational visibility';
+  }else if(/lead|client request|follow/.test(signal)){
+    pressurePoint = 'client request routing and follow-up';
+  }else if(/data entry|logging|record|crm|erp/.test(signal)){
+    pressurePoint = 'operational data capture and record quality';
+  }else if(/handoff|coordination|owner|routing/.test(signal)){
+    pressurePoint = 'internal handoffs and ownership visibility';
+  }
+  var commercialRisk = 'the workflow keeps creating avoidable management drag, slower response loops, and unclear ownership';
+  if(String(ans.consequence || '').toLowerCase().indexOf('mix') >= 0){
+    commercialRisk = 'slow responses, weaker client experience, overloaded teams, and reduced management visibility compound into operational drag';
+  }
+
+  return normalizeAssessmentPayload({
+    report: {
+      headline: 'Your answers point to one practical AI opportunity: reducing coordination drag around ' + pressurePoint + '.',
+      whatAnswersSuggest: company + " describes the business as " + compactText(ans.whatDo || "an operation with repeat coordination work") + ". The assessment does not point to a broad AI transformation problem. It points to " + pressurePoint + ", with work moving through " + channelText + ". The clearest signals are " + frictionText + " and the stated desire to remove \"" + task + "\" from manual workload.",
+      workflowWorthExploring: firstWorkflow + ' is the first workflow to test. It is close enough to client experience and management visibility to matter, while still narrow enough to validate with real examples, owners, and handoff rules.',
+      whyThisMayMatter: 'This is not an AI problem. It is an operational visibility and coordination problem. The commercial cost shows up as ' + commercialRisk + '. The recurring drag: time lost chasing updates, delayed client responses, unclear ownership, missed or late follow-through, duplicated updates, and senior staff reconstructing project status from scattered sources.',
+      howAgentCouldHelp: 'An AI agent captures field or client requests, asks for missing details, routes work to the right owner, logs status updates, triggers reminders, and produces a concise management view of open issues and next actions. For example, a field update comes in through WhatsApp or email. The agent asks for missing details, captures site, client, issue type, urgency, owner, and deadline, logs the update, reminds the owner if no update is provided, and prepares a weekly unresolved-items summary.',
+      coordinationCostEstimate: 'A crude coordination-cost estimate looks at how often ' + pressurePoint + ' creates ' + frictionText.toLowerCase() + ' across ' + channelText + '. In the review, we estimate weekly volume, minutes lost per update or handoff, senior time spent reconstructing status, late client responses, and missed follow-through.',
+      firstDeploymentHypothesis: 'If validated, the first deployment focuses on update capture, routing, reminders, unresolved-item tracking, and weekly status summaries. We avoid automating decisions until ownership rules, escalation paths, and approval limits are clear.',
+      opportunities: [
+        {
+          name: /campaign|media|marketing|creative|agency|communications|pr|event|activation/.test(signal) ? 'Campaign update visibility and client status reporting' : 'Field update and client request coordination',
+          description: /campaign|media|marketing|creative|agency|communications|pr|event|activation/.test(signal) ? 'An agent turns scattered campaign, media, event, and digital project updates into clear owners, next steps, client status inputs, and follow-up reminders.' : 'An agent turns scattered project updates, client requests, and issue notes into clear owners, next steps, and follow-up reminders.',
+          businessValue: /campaign|media|marketing|creative|agency|communications|pr|event|activation/.test(signal) ? 'Fewer delayed client responses, less manual status chasing, and clearer visibility across active campaigns.' : 'Faster response loops, fewer dropped handoffs, and better visibility across active work.',
+          complexity: 'Moderate — depends on where the source updates live and how consistently they are recorded.',
+          timeline: 'Timing depends on real examples and system access — confirmed in the review.'
+        },
+        {
+          name: 'Field update visibility and client status reporting',
+          description: 'An agent turns field notes, maintenance progress, blockers, and client-facing status updates into a clear view of what needs action.',
+          businessValue: 'Less manual chasing, clearer client visibility, and earlier escalation of blocked field work.',
+          complexity: 'Low to moderate if the inputs are already available in common tools.',
+          timeline: 'Timing validated during the AI Opportunity Review.'
+        }
+      ],
+      whatWeWouldValidate: [
+        '3 to 5 recent field deployment, maintenance, request, or handoff examples',
+        'A sample weekly client report or status update if one exists',
+        'The current tracker, spreadsheet, ERP view, or internal record format',
+        'The current WhatsApp or email handoff flow',
+        'The main ERP or internal system involved',
+        'Number of active sites, clients, projects, or open workstreams',
+        'Rough weekly volume of updates, requests, blockers, or follow-ups',
+        'Who owns updates, approvals, and escalations'
+      ],
+      recommendedNextStep: 'Book a 30-minute AI Opportunity Review. The assessment gives us enough context for a focused conversation where we can validate whether an AI Operations Audit makes sense.',
+      disclaimer: 'This is an initial fallback AI Opportunity Snapshot based on your questionnaire responses. It is not a formal audit or implementation recommendation.'
+    }
   });
 }
 
 function renderFallback(){
   clearInterval(window._lt);
-  var mailSub = encodeURIComponent('Discovery call from ' + (ans.company||''));
-  var preparedFor = compactText(ans.name || userName || 'there');
-  document.getElementById('reportWrap').innerHTML =
-    '<div class="report-shell">'
-    + '<section class="report-hero">'
-    + '<div class="report-kicker">Assessment Received</div>'
-    + '<h1 class="report-title">Thanks, <em>' + escapeHTML(preparedFor) + '.</em></h1>'
-    + '<p class="report-intro">We received your answers but hit an issue generating the instant report. Our team will review your submission and send a personalised assessment to ' + escapeHTML(ans.email || 'you') + ' within one business day.</p>'
-    + '</section>'
-    + '<div class="report-actions">'
-    + '<a href="mailto:hello@rp-collective.com?subject=' + mailSub + '" class="btn btn-lime">Email us directly &rarr;</a>'
-    + '<a href="index.html" class="btn btn-ghost">Back to site</a>'
-    + '</div>'
-    + '</div>';
+  renderReportPage(buildFallbackReportData());
 }
 </script>
 </body>
